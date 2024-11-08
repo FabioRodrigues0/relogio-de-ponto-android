@@ -1,20 +1,22 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/users', [UserController::class, 'index'])->name('users.home');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get("/register", [AuthController::class, 'register'])->name('register.get');
+Route::post("/create_user", [AuthController::class, 'createUser'])->name('user.create');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+//contacts
+Route::get("/view_contact/{id}", [UserController::class, 'viewContact'])->name('userContact.view');
+Route::post("/update_contact", [UserController::class, 'updateUser'])->name('update.contact');
+
+Route::fallback(function(){
+    return '<h1> Esta página não existe! </h1>';
 });
-
-require __DIR__.'/auth.php';
