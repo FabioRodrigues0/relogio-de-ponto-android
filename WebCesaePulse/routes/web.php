@@ -8,6 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', [UserController::class, 'home'])->name('home.page');
 Route::get('/users', [UserController::class, 'index'])->name('users.home');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get("/register", [AuthController::class, 'register'])->name('register.get');

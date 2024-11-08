@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
+
     public function index(){
 
         $search = request()->query('search') ? request()->query('search') : null;
@@ -58,5 +59,9 @@ class UserController extends Controller
             ->select('users.*', 'users_type.type')
             ->get();
             return $users;
+    }
+
+    public function home(){
+        return view('pages.home');
     }
 }
