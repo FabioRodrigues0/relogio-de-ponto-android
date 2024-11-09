@@ -7,8 +7,6 @@
     <title>CesaePulse</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('CSS/style.css') }}">
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="{{ asset('JS/app.js') }}" defer></script>
 
@@ -59,7 +57,7 @@
             </nav>
         @endif
         @auth
-            <div class="dropdown text-end ms-1">
+            <div class="dropdown text-end ms-2">
               <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
               </a>
@@ -81,6 +79,8 @@
       <!---------------------------------------- END NAVBAR ----------------------------------------------->
 
     @yield('content')
-
+    <div class="text-center m-3 text-muted">
+        Copyright © 2024 — Cesae
+    </div>
 </body>
 </html>
