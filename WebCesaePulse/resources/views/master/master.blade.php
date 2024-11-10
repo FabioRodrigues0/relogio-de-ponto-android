@@ -77,6 +77,13 @@
 
                 <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off" disabled>
                 <label class="btn btn-primary " for="btn-check-3"> <i class="fa-solid fa-clock fa-4x"></i>Out</label>
+                onclick="document.getElementById('logout-form').submit()">Sign out</a></li>
+            </form>
+        </ul>
+    </div>
+
+</div>
+</header>
 
             </div>
         </main>
