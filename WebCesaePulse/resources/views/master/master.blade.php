@@ -28,8 +28,13 @@
 
     <body id="body-pd">
         <header class="header" id="header">
+
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-            <div class="header_img"> <img src="" alt=""> </div>
+      <div>
+
+
+            <div class="header_img"> <img src="{{asset('images/cesaeimg.png')}}" alt="logocesae"> </div>
+
         </header>
 
         <div class="l-navbar" id="nav-bar">
@@ -57,7 +62,11 @@
 
         <!--Container Main start-->
         <main class="height-100 bg-light">
-            <h4>Main Components</h4>
+            <div class="banner_img"> <img src="{{asset('images/cesaeimg.png')}}" class="rounded float-start" alt="..."> </div><input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off">
+            <label class="btn btn-primary" for="btn-check-2">Checked</label>
+
+            <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off" disabled>
+            <label class="btn btn-primary" for="btn-check-3">Disabled</label>
         </main>
         <!--Container Main end-->
         @yield('content')
