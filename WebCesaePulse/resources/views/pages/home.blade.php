@@ -11,9 +11,10 @@
                 <div class="card-body">
 
                     <div class="text-center mb-4">
-
-                        <h3 class="card-title mb-3">Olá, {{ Auth::user()->name }}!</h3>
+                        <div class="text-center my-2"><img src="https://www.layoutcriativo.com/wp-content/uploads/2021/06/cesae.png" alt="logo" width="150"></div>
                         <hr>
+                        <h3 class="card-title mb-3">Olá, {{ Auth::user()->name }}!</h3>
+
                         <p class="card-text text-muted">Aqui estão as suas informações de entrada e saída.</p>
                     </div>
                     <div class="container">
@@ -82,7 +83,7 @@
                                         <th>Entrada</th>
                                         <th>Saída</th>
                                         <th>Total do Dia</th>
-                                        <th>Modalidade</th>
+                                        <th>Regime</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,9 +95,11 @@
                                         <td>Ainda sem dados</td>
                                         <td>
                                             @if(!empty($data->description) && $data->description == "Remote")
-                                               <button type="button" class="btn btn-outline-success">Remoto</button>
+                                               {{-- <button type="button" class="btn btn-outline-success">Remoto</button> --}}
+                                               <span class="badge bg-success">Remoto</span>
                                             @elseif(!empty($data->description) && $data->description == "In-Person")
-                                               <button type="button" class="btn btn-outline-primary">Presencial</button>
+                                               {{-- <button type="button" class="btn btn-outline-primary">Presencial</button> --}}
+                                               <span class="badge bg-primary">Presencial</span>
                                             @else
                                                 Sem registos
                                             @endif
