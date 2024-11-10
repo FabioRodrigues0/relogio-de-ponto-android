@@ -5,12 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     public function login(){
+        if (Auth::check()){
+            return redirect()->route('home.page');
+        }
+        else{
         return view("auth.login");
+        }
     }
 
     public function register(){
@@ -18,6 +24,8 @@ class AuthController extends Controller
         return view("auth.register", compact('sendUserType'));
 
     }
+
+
 
     public function userType(){
         $userType = DB::table('users_type')

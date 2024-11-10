@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -10,6 +11,8 @@ Route::get('/', function () {
 
 Route::get('/home', [UserController::class, 'home'])->name('home.page');
 Route::get('/users', [UserController::class, 'index'])->name('users.home');
+
+//autenticação
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get("/register", [AuthController::class, 'register'])->name('register.get');
 Route::post("/create_user", [AuthController::class, 'createUser'])->name('user.create');
@@ -18,6 +21,10 @@ Route::post("/create_user", [AuthController::class, 'createUser'])->name('user.c
 Route::get("/view_contact/{id}", [UserController::class, 'viewContact'])->name('userContact.view');
 Route::post("/update_contact", [UserController::class, 'updateUser'])->name('update.contact');
 
+//Admin
+Route::get('/admin_home', [AdminController::class, 'adminHome'])->name('admin.home');
+
+//fallback
 Route::fallback(function(){
     return '<h1> Esta página não existe! </h1>';
 });
