@@ -33,13 +33,13 @@
             <div>
 
 
-         <div class="header_img"> <img src="{{ asset('images/rapaz.png') }}" alt="logocesae"> </div>
+                <div class="header_img"> <img src="{{ asset('images/rapaz.png') }}" alt="logocesae"> </div>
 
         </header>
 
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
-                <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
+                <div> <a href="#" class="nav_logo"> <i class="fa-solid fa-user-clock nav_logo-icon"></i> <span
                             class="nav_logo-name">CecaeClock</span> </a>
                     <div class="nav_list"> <a href="#" class="nav_link active"> <i
                                 class='bx bx-grid-alt nav_icon'></i>
@@ -66,18 +66,17 @@
         <main>
 
 
-                <div class=".g-col-2 .g-start-3">
-                    <div class="banner_img"> <img src="{{ asset('images/cesaeimg.png') }}" class="rounded float-start"
+            <div class=".g-col-2 .g-start-3">
+                <div class="banner_img"> <img src="{{ asset('images/cesaeimg.png') }}" class="rounded float-start"
                         alt="..."> </div>
-                    </div>
-                <div class="g.g-col-2 .g-start-3">
+            </div>
+            <div class="g.g-col-2 .g-start-3">
                 <input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off">
                 <label class="btn btn-primary " for="btn-check-2"> <i class="fa-solid fa-clock fa-4x"></i>
                     In</label>
 
-            <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off" disabled>
-            <label class="btn btn-primary " for="btn-check-3"> <i
-                    class="fa-solid fa-clock fa-4x"></i>Out</label>
+                <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off" disabled>
+                <label class="btn btn-primary " for="btn-check-3"> <i class="fa-solid fa-clock fa-4x"></i>Out</label>
 
             </div>
         </main>
