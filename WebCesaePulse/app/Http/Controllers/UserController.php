@@ -77,7 +77,6 @@ class UserController extends Controller
         ->select('date', 'entry_time', 'exit_time')
         ->orderBy('date', 'desc')
         ->first();
-
         return($checkTime);
     }
 
