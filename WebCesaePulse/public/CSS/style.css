@@ -7,7 +7,6 @@
     background-color: blueviolet;
 }
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
 :root {
   --header-height: 3rem;
@@ -173,13 +172,17 @@ a {
     width: 45px;
   }
 
-  .l-navbar {
+.l-navbar {
     left: 0;
     padding: 1rem 1rem 0 0;
   }
 
   .show {
     width: calc(var(--nav-width) + 156px);
+  }
+
+  .body-pd {
+    padding-left: calc(var(--nav-width) + 188px);
   }
   .banner_img {
     width: 80px;
@@ -194,12 +197,7 @@ a {
     padding-left: calc(var(--nav-width) + 188px);
   }
 
-  .btn-primary{
-    width: 80px;
-    height: 80px;
-    justify-content: center;
-    border-radius: 100%;
-    overflow: hidden;
+
 
   }
-}
+

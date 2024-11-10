@@ -33,7 +33,7 @@
             <div>
 
 
-                <div class="header_img"> <img src="{{ asset('images/rapaz.png') }}" alt="logocesae"> </div>
+         <div class="header_img"> <img src="{{ asset('images/rapaz.png') }}" alt="logocesae"> </div>
 
         </header>
 
@@ -62,17 +62,23 @@
         </div>
 
         <!--Container Main start-->
+
         <main>
 
 
-            <div class="banner_img"> <img src="{{ asset('images/cesaeimg.png') }}" class="rounded float-start"
-                    alt="..."> </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <div class=".g-col-2 .g-start-3">
+                    <div class="banner_img"> <img src="{{ asset('images/cesaeimg.png') }}" class="rounded float-start"
+                        alt="..."> </div>
+                    </div>
+                <div class="g.g-col-2 .g-start-3">
                 <input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off">
-                <label class="btn btn-primary d-flex align-items-center" for="btn-check-2">CesaeIn <i class="fa-solid fa-clock icon-large"></i></label>
-                <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off" disabled>
-                <label class="btn btn-primary" for="btn-check-3">CesaeOut <i
-                    class="fa-solid fa-clock icon-smal"></i></label>
+                <label class="btn btn-primary " for="btn-check-2"> <i class="fa-solid fa-clock fa-4x"></i>
+                    In</label>
+
+            <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off" disabled>
+            <label class="btn btn-primary " for="btn-check-3"> <i
+                    class="fa-solid fa-clock fa-4x"></i>Out</label>
+
             </div>
         </main>
         <!--Container Main end-->
