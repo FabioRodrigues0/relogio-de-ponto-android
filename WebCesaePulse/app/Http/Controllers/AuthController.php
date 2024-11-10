@@ -22,6 +22,7 @@ class AuthController extends Controller
     public function register(){
         $sendUserType = $this->userType();
         return view("auth.register", compact('sendUserType'));
+
     }
 
 
