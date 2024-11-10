@@ -1,9 +1,10 @@
-@extends('master.master')
+{{-- @extends('master.master') --}}
+@extends('master.masterTwo')
 @section('content')
 
 <div class="container my-4">
     <div class="row justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-8 mt-4">
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <div class="text-center mb-4">
