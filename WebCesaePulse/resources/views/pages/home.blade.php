@@ -9,7 +9,8 @@
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="text-center mb-4">
-                                <h3 class="card-title mb-3">Bem-vindo, {{ Auth::user()->name }}!</h3>
+                                <h3 class="card-title mb-3">Bem-vindo,
+                                </h3>-
                                 <p class="card-text text-muted">Aqui estão suas informações de entrada e saída.</p>
                             </div>
                             <div class="container">
@@ -120,5 +121,5 @@
                 </div>
             </div>
         </div>
-   
+
 @endsection
