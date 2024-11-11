@@ -1,52 +1,104 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@extends('master.master')
+@section('content')
+    <div class="container h-100">
+        <div class="row justify-content-sm-center h-100">
+            <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+                <div class="text-center my-5">
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                </div>
+                <div class="card shadow-lg">
+                    <div class="card-body p-5">
+                        <div class="text-center my-2"><img
+                                src="https://www.layoutcriativo.com/wp-content/uploads/2021/06/cesae.png" alt="logo"
+                                width="150"></div>
+
+                        <h1 class="fs-4 card-title fw-bold mb-4">Register</h1>
+                        <form method="POST" action="{{ route('user.create') }}" class="needs-validation" autocomplete="off"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label class="mb-2 text-muted" for="name">Name</label>
+                                <input id="name" type="name" class="form-control" name="name" value=""
+                                    autofocus="" fdprocessedid="8f7bri" required>
+                                @error('name')
+                                    <div>
+                                        Name is invalid!
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="mb-2 text-muted" for="email">Email</label>
+                                <input id="email" type="email" class="form-control" name="email" value=""
+                                    autofocus="" fdprocessedid="8f7bri" required>
+                                @error('email')
+                                    <div>
+                                        Email is invalid!
+                                    </div>
+                                @enderror
+                            </div>
+
+
+                            <div class="mb-3">
+                                <div class="mb-2 w-100">
+                                    <label class="text-muted" for="password">Password</label>
+
+                                </div>
+                                <input id="password" type="password" class="form-control" name="password" required=""
+                                    fdprocessedid="2y22z">
+                                <div class="invalid-feedback">
+                                    Password is required
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Photo</label>
+                                <input class="form-control" type="file" id="formFile" name="foto">
+                            </div>
+
+
+                            <div class="mb-3">
+                                <div class="mb-2 w-100">
+                                    <label class="text-muted" for="password">User Type</label>
+                                </div>
+                                <select class="form-select form-select-m" aria-label="Small select example" required
+                                    name ="users_type_id">
+                                    <option selected>-</option>
+                                    @foreach ($sendUserType as $userType)
+                                        <option value="{{ $userType->id }}">{{ $userType->type }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="mb-2 w-100">
+                                    <label class="text-muted" for="password">Sector</label>
+                                </div>
+                                <select class="form-select form-select-m" aria-label="Small select example" name ="setor"
+                                    required>
+                                    <option selected>-</option>
+                                    <option value="Tecnologia">Tecnologia</option>
+                                    <option value="Comunicação Interpessoal">Comunicação Interpessoal</option>
+                                    <option value="SQL">SQL</option>
+                                    <option value="Android">Android</option>
+                                    <option value="Laravel">Laravel</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <button type="submit" class="btn btn-primary ms-auto btnRegister" fdprocessedid="i5syyn">
+                                    Register
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer py-3 border-0">
+                        <div class="text-center">
+                            <a href="register.html" class="text-dark">Back to login</a>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
         </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+@endsection
