@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,6 @@ class UserController extends Controller
     public function home(){
         $userTime = $this->getLastEntrance();
         $allUserData = $this->getAllPresences();
-
         return view('pages.home', compact('userTime', 'allUserData'));
     }
 
@@ -50,21 +50,30 @@ class UserController extends Controller
     }
 
 
+    public function deleteUser($id){
+        User::where('id', $id)->delete();
+
+        return back();
+    }
+
     public function getUsers(){
         $allUsers = DB::table('users')
                            ->join('users_type', 'users.users_type_id', '=', 'users_type.id')
                            ->select('users.*', 'users_type.type')
-                           ->get();
+                           ->orderBy('users.id')
+                           ->cursorPaginate(5);
         return($allUsers);
     }
 
     public function findUSers($search){
         $users = DB::table('users');
             $users = $users->where('name', 'LIKE', "%{$search}%")
-            ->orWhere('email', $search)
+            ->orWhere('email', 'LIKE', "%{$search}%")
             ->join('users_type', 'users.users_type_id', '=', 'users_type.id')
             ->select('users.*', 'users_type.type')
-            ->get();
+            ->orderBy('id')
+            ->simplePaginate(5);
+
             return $users;
     }
 
@@ -77,6 +86,13 @@ class UserController extends Controller
         ->select('date', 'entry_time', 'exit_time')
         ->orderBy('date', 'desc')
         ->first();
+
+        if($checkTime && $checkTime->entry_time && $checkTime->exit_time) {
+            $entryTime = Carbon::parse($checkTime->entry_time);
+            $exitTime = Carbon::parse($checkTime->exit_time);
+            $checkTime->total_time = $exitTime->diff($entryTime)->format('%H:%I');
+        }
+
         return($checkTime);
     }
 
@@ -88,6 +104,19 @@ class UserController extends Controller
         ->select('presence_record.date', 'presence_record.entry_time', 'presence_record.exit_time', 'attendance_mode.description')
         ->orderBy('date', 'desc')
         ->cursorPaginate(5);
+
+        foreach ($checkAllFields as $presence){
+            $entryTime = Carbon::parse($presence->entry_time);
+            $exitTime = Carbon::parse($presence->exit_time);
+
+            if($presence->exit_time){
+                $presence->total_time = $entryTime->diff($exitTime)->format('%H:%I');
+            }
+            else{
+                $presence->total_time = 'Ainda sem dados';
+            }
+        }
+
 
         return($checkAllFields);
     }

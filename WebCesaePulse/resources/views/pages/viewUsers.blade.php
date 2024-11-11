@@ -59,9 +59,6 @@
 <div class="card-footer py-3 border-0">
 </div>
 </div>
-<div class="text-center mt-5 text-muted">
-Copyright © 2024 — Cesae
-</div>
 </div>
 </div>
 </div>

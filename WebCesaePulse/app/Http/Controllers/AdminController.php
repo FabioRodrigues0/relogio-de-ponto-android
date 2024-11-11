@@ -13,7 +13,6 @@ class AdminController extends Controller
         }
 
         else{
-            return view("auth.login");
-        }
+            return redirect()->route('login');        }
     }
 }

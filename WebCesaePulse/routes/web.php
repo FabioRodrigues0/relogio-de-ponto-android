@@ -9,8 +9,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//users
 Route::get('/home', [UserController::class, 'home'])->name('home.page');
 Route::get('/users', [UserController::class, 'index'])->name('users.home');
+Route::get('/users_delete/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
 
 //autenticação
 Route::get('/login', [AuthController::class, 'login'])->name('login');
