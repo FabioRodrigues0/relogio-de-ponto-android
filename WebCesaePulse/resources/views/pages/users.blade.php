@@ -23,10 +23,10 @@
                                         aria-label="Pesquisar"
                                         aria-describedby="basic-addon2"
                                     >
-                                    <select class="form-select ms-1" name="type" aria-label="Default select example">
+                                    <select class="form-select ms-1" name="type" aria-label="Default select example" {{ request()->query('type') }}>
                                         <option selected>Filtrar por tipo</option>
-                                        <option value="Admin" {{ request()->query('type') }}>Admin</option>
-                                        <option value="Employee" {{ request()->query('type') }}>Employee</option>
+                                        <option value="1" >Admin</option>
+                                        <option value="2" >Employee</option>
                                       </select>
                                     <button class="btn btn-outline-success" type="submit" id="basic-addon2">
                                         Procurar

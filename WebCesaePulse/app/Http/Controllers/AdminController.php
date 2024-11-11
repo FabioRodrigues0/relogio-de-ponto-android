@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     public function adminHome(){
-        if (Auth::check()){
+        if (Auth::user()->users_type_id == 1){
             return view('admin.homeAdmin');
         }
 

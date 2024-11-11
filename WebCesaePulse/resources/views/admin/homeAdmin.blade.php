@@ -1,4 +1,4 @@
-{{-- @extends('master.master') --}}
+
 @extends('master.masterTwo')
 @section('content')
 
@@ -35,18 +35,22 @@
                                 </thead>
                                 <tbody>
                                     <tr>
+
                                         <td class="align-middle">a</td>
                                         <td class="align-middle">b</td>
                                         <td class="align-middle">c</td>
                                         <td class="align-middle">e</td>
                                         <td class="align-middle"><span class="badge bg-primary">Presencial</span></td>
                                         <td class="align-middle"><button class="btn btn-outline-dark">Ver</button></td>
+
                                     </tr>
                                 </tbody>
                             </table>
+
                             <div class="d-flex justify-content-center">
                                 {{-- {{ $allUserData->links('') }} --}}
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -56,4 +60,5 @@
 </div>
 
 @endsection
+
 

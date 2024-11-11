@@ -10,8 +10,8 @@ Route::get('/', function () {
 });
 
 //users
-Route::get('/home', [UserController::class, 'home'])->name('home.page');
-Route::get('/users', [UserController::class, 'index'])->name('users.home');
+Route::get('/home', [UserController::class, 'home'])->name('home.page')->middleware('auth');
+Route::get('/users', [UserController::class, 'index'])->name('users.home')->middleware('auth');
 Route::get('/users_delete/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
 
 //autenticação
@@ -24,7 +24,7 @@ Route::get("/view_contact/{id}", [UserController::class, 'viewContact'])->name('
 Route::post("/update_contact", [UserController::class, 'updateUser'])->name('update.contact');
 
 //Admin
-Route::get('/admin_home', [AdminController::class, 'adminHome'])->name('admin.home');
+Route::get('/admin_home', [AdminController::class, 'adminHome'])->name('admin.home')->middleware('auth');
 
 //fallback
 Route::fallback(function(){

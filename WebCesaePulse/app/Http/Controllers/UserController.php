@@ -16,9 +16,10 @@ class UserController extends Controller
     public function index(){
 
         $search = request()->query('search') ? request()->query('search') : null;
+        $type = request()->query('type') ? request()->query('type') : null;
 
         if($search){
-            $showUsers = $this->findUsers($search);
+            $showUsers = $this->findUsers($search, $type);
         }
         else{
             $showUsers = $this->getUsers();
@@ -52,7 +53,6 @@ class UserController extends Controller
 
     public function deleteUser($id){
         User::where('id', $id)->delete();
-
         return back();
     }
 
@@ -65,15 +65,16 @@ class UserController extends Controller
         return($allUsers);
     }
 
-    public function findUSers($search){
+    public function findUSers($search, $type){
         $users = DB::table('users');
             $users = $users->where('name', 'LIKE', "%{$search}%")
             ->orWhere('email', 'LIKE', "%{$search}%")
+            ->orWhere('users_type_id', '=', $type)
             ->join('users_type', 'users.users_type_id', '=', 'users_type.id')
             ->select('users.*', 'users_type.type')
             ->orderBy('id')
             ->simplePaginate(5);
-
+            //QUERY NAO ESTA A FUNCIONAR CORRETAMENTE!!!!
             return $users;
     }
 
