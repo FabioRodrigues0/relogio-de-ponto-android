@@ -59,9 +59,12 @@
 <div class="card-footer py-3 border-0">
 </div>
 </div>
+<<<<<<< HEAD
 <div class="text-center mt-5 text-muted">
 Copyright © 2024 — Cesae
 </div>
+=======
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
 </div>
 </div>
 </div>

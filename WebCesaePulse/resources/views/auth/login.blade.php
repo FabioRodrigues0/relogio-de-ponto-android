@@ -53,8 +53,13 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
 
         </div>
+=======
+        </div>
+        </div>
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
     </div>
 </div>
 @endsection

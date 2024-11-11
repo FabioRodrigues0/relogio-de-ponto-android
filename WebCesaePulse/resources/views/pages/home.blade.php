@@ -11,9 +11,16 @@
                 <div class="card-body">
 
                     <div class="text-center mb-4">
+<<<<<<< HEAD
 
                         <h3 class="card-title mb-3">Olá, {{ Auth::user()->name }}!</h3>
                         <hr>
+=======
+                        <div class="text-center my-2"><img src="https://www.layoutcriativo.com/wp-content/uploads/2021/06/cesae.png" alt="logo" width="150"></div>
+                        <hr>
+                        <h3 class="card-title mb-3">Olá, {{ Auth::user()->name }}!</h3>
+
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
                         <p class="card-text text-muted">Aqui estão as suas informações de entrada e saída.</p>
                     </div>
                     <div class="container">
@@ -22,7 +29,11 @@
                                 <p class="card-text"><strong>Data:</strong> <span id="current-date"></span></p>
                             </div>
                             <div class="col-md-6 text-center">
+<<<<<<< HEAD
                                 <p class="card-text"><strong>Horas trabalhadas hoje:</strong> 8Horas</p>
+=======
+                                <p class="card-text"><strong>Horas trabalhadas hoje:</strong> {{ $userTime->total_time ?? 'Sem registos' }}</p>
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -81,8 +92,13 @@
                                         <th>Data</th>
                                         <th>Entrada</th>
                                         <th>Saída</th>
+<<<<<<< HEAD
                                         <th>Total do Dia</th>
                                         <th>Modalidade</th>
+=======
+                                        <th>Total (H)</th>
+                                        <th>Regime</th>
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -91,12 +107,23 @@
                                         <td>{{ $data->date ?? 'Sem registos' }}</td>
                                         <td>{{ $data->entry_time ?? 'Sem registos' }}</td>
                                         <td>{{ $data->exit_time ?? 'Sem registos' }}</td>
+<<<<<<< HEAD
                                         <td>Ainda sem dados</td>
                                         <td>
                                             @if(!empty($data->description) && $data->description == "Remote")
                                                <button type="button" class="btn btn-outline-success">Remoto</button>
                                             @elseif(!empty($data->description) && $data->description == "In-Person")
                                                <button type="button" class="btn btn-outline-primary">Presencial</button>
+=======
+                                        <td>{{ $data->total_time ?? 'Sem registos' }}</td>
+                                        <td>
+                                            @if(!empty($data->description) && $data->description == "Remote")
+                                               {{-- <button type="button" class="btn btn-outline-success">Remoto</button> --}}
+                                               <span class="badge bg-success">Remoto</span>
+                                            @elseif(!empty($data->description) && $data->description == "In-Person")
+                                               {{-- <button type="button" class="btn btn-outline-primary">Presencial</button> --}}
+                                               <span class="badge bg-primary">Presencial</span>
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
                                             @else
                                                 Sem registos
                                             @endif

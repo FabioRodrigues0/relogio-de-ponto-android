@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
+=======
+use Carbon\Carbon;
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,9 +19,16 @@ class UserController extends Controller
     public function index(){
 
         $search = request()->query('search') ? request()->query('search') : null;
+<<<<<<< HEAD
 
         if($search){
             $showUsers = $this->findUsers($search);
+=======
+        $type = request()->query('type') ? request()->query('type') : null;
+
+        if($search){
+            $showUsers = $this->findUsers($search, $type);
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
         }
         else{
             $showUsers = $this->getUsers();
@@ -29,7 +40,10 @@ class UserController extends Controller
     public function home(){
         $userTime = $this->getLastEntrance();
         $allUserData = $this->getAllPresences();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
         return view('pages.home', compact('userTime', 'allUserData'));
     }
 
@@ -50,10 +64,19 @@ class UserController extends Controller
     }
 
 
+<<<<<<< HEAD
+=======
+    public function deleteUser($id){
+        User::where('id', $id)->delete();
+        return back();
+    }
+
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
     public function getUsers(){
         $allUsers = DB::table('users')
                            ->join('users_type', 'users.users_type_id', '=', 'users_type.id')
                            ->select('users.*', 'users_type.type')
+<<<<<<< HEAD
                            ->get();
         return($allUsers);
     }
@@ -65,6 +88,23 @@ class UserController extends Controller
             ->join('users_type', 'users.users_type_id', '=', 'users_type.id')
             ->select('users.*', 'users_type.type')
             ->get();
+=======
+                           ->orderBy('users.id')
+                           ->cursorPaginate(5);
+        return($allUsers);
+    }
+
+    public function findUSers($search, $type){
+        $users = DB::table('users');
+            $users = $users->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('email', 'LIKE', "%{$search}%")
+            ->orWhere('users_type_id', '=', $type)
+            ->join('users_type', 'users.users_type_id', '=', 'users_type.id')
+            ->select('users.*', 'users_type.type')
+            ->orderBy('id')
+            ->simplePaginate(5);
+            //QUERY NAO ESTA A FUNCIONAR CORRETAMENTE!!!!
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
             return $users;
     }
 
@@ -78,6 +118,15 @@ class UserController extends Controller
         ->orderBy('date', 'desc')
         ->first();
 
+<<<<<<< HEAD
+=======
+        if($checkTime && $checkTime->entry_time && $checkTime->exit_time) {
+            $entryTime = Carbon::parse($checkTime->entry_time);
+            $exitTime = Carbon::parse($checkTime->exit_time);
+            $checkTime->total_time = $exitTime->diff($entryTime)->format('%H:%I');
+        }
+
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
         return($checkTime);
     }
 
@@ -90,6 +139,22 @@ class UserController extends Controller
         ->orderBy('date', 'desc')
         ->cursorPaginate(5);
 
+<<<<<<< HEAD
+=======
+        foreach ($checkAllFields as $presence){
+            $entryTime = Carbon::parse($presence->entry_time);
+            $exitTime = Carbon::parse($presence->exit_time);
+
+            if($presence->exit_time){
+                $presence->total_time = $entryTime->diff($exitTime)->format('%H:%I');
+            }
+            else{
+                $presence->total_time = 'Ainda sem dados';
+            }
+        }
+
+
+>>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
         return($checkAllFields);
     }
 }
