@@ -49,9 +49,9 @@
             <nav class="nav">
                 <div> <a href="#" class="nav_logo"> <i class="fa-solid fa-user-clock nav_logo-icon"></i> <span
                             class="nav_logo-name">CesaeClock</span> </a>
-                    <div class="nav_list"> <a href="#" class="nav_link active"> <i
+                    <div class="nav_list"> <a href="{{ route('admin.home') }}" class="nav_link active"> <i
                                 class='bx bx-grid-alt nav_icon'></i>
-                            <span class="nav_name">Home</span> </a> <a href="#" class="nav_link"> <i
+                            <span class="nav_name">Home</span> </a> <a href="{{ route('home.page') }}" class="nav_link"> <i
                                 class='bx bx-user nav_icon'></i>
                             <span class="nav_name">Meu Perfil</span> </a> <a href="#" class="nav_link"> <i
                                 class='bx bx-message-square-detail nav_icon'></i>
