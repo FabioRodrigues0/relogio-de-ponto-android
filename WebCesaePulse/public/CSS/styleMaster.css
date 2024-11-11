@@ -200,3 +200,7 @@ a {
 .bg-purple{
     background-color: blueviolet;
 }
+
+.input-group-append {
+    cursor: pointer;
+  }
