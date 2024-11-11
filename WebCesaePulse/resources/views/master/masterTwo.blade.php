@@ -32,14 +32,7 @@
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
 
             <div>
-
-
-
-                <div class="header_img mt-2">
-                     <img src="{{ asset('images/rapaz.png') }}" alt="logocesae">
-
-                     </div>
-                     {{ Auth::user()->name }}
+              
 
         </header>
 
