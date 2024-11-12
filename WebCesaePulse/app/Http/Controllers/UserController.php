@@ -107,6 +107,9 @@ class UserController extends Controller
         return($checkTime);
     }
 
+
+    //PRESENÇAS -----------------------------------------------------------------
+
     public function getAllPresences(){
         $id = Auth::user()->id;
         $checkAllFields = DB::table('presence_record')
@@ -131,4 +134,6 @@ class UserController extends Controller
 
         return($checkAllFields);
     }
+
+   
 }

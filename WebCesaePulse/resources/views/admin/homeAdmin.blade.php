@@ -30,6 +30,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
+                                        <th>Perfil</th>
                                         <th>Nome</th>
                                         <th>Entrada</th>
                                         <th>Saída</th>
@@ -39,21 +40,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($entrances as $user)
                                     <tr>
-
-                                        <td class="align-middle">a</td>
-                                        <td class="align-middle">b</td>
-                                        <td class="align-middle">c</td>
-                                        <td class="align-middle">e</td>
-                                        <td class="align-middle"><span class="badge bg-primary">Presencial</span></td>
+                                        <td class="align-middle"><img width="30px" height="30px"
+                                            src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('images/defaultUser.png') }}" alt="" style="border-radius: 50%"></td>
+                                        <td class="align-middle">{{ $user->name ?? 'Sem registos'}}</td>
+                                        <td class="align-middle">{{ $user->entry_time ?? 'Sem registos'}}</td>
+                                        <td class="align-middle">{{ $user->exit_time ?? '-'}}</td>
+                                        <td class="align-middle">{{ $user->total_time }}</td>
+                                        <td>
+                                            @if(!empty($user->description) && $user->description == "Remote")
+                                               <span class="badge bg-success">Remoto</span>
+                                            @elseif(!empty($user->description) && $user->description == "In-Person")
+                                               <span class="badge bg-primary">Presencial</span>
+                                            @else
+                                                Sem registos
+                                            @endif
+                                        </td>
                                         <td class="align-middle"><button class="btn btn-outline-dark">Ver</button></td>
 
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
 
                             <div class="d-flex justify-content-center">
-                                {{-- {{ $allUserData->links('') }} --}}
+                               {{ $entrances->links('') }}
                             </div>
 
 
@@ -69,7 +81,7 @@
                     <div class="card text-center shadow">
                         <div class="card-body">
                             <h5 class="card-title">Total de Horas</h5>
-                            <p class="card-text fs-4">120 h</p> <!-- Este valor pode ser dinâmico -->
+                            <p class="card-text fs-4">{{ $totalHours  }}h</p>
                         </div>
                     </div>
                 </div>

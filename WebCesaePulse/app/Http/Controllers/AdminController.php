@@ -2,17 +2,66 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function adminHome(){
         if (Auth::user()->users_type_id == 1){
-            return view('admin.homeAdmin');
+            $userLog = $this->getTodaysEntrances();
+            $entrances = $userLog['entrances'];
+            $totalHours = $userLog['totalHours'];
+            // dd($totalHours);
+
+            return view('admin.homeAdmin', compact('entrances', 'totalHours'));
         }
 
         else{
             return redirect()->route('login');        }
+    }
+
+    public function getTodaysEntrances(){
+        $today = Carbon::today();
+
+        $entrances = DB::table('presence_record')
+        ->join('users', 'users.id', '=', 'presence_record.user_id')
+        ->join('attendance_mode', 'attendance_mode.id', '=', 'presence_record.attendance_mode_id')
+        ->whereDate('presence_record.date', $today)
+        ->select('users.name',
+        'users.foto',
+        'presence_record.entry_time',
+        'presence_record.date',
+        'presence_record.exit_time',
+        'attendance_mode.description')
+        ->orderBy('presence_record.entry_time', 'desc')
+        ->cursorPaginate(5);
+
+        $totalMinutes = 0;
+
+        foreach ($entrances as $presence){
+
+            $entryTime = Carbon::parse($presence->entry_time);
+            $exitTime = Carbon::parse($presence->exit_time);
+            $timeNow = Carbon::parse(now());
+
+
+
+            if($presence->exit_time){
+                $presence->total_time = $entryTime->diff($exitTime)->format('%H:%I');
+                $durationInMinutes = $entryTime->diffInMinutes($exitTime);
+            }
+            else{
+                $durationInMinutes = $entryTime->diffInMinutes($timeNow);
+                $presence->total_time = '';
+            }
+            $totalMinutes += $durationInMinutes;
+        }
+
+        $formattedTotalHours = round($totalMinutes/60, 2);
+
+        return ['entrances' => $entrances, 'totalHours' => $formattedTotalHours];
     }
 }
