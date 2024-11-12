@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Boxicons -->
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
-    <scriptsrc="https://kit.fontawesome.com/d5fba335cd.js" crossorigin="anonymous"></scriptsrc=>
+    <script src="https://kit.fontawesome.com/d5fba335cd.js" crossorigin="anonymous"></scriptsrc=>
     <!-- Custom CSS (optional, remove if not needed) -->
     <link rel="stylesheet" href="{{ asset('CSS/styleMaster.css') }}">
 </head>
@@ -32,7 +32,7 @@
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
 
             <div>
-              
+
 
         </header>
 
