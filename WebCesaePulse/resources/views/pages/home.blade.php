@@ -23,7 +23,7 @@
                                 <p class="card-text"><strong>Data:</strong> <span id="current-date"></span></p>
                             </div>
                             <div class="col-md-6 text-center">
-                                <p class="card-text"><strong>Horas trabalhadas hoje:</strong> 8Horas</p>
+                                <p class="card-text"><strong>Horas trabalhadas hoje:</strong> {{ $userTime->total_time ?? 'Sem registos' }}</p>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -82,7 +82,7 @@
                                         <th>Data</th>
                                         <th>Entrada</th>
                                         <th>Saída</th>
-                                        <th>Total do Dia</th>
+                                        <th>Total (H)</th>
                                         <th>Regime</th>
                                     </tr>
                                 </thead>
@@ -92,7 +92,7 @@
                                         <td>{{ $data->date ?? 'Sem registos' }}</td>
                                         <td>{{ $data->entry_time ?? 'Sem registos' }}</td>
                                         <td>{{ $data->exit_time ?? 'Sem registos' }}</td>
-                                        <td>Ainda sem dados</td>
+                                        <td>{{ $data->total_time ?? 'Sem registos' }}</td>
                                         <td>
                                             @if(!empty($data->description) && $data->description == "Remote")
                                                {{-- <button type="button" class="btn btn-outline-success">Remoto</button> --}}
