@@ -64,15 +64,17 @@
         </div>
 
         <!--Container Main start-->
-
-        <!--Container Main end-->
-        @yield('content')
+        <main>
+            @yield('content')
         </main>
+        <!--Container Main end-->
+
         <footer>
             <div class="text-center m-3 text-muted">
                 Copyright © 2024 — Cesae
             </div>
-        </footer>
 
+        </footer>
+    </body>
 
 
