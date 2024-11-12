@@ -39,6 +39,7 @@
         <table class="table table-striped">
             <thead>
               <tr>
+                <th scope="col"></th>
                 <th scope="col">#ID</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Email</th>
@@ -49,6 +50,8 @@
             <tbody>
                 @foreach($showUsers as $users)
               <tr>
+                <td><img width="30px" height="30px"
+                    src="{{ $users->foto ? asset('storage/' . $users->foto) : asset('images/defaultUser.png') }}" alt="" style="border-radius: 50%"></td>
                 <th scope="row">{{ $users->id }}</th>
                 <td>{{ $users->name }}</td>
                 <td>{{ $users->email }}</td>
