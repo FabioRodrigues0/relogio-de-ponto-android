@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -40,11 +41,20 @@ class UserController extends Controller
     }
 
     public function updateUser(Request $request){
+        $photo = null;
+
+        if($request->hasFile('photo')){
+            $photo = Storage::putFile('uploadedImages', $request->photo);
+
+        }
+
+
         User::where('id', $request->id)
         ->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'foto' => $photo
         ]);
 
         return redirect()->route('users.home')->with('message', 'Contacto atualizado com sucesso!');
@@ -74,7 +84,7 @@ class UserController extends Controller
             ->select('users.*', 'users_type.type')
             ->orderBy('id')
             ->simplePaginate(5);
-            //QUERY NAO ESTA A FUNCIONAR CORRETAMENTE!!!!
+
             return $users;
     }
 
@@ -96,6 +106,9 @@ class UserController extends Controller
 
         return($checkTime);
     }
+
+
+    //PRESENÇAS -----------------------------------------------------------------
 
     public function getAllPresences(){
         $id = Auth::user()->id;
@@ -121,4 +134,6 @@ class UserController extends Controller
 
         return($checkAllFields);
     }
+
+   
 }

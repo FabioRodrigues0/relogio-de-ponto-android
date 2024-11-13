@@ -5,7 +5,7 @@
 :root {
   --header-height: 3rem;
   --nav-width: 68px;
-  --first-color: #4723D9;
+  --first-color: #6252a3;
   --first-color-light: #AFA5D9;
   --white-color: #F7F6FB;
   --body-font: 'Nunito', sans-serif;
@@ -200,3 +200,7 @@ a {
 .bg-purple{
     background-color: blueviolet;
 }
+
+.input-group-append {
+    cursor: pointer;
+  }

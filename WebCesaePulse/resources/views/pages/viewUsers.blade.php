@@ -47,6 +47,13 @@
         </div>
     </div>
 
+    <div class="mb-3">
+        <label for="photo" class="form-label">Foto</label>
+        <input type="file" accept="image/*" name="photo" class="form-control" id="photo">
+        @error('photo')
+            Deve colocar uma foto válida!
+        @enderror
+    </div>
 
     <div class="d-flex align-items-center">
         <button type="submit" class="btn btn-primary ms-auto btnRegister" fdprocessedid="i5syyn">

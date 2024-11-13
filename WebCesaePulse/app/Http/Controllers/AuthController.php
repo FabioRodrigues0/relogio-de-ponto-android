@@ -26,7 +26,6 @@ class AuthController extends Controller
     }
 
 
-
     public function userType(){
         $userType = DB::table('users_type')
                    ->get();
