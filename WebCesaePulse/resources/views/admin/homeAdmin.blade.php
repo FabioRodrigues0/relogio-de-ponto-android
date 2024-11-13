@@ -28,7 +28,7 @@
 
 
             <div>
-                <div class="row justify-content-center">
+                <div class="row d-flex justify-content-center"> 
                     <div class="col-12 d-flex justify-content-center">
                         <div class="card mb-4 w-100 shadow">
                             <div class="card-header bg-purple fs-5 text-white text-center">Registo de Utilizadores
@@ -74,7 +74,7 @@
                                     <thead>
                                         <tr>
                                             <th>Perfil</th>
-                                        <th>Nome</th>
+                                            <th>Nome</th>
                                             <th>Entrada</th>
                                             <th>Saída</th>
                                             <th>Total</th>
@@ -83,75 +83,75 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($entrances as $user)
-                                    <tr>
-                                            <td class="align-middle"><img width="30px" height="30px"
-                                            src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('images/defaultUser.png') }}" alt="" style="border-radius: 50%"></td>
-                                            <td class="align-middle">{{ $user->name ?? 'Sem registos'}}</td>
-                                            <td class="align-middle">{{ $user->entry_time ?? 'Sem registos'}}</td>
-                                            <td class="align-middle">{{ $user->exit_time ?? '-'}}</td>
-                                            <td class="align-middle">{{ $user->total_time }}</td>
-                                        <td>
-                                            @if(!empty($user->description) && $user->description == "Remote")
-                                               <span class="badge bg-success">Remoto</span>
-                                            @elseif(!empty($user->description) && $user->description == "In-Person")
-                                               <span class="badge bg-primary">Presencial</span>
+                                        @foreach ($entrances as $user)
+                                            <tr>
+                                                <td class="align-middle"><img width="30px" height="30px"
+                                                        src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('images/defaultUser.png') }}"
+                                                        alt="" style="border-radius: 50%"></td>
+                                                <td class="align-middle">{{ $user->name ?? 'Sem registos' }}</td>
+                                                <td class="align-middle">{{ $user->entry_time ?? 'Sem registos' }}</td>
+                                                <td class="align-middle">{{ $user->exit_time ?? '-' }}</td>
+                                                <td class="align-middle">{{ $user->total_time }}</td>
+                                                <td>
+                                                    @if (!empty($user->description) && $user->description == 'Remote')
+                                                        <span class="badge bg-success">Remoto</span>
+                                                    @elseif(!empty($user->description) && $user->description == 'In-Person')
+                                                        <span class="badge bg-primary">Presencial</span>
+                                                    @else
+                                                        Sem registos
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle"><button class="btn btn-outline-dark">Ver</button>
+                                                </td>
 
-                                            @else
-                                                Sem registos
-                                            @endif
-                                        </td>
-                                            <td class="align-middle"><button class="btn btn-outline-dark">Ver</button>
-                                            </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
 
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                <div class="d-flex justify-content-center">
+                                    {{ $entrances->links('') }}
+                                </div>
 
-                            <div class="d-flex justify-content-center">
-                               {{ $entrances->links('') }}
+
                             </div>
 
+                        </div>
 
+                    </div>
+
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card text-center shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">Total de Horas</h5>
+                                <p class="card-text fs-4">{{ $totalHours }}h</p>
                             </div>
-
-                        </div>
-
-                    </div>
-
-            </div>
-            <div class="row mb-4">
-                <div class="col-md-3">
-                    <div class="card text-center shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Total de Horas</h5>
-                            <p class="card-text fs-4">{{ $totalHours  }}h</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-center shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Utilizadores Ativos</h5>
-                            <p class="card-text fs-4">25</p> <!-- Este valor pode ser dinâmico -->
+                    <div class="col-md-3">
+                        <div class="card text-center shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">Utilizadores Ativos</h5>
+                                <p class="card-text fs-4">25</p> <!-- Este valor pode ser dinâmico -->
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-center shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Presenças</h5>
-                            <p class="card-text fs-4">80</p> <!-- Este valor pode ser dinâmico -->
+                    <div class="col-md-3">
+                        <div class="card text-center shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">Presenças</h5>
+                                <p class="card-text fs-4">80</p> <!-- Este valor pode ser dinâmico -->
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-center shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Faltas</h5>
-                            <p class="card-text fs-4">5</p> <!-- Este valor pode ser dinâmico -->
-                        </div>
+                    <div class="col-md-3">
+                        <div class="card text-center shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">Faltas</h5>
+                                <p class="card-text fs-4">5</p> <!-- Este valor pode ser dinâmico -->
+                            </div>
 
                         </div>
                     </div>
@@ -221,32 +221,53 @@
                             <li class="list-group-item">Atraso 2h Francisco Conceição</li>
                             <li class="list-group-item">Atraso 2h Francisco Conceição</li>
                         </ul>
+                        <div class="d-flex justify-content-center">
+
                         <button class="btn btn-outline-dark mt-3">Ver</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="card shadow" style="border-color: #5b1bd2;">
-                    <div class="card-body">
-                        <h5 class="card-title" style="color: #5b1bd2;">Notas</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item">Enviar mensagem de Magusto dia 14/11</li>
-                            <li class="list-group-item">Criar nova Conta do formador </li>
-                            <li class="list-group-item">Enviar mensagem sobre a appClock para Android  </li>
-                            <li class="list-group-item">Enviar mensagem de Parabéns, nova funcionalidade </li>
-                        </ul>
-                        <button class="btn btn-outline-dark mt-3">Adicionar notas</button>
-                    </div>
-                </div>
-            </div>
+
             <div class="col-sm-3">
                 <div class="card shadow" style="border-color: #5b1bd2;">
                     <div class="card-body">
                         <h5 class="card-title" style="color: #5b1bd2;">Atividades</h5>
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Enviar Avisos <button class="btn btn-outline-dark">Enviar</button>
+                                Enviar Alertas
+                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    data-bs-whatever="@mdo">Enviar alertas </button></li>
+
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <!-- Modificação: Adicione "modal-dialog-centered" -->
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Enviar Alerta</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <label for="recipient-name" class="col-form-label">e-mail:</label>
+                                                        <input type="text" class="form-control" id="recipient-name">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="message-text" class="col-form-label">Messagem:</label>
+                                                        <textarea class="form-control" id="message-text"></textarea>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                <button type="button" class="btn btn-outline-dark">Enviar alerta</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
+
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Emails dos funcionários <button class="btn btn-outline-dark">Consultar</button>
                             </li>
@@ -259,4 +280,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection

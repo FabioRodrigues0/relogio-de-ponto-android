@@ -1,5 +1,5 @@
-import $ from 'jquery';
-import 'bootstrap-datepicker';
+//import $ from 'jquery';
+//import 'bootstrap-datepicker';
 
 function setCurrentDate() {
     const dateElement = document.getElementById('current-date');
@@ -80,3 +80,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
           autoclose: true
         });
       });
+
+      $('#meuModal').on('shown.bs.modal', function () {
+        $('#meuInput').trigger('focus')
+      })
+      const exampleModal = document.getElementById('exampleModal')
+if (exampleModal) {
+  exampleModal.addEventListener('show.bs.modal', event => {
+    const button = event.relatedTarget
+    const recipient = button.getAttribute('data-bs-whatever')
+    const modalTitle = exampleModal.querySelector('.modal-title')
+    const modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+    modalTitle.textContent = `New message to ${recipient}`
+    modalBodyInput.value = recipient
+  })
+}
