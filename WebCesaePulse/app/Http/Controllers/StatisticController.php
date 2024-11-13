@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class StatisticController extends Controller
 {
-    public function estatistica()
+    public function statistics()
     {
-        
+        return view('admin.statistics');
     }
 }
