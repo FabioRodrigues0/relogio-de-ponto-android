@@ -10,10 +10,8 @@ coilCompose = "2.6.0"
 converterMoshiVersion = "2.11.0"
 converterScalars = "2.11.0"
 core = "3.5.3"
-espressoCore = "3.6.1"
 hilt = "2.51.1"
 hiltCompiler = "1.2.0"
-junitVersion = "1.1.5"
 kotlin = "2.0.0"
 lifecycleViewmodelKtx = "2.8.2"
 lifecycleLivedataKtx = "2.8.2"
@@ -30,6 +28,8 @@ ui = "1.7.0-alpha08"
 serialization = "1.6.3"
 navigationCompose = "2.8.0-beta02"
 junit = "4.12"
+monitor = "1.7.2"
+junitKtx = "1.2.1"
 uiTooling = "1.7.5"
 
 [libraries]
@@ -42,10 +42,8 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui"}
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview"}
 androidx-compose-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidxHilt" }
-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
@@ -71,6 +69,8 @@ squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = 
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-monitor = { group = "androidx.test", name = "monitor", version.ref = "monitor" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 
 [plugins]

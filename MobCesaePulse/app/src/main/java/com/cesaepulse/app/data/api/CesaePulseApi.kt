@@ -7,6 +7,8 @@ import retrofit2.http.Path
 
 interface CesaePulseApi {
 
+	// ----------------	USER ---------------------------
+
 	/**
 	 *  Call Api to get All User
 	 */
@@ -20,6 +22,8 @@ interface CesaePulseApi {
 	 */
 	@GET("/view_contact/{id}?token=&key=${secretKey}")
 	suspend fun getUserById(@Path("id") id: Int): ApiResponse<UsersDto>
+
+	// ------------------ JUSTIFICATION -----------------------
 
 	companion object {
 		const val baseUrl = "https://gawbignbvttgvuipsakm.supabase.co"
