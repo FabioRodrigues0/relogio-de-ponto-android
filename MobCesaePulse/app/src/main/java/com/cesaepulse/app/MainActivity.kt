@@ -12,7 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.cesaepulse.app.ui.theme.CesaepulseTheme
+import com.cesaepulse.app.ui.views.UsersList.UsersList
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -24,6 +27,7 @@ class MainActivity : ComponentActivity() {
 						name = "Android",
 						modifier = Modifier.padding(innerPadding)
 					)
+					UsersList()
 				}
 			}
 		}

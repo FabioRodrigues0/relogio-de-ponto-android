@@ -4,7 +4,7 @@ import com.cesaepulse.app.domain.model.User
 
 interface IUserRepository {
 
-	fun getUserById(id: Int): User?
+	suspend fun getUserById(id: Int): User?
 
-	fun getAllUsers(): List<User>
+	suspend fun getAllUsers(): List<User>
 }
