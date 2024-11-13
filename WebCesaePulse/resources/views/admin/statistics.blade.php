@@ -1,86 +1,68 @@
 @extends('master.masterTwo')
 @section('content')
-    <div class="container text-center my-4">
-        <h3 class="card-title mb-3">Estatística</h3>
+    <div class="container mt-5">
+        <h1 class="title-gradient text-center display-3">Estatística</h1>
     </div>
 
     <div class="container">
         <div class="row">
-            <!-- Card 1 -->
-            <div class="col-md-6 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text"></p>
+            @foreach ($userData as $userId => $user)
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $user['name'] }}</h5>
+                            <canvas id="attendanceChart-{{ $userId }}"></canvas>
+                        </div>
                     </div>
-                    <img src="..." class="card-img-bottom" alt="...">
                 </div>
-            </div>
+            @endforeach
+        </div>
+    </div>
 
-            <!-- Card 2 -->
-            <div class="col-md-6 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text"></p>
-                    </div>
-                    <img src="..." class="card-img-bottom" alt="...">
-                </div>
-            </div>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-            <!-- Card 3 -->
-            <div class="col-md-6 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text"></p>
-                    </div>
-                    <img src="..." class="card-img-bottom" alt="...">
-                </div>
-            </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @foreach ($userData as $userId => $user)
+                // Prepare data for the chart
+                const labels{{ $userId }} = {!! json_encode($user['attendance']->pluck('month')) !!};
+                const data{{ $userId }} = {!! json_encode($user['attendance']->pluck('total_hours')) !!};
+                const daysData{{ $userId }} = {!! json_encode($user['attendance']->pluck('attendance_days')) !!};
 
-            <!-- Card 4 -->
-            <div class="col-md-6 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text"></p>
-                    </div>
-                    <img src="..." class="card-img-bottom" alt="...">
-                </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="col-md-6 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text"></p>
-                    </div>
-                    <img src="..." class="card-img-bottom" alt="...">
-                </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="col-md-6 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text"></p>
-                    </div>
-                    <img src="..." class="card-img-bottom" alt="...">
-                </div>
-            </div>
-        @endsection
+                // Create the chart
+                const ctx{{ $userId }} = document.getElementById('attendanceChart-{{ $userId }}')
+                    .getContext('2d');
+                new Chart(ctx{{ $userId }}, {
+                    type: 'bar',
+                    data: {
+                        labels: labels{{ $userId }},
+                        datasets: [{
+                                label: 'Total Hours Worked',
+                                data: data{{ $userId }},
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Days Present',
+                                data: daysData{{ $userId }},
+                                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                                borderColor: 'rgba(153, 102, 255, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            @endforeach
+        });
+    </script>
+@endsection

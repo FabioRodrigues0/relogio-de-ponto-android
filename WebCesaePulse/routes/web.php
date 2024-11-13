@@ -27,8 +27,8 @@ Route::post("/update_contact", [UserController::class, 'updateUser'])->name('upd
 //Admin
 Route::get('/admin_home', [AdminController::class, 'adminHome'])->name('admin.home')->middleware('auth');
 
-Route::get('/statistics', [StatisticController::class, 'statistics']);
-//fallback
+//Route::get('/statistics', [StatisticController::class, 'statistics']);
+Route::get('/admin/statistics', [StatisticController::class, 'statistics'])->name('admin.statistics');
 Route::fallback(function(){
     return '<h1> Esta página não existe! </h1>';
 });

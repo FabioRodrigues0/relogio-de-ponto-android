@@ -14,7 +14,7 @@ class AdminController extends Controller
             $userLog = $this->getTodaysEntrances();
             $entrances = $userLog['entrances'];
             $totalHours = $userLog['totalHours'];
-            
+
 
             return view('admin.homeAdmin', compact('entrances', 'totalHours'));
         }
@@ -72,4 +72,6 @@ class AdminController extends Controller
 
         return ['entrances' => $entrances, 'totalHours' => $finalHour];
     }
+
+    
 }
