@@ -14,7 +14,7 @@ class AdminController extends Controller
             $userLog = $this->getTodaysEntrances();
             $entrances = $userLog['entrances'];
             $totalHours = $userLog['totalHours'];
-            // dd($totalHours);
+            
 
             return view('admin.homeAdmin', compact('entrances', 'totalHours'));
         }
@@ -60,8 +60,16 @@ class AdminController extends Controller
             $totalMinutes += $durationInMinutes;
         }
 
-        $formattedTotalHours = round($totalMinutes/60, 2);
 
-        return ['entrances' => $entrances, 'totalHours' => $formattedTotalHours];
+        $formattedTotalHours = round($totalMinutes/60, 2);
+        // dd($formattedTotalHours);
+        $casaDecimalInteiro = $formattedTotalHours - floor($totalMinutes/60);
+        $casaDecimal = ceil($casaDecimalInteiro*60)/100;
+
+        $numeroInteiro = $formattedTotalHours - $casaDecimalInteiro;
+
+        $finalHour = $numeroInteiro + $casaDecimal;
+
+        return ['entrances' => $entrances, 'totalHours' => $finalHour];
     }
 }
