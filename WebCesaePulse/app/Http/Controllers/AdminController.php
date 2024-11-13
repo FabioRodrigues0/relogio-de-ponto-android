@@ -15,6 +15,7 @@ class AdminController extends Controller
             $userLog = $this->getTodaysEntrances();
             $userPerformance = $this->usersPerformance();
             $actualMonthYear = Carbon::now()->month."/".Carbon::now()->year;
+            $actualDayMonthYear = Carbon::now()->day."/".Carbon::now()->month."/".Carbon::now()->year;
 
             $entrances = $userLog['entrances'];
             $totalHours = $userLog['totalHours'];
@@ -22,7 +23,7 @@ class AdminController extends Controller
             $presences = $userLog['presences'];
 
 
-            return view('admin.homeAdmin', compact('entrances', 'totalHours', 'cont', 'presences', 'userPerformance', 'actualMonthYear'));
+            return view('admin.homeAdmin', compact('entrances', 'totalHours', 'cont', 'presences', 'userPerformance', 'actualMonthYear', 'actualDayMonthYear'));
         }
 
         else{

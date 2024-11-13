@@ -33,21 +33,17 @@
                         <div class="card mb-4 w-100 shadow">
                             <div class="card-header bg-purple fs-5 text-white text-center">Registo de Utilizadores
                             </div>
+                            <div class="fs-5 mt-2 text-center form-control">{{ $actualDayMonthYear }}
 
-                            <div class="container mt-2 mb-2"> <label> </label>
+                            </div>
+                            <div class="container mb-2"> <label> </label>
                                 <div class="row gy-2 gx-3 align-items-center">
                                     <div class="col-auto">
                                         <label class="visually-hidden" for="autoSizingInput">Filtro</label>
                                         <input type="text" class="form-control" id="autoSizingInput" placeholder="Nome">
                                     </div>
 
-                                    <div class="col-auto">
-                                        <label class="input-group date" id="datepicker">
 
-                                            <label for="data"> </label>
-                                            <input type="date" class="form-control" id="data" name="data">
-                                        </label>
-                                    </div>
                                     <div class="col-auto">
                                         <label class="visually-hidden" for="autoSizingSelect">Departamento</label>
                                         <select class="form-select" id="autoSizingSelect">
@@ -59,6 +55,13 @@
                                     <div class="col-auto">
                                         <button type="button" class="btn btn-primary">
                                             <i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </div>
+                                    <div class="col-auto ms-auto">
+                                        <label class="input-group date" id="datepicker">
+
+                                            <label for="data">  </label>
+                                            <input type="date" class="form-control" id="data" name="data">
+                                        </label>
                                     </div>
                                 </div>
                             </div>
