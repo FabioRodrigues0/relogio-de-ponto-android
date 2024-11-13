@@ -11,13 +11,18 @@ class AdminController extends Controller
 {
     public function adminHome(){
         if (Auth::user()->users_type_id == 1){
+
             $userLog = $this->getTodaysEntrances();
+            $userPerformance = $this->usersPerformance();
+            $actualMonthYear = Carbon::now()->month."/".Carbon::now()->year;
+
             $entrances = $userLog['entrances'];
             $totalHours = $userLog['totalHours'];
             $cont = $userLog['cont'];
+            $presences = $userLog['presences'];
 
 
-            return view('admin.homeAdmin', compact('entrances', 'totalHours', 'cont'));
+            return view('admin.homeAdmin', compact('entrances', 'totalHours', 'cont', 'presences', 'userPerformance', 'actualMonthYear'));
         }
 
         else{
@@ -42,6 +47,7 @@ class AdminController extends Controller
 
         $totalMinutes = 0;
         $cont = 0;
+        $presences = 0;
 
         foreach ($entrances as $presence){
 
@@ -61,17 +67,47 @@ class AdminController extends Controller
                 $cont ++;
             }
             $totalMinutes += $durationInMinutes;
+            $presences ++;
         }
 
 
         $formattedTotalHours = round($totalMinutes/60, 2);
-        // dd($formattedTotalHours);
         $casaDecimalInteiro = $formattedTotalHours - floor($totalMinutes/60);
         $casaDecimal = ceil($casaDecimalInteiro*60)/100;
 
         $numeroInteiro = $formattedTotalHours - $casaDecimalInteiro;
 
         $finalHour = $numeroInteiro + $casaDecimal;
-        return ['entrances' => $entrances, 'totalHours' => $finalHour, 'cont' => $cont];
+        return ['entrances' => $entrances, 'totalHours' => $finalHour, 'cont' => $cont, 'presences' => $presences];
     }
+
+    public function usersPerformance(){
+        $monthStart = Carbon::now()->startOfMonth();
+        $monthEnd = Carbon::now()->endOfMonth();
+
+        $entrances = DB::table('presence_record')
+            ->join('users', 'users.id', '=', 'presence_record.user_id')
+            ->whereBetween('presence_record.entry_time', [$monthStart, $monthEnd])
+            ->select('users.name',
+                DB::raw('SUM(TIMESTAMPDIFF(MINUTE, presence_record.entry_time, presence_record.exit_time)) as total_minutes'),
+                DB::raw('
+                100 - (AVG(ABS(
+                    (HOUR(presence_record.entry_time) * 60 + MINUTE(presence_record.entry_time))
+                    - (HOUR(presence_record.entry_time) * 60)
+                )) / 60) * 100 AS punctuality_percentage
+            ')
+            )
+            ->groupBy('users.name')
+            ->orderByDesc('total_minutes')
+            ->simplePaginate(5);
+
+        foreach ($entrances as $entry) {
+            $hours = floor($entry->total_minutes / 60);
+            $minutes = $entry->total_minutes % 60;
+            $entry->total_hours = sprintf("%02d:%02d", $hours, $minutes);
+        }
+
+        return $entrances;
+    }
+
 }

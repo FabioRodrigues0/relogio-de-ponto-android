@@ -51,7 +51,7 @@
                                     <div class="col-auto">
                                         <label class="visually-hidden" for="autoSizingSelect">Departamento</label>
                                         <select class="form-select" id="autoSizingSelect">
-                                            <option selected>tipo de trabalho</option>
+                                            <option selected>Regime</option>
                                             <option value="1">Remoto</option>
                                             <option value="2">Presencial</option>
                                         </select>
@@ -142,7 +142,7 @@
                     <div class="card text-center shadow">
                         <div class="card-body">
                             <h5 class="card-title">Presenças</h5>
-                            <p class="card-text fs-4">80</p> <!-- Este valor pode ser dinâmico -->
+                            <p class="card-text fs-4">{{ $presences }}</p>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                     <div class="card text-center shadow">
                         <div class="card-body">
                             <h5 class="card-title">Faltas</h5>
-                            <p class="card-text fs-4">5</p> <!-- Este valor pode ser dinâmico -->
+                            <p class="card-text fs-4">Sem dados</p> <!-- Este valor pode ser dinâmico -->
                         </div>
 
                         </div>
@@ -163,7 +163,7 @@
     <div class="row justify-content-center">
         <div class="col-6 d-flex justify-content-center">
             <div class="card mb-4 w-100 shadow">
-                <div class="card-header fs-5 text-center"> Ranking desempenho Utilizadores</div>
+                <div class="card-header fs-5 text-center"> Ranking desempenho Utilizadores - Mês {{ $actualMonthYear }}</div>
                 <div class="card-body table-responsive">
                     <table class="table table-striped">
                         <thead class="table-dark">
@@ -174,38 +174,38 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($userPerformance as $user)
                             <tr>
-                                <td>João Silva</td>
-                                <td>160 h</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->total_hours }}h</td>
                                 <td>
                                     <div class="progress" style="height: 20px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 95%;"
-                                            aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">95%</div>
+                                        @php
+                                         $punctuality = round($user->punctuality_percentage);
+                                        @endphp
+                                        @if($punctuality >= 90)
+                                          <div class="progress-bar bg-success" role="progressbar" style="width: {{ round($user->punctuality_percentage) }}%;"
+                                            aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">{{ round($user->punctuality_percentage) }}%</div>
+                                        @elseif ($punctuality >= 70)
+                                           <div class="progress-bar bg-primary" role="progressbar" style="width: {{ round($user->punctuality_percentage) }}%;"
+                                            aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">{{ round($user->punctuality_percentage) }}%</div>
+                                        @elseif ($punctuality >= 50)
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{ round($user->punctuality_percentage) }}%;"
+                                                aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">{{ round($user->punctuality_percentage) }}%</div>
+                                        @else
+                                                 <div class="progress-bar bg-warning" role="progressbar" style="width: {{ round($user->punctuality_percentage) }}%;"
+                                                aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">{{ round($user->punctuality_percentage) }}%</div>
+                                        @endif
+
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Maria Santos</td>
-                                <td>155 h</td>
-                                <td>
-                                    <div class="progress" style="height: 20px;">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 90%;"
-                                            aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Pedro Costa</td>
-                                <td>140 h</td>
-                                <td>
-                                    <div class="progress" style="height: 20px;">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%;"
-                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
-                                    </div>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center">
+                        {{ $userPerformance->links('') }}
+                     </div>
                 </div>
 
             </div>
