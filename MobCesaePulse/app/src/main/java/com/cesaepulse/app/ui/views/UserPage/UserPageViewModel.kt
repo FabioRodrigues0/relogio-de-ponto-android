@@ -1,4 +1,4 @@
-package com.cesaepulse.app.ui.views.UserDetails
+package com.cesaepulse.app.ui.views.UserPage
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UsersDetailsViewModel @Inject constructor(
+class UsersPageViewModel @Inject constructor(
     private val repository: MockUserRepo
 )  : ViewModel() {
     //private val repository: UserRepository

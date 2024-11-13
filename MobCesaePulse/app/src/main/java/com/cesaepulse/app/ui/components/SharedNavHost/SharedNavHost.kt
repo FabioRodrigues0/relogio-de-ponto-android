@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.cesaepulse.app.ui.UserListRoute
 import com.cesaepulse.app.ui.UserRoute
-import com.cesaepulse.app.ui.views.UserDetails.UsersDetails
+import com.cesaepulse.app.ui.views.UserPage.UsersPage
 import com.cesaepulse.app.ui.views.UsersList.UsersList
 
 @Composable
@@ -30,7 +30,7 @@ fun SharedNavHost(navController: NavHostController, innerPadding: PaddingValues)
             composable<UserRoute> {
                 val args = it.toRoute<UserRoute>()
 
-                UsersDetails(id = args.id.toInt())
+                UsersPage(id = args.id.toInt())
             }
         }
     }

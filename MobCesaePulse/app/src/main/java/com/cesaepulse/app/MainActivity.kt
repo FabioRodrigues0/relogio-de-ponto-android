@@ -12,11 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.cesaepulse.app.ui.components.BottomNavBar.BottomNavBar
+import com.cesaepulse.app.ui.components.SharedNavHost.SharedNavHost
+import com.cesaepulse.app.ui.components.TopBar.TopBar
 import com.cesaepulse.app.ui.theme.CesaepulseTheme
 import dagger.hilt.android.AndroidEntryPoint
-import com.cesaepulse.app.ui.components.SharedNavHost.SharedNavHost
-import com.cesaepulse.app.ui.components.BottomNavBar.BottomNavBar
-import com.cesaepulse.app.ui.components.TopBar.TopBar
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -24,11 +24,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             CesaepulseTheme {
                 val navController = rememberNavController()
 
                 enableEdgeToEdge(
+                    navigationBarStyle = SystemBarStyle.dark(
+                        android.graphics.Color.TRANSPARENT
+                    ),
                     statusBarStyle = SystemBarStyle.dark(
                         android.graphics.Color.TRANSPARENT
                     )
