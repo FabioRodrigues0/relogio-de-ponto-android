@@ -1,5 +1,5 @@
-import $ from 'jquery';
-import 'bootstrap-datepicker';
+// import $ from 'jquery';
+// import 'bootstrap-datepicker';
 
 function setCurrentDate() {
     const dateElement = document.getElementById('current-date');

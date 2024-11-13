@@ -89,7 +89,7 @@
                     <div class="card text-center shadow">
                         <div class="card-body">
                             <h5 class="card-title">Utilizadores Ativos</h5>
-                            <p class="card-text fs-4">25</p> <!-- Este valor pode ser dinâmico -->
+                            <p class="card-text fs-4">{{ cont }}</p> <!-- Este valor pode ser dinâmico -->
                         </div>
                     </div>
                 </div>

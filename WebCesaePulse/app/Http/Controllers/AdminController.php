@@ -14,7 +14,7 @@ class AdminController extends Controller
             $userLog = $this->getTodaysEntrances();
             $entrances = $userLog['entrances'];
             $totalHours = $userLog['totalHours'];
-            
+
 
             return view('admin.homeAdmin', compact('entrances', 'totalHours'));
         }
@@ -40,6 +40,7 @@ class AdminController extends Controller
         ->cursorPaginate(5);
 
         $totalMinutes = 0;
+        $cont = 0;
 
         foreach ($entrances as $presence){
 
@@ -52,10 +53,12 @@ class AdminController extends Controller
             if($presence->exit_time){
                 $presence->total_time = $entryTime->diff($exitTime)->format('%H:%I');
                 $durationInMinutes = $entryTime->diffInMinutes($exitTime);
+                cont--;
             }
             else{
                 $durationInMinutes = $entryTime->diffInMinutes($timeNow);
                 $presence->total_time = '';
+                cont++;
             }
             $totalMinutes += $durationInMinutes;
         }
