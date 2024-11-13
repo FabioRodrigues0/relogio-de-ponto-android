@@ -1,6 +1,5 @@
 package com.cesaepulse.app.ui.views.UserPage
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,7 +22,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
+import com.cesaepulse.app.ui.components.InfoHours.InfoHour
 import com.cesaepulse.app.ui.theme.Shapes
+import com.cesaepulse.app.ui.theme.cesae1
+import com.cesaepulse.app.ui.theme.cesae2
+import com.cesaepulse.app.ui.theme.cesae3
 
 @Composable
 fun UsersPage(
@@ -62,34 +64,14 @@ fun UsersPage(
 				fontWeight = FontWeight.Bold)
 			Text(text = "2/11/2024 17:05")
 
-
+			Text(text = "Horas", fontSize = TextUnit(25f, TextUnitType.Sp), fontWeight = FontWeight.Bold)
 			Row(
 				horizontalArrangement = Arrangement.spacedBy(20.dp),
 				modifier = Modifier.padding(vertical = 20.dp)
 			) {
-				Column (
-					modifier = Modifier
-						.background(MaterialTheme.colorScheme.primary, shape = Shapes.medium)
-						.clip(Shapes.medium)
-						.size(110.dp)
-				) {
-					Text(text = "Horas Diarias")
-				}
-				Column(
-					modifier = Modifier
-						.background(MaterialTheme.colorScheme.onSecondary, shape = Shapes.medium)
-						.clip(Shapes.medium)
-						.size(110.dp)
-				) {
-					Text(text = "Horas Diarias")
-				}
-				Column(
-					modifier = Modifier
-						.background(MaterialTheme.colorScheme.tertiary, shape = Shapes.medium)
-						.size(110.dp)
-				) {
-					Text(text = "Horas Diarias")
-				}
+				InfoHour(header = "Diárias", hour = "7h", color = cesae1)
+				InfoHour(header = "Semanais", hour = "48h", color = cesae2)
+				InfoHour(header = "Mensais", hour = "120h", color = cesae3)
 			}
 		}
 	}
