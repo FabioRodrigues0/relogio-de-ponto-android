@@ -1,3 +1,6 @@
+import $ from 'jquery';
+import 'bootstrap-datepicker';
+
 function setCurrentDate() {
     const dateElement = document.getElementById('current-date');
     const today = new Date();
@@ -53,3 +56,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
      // Your code to run since DOM is loaded and ready
     });
+    $(document).ready(function() {
+        $('#datepicker').datepicker({
+          format: 'dd/mm/yyyy',
+          todayHighlight: true,
+          autoclose: true
+        });
+      });
