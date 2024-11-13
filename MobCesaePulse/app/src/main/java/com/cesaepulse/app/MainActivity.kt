@@ -14,9 +14,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.cesaepulse.app.ui.theme.CesaepulseTheme
 import dagger.hilt.android.AndroidEntryPoint
-import com.cesaepulse.app.ui.views.components.SharedNavHost.SharedNavHost
-import com.cesaepulse.app.ui.views.components.BottomNavBar.BottomNavBar
-import com.cesaepulse.app.ui.views.components.TopBar.TopBar
+import com.cesaepulse.app.ui.components.SharedNavHost.SharedNavHost
+import com.cesaepulse.app.ui.components.BottomNavBar.BottomNavBar
+import com.cesaepulse.app.ui.components.TopBar.TopBar
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

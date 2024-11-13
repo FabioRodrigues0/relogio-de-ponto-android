@@ -1,4 +1,4 @@
-package com.cesaepulse.app.ui.views.components.TopBar
+package com.cesaepulse.app.ui.components.TopBar
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme

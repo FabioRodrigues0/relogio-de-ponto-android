@@ -1,4 +1,4 @@
-package com.cesaepulse.app.ui.views.components.SharedNavHost
+package com.cesaepulse.app.ui.components.SharedNavHost
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
