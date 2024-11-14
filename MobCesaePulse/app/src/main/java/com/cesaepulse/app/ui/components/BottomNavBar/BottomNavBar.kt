@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.cesaepulse.app.ui.theme.cesae3
+import com.cesaepulse.app.ui.theme.primaryLight
 
 @Composable
 fun BottomNavBar() {
@@ -27,7 +27,7 @@ fun BottomNavBar() {
         modifier = Modifier
             .padding(horizontal = 95.dp, vertical = 43.dp)
             .size(width = 220.dp, height = 50.dp)
-            .background(color = cesae3, shape = MaterialTheme.shapes.medium)
+            .background(color = primaryLight, shape = MaterialTheme.shapes.medium)
     ) {
         IconButton(
             modifier = Modifier.padding(horizontal = 10.dp),

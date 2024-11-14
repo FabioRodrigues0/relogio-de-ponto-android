@@ -28,7 +28,7 @@ fun InfoHour(
 		verticalArrangement = Arrangement.spacedBy(15.dp),
 		modifier = Modifier
 			.background(color = color, shape = Shapes.medium)
-			.size(110.dp)
+			.size(100.dp)
 	) {
 		Text(
 			text = header,

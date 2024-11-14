@@ -49,11 +49,11 @@ fun SharedTransitionScope.UsersList(
 				}
 			} else {
 				LazyColumn(
-					verticalArrangement = Arrangement.spacedBy(16.dp),
+					verticalArrangement = Arrangement.spacedBy(8.dp),
 					contentPadding = PaddingValues(
 						start = 20.dp,
 						end = 20.dp,
-						top = 15.dp + innerPadding.calculateTopPadding(),
+						top = 50.dp + innerPadding.calculateTopPadding(),
 						bottom = 15.dp + innerPadding.calculateBottomPadding()),
 				) {
 					item {
