@@ -25,6 +25,8 @@ Route::post("/update_contact", [UserController::class, 'updateUser'])->name('upd
 
 //Admin
 Route::get('/admin_home', [AdminController::class, 'adminHome'])->name('admin.home')->middleware('auth');
+Route::get('/admin_search', [AdminController::class, 'adminSearch'])->name('admin.search')->middleware('auth');
+
 
 //fallback
 Route::fallback(function(){

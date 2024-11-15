@@ -34,28 +34,37 @@
                             <div class="card-header bg-purple fs-5 text-white text-center">Registo de Utilizadores
                             </div>
                             <div class="fs-5 mt-2 text-center form-control">{{ $actualDayMonthYear }}
-
                             </div>
                             <div class="container mb-2"> <label> </label>
-                                <div class="row gy-2 gx-3 align-items-center">
+
+                                <form method="GET">
+                                 <div class="row gy-2 gx-3 align-items-center">
                                     <div class="col-auto">
                                         <label class="visually-hidden" for="autoSizingInput">Filtro</label>
-                                        <input type="text" class="form-control" id="autoSizingInput" placeholder="Nome">
-                                    </div>
 
+                                        <input  value="{{ request()->query('search') }}"
+                                        type="text"
+                                        name="search"
+                                        class="form-control"
+                                        placeholder="Procurar..."
+                                        aria-label="Pesquisar"
+                                        aria-describedby="basic-addon2">
+                                    </div>
 
                                     <div class="col-auto">
                                         <label class="visually-hidden" for="autoSizingSelect">Departamento</label>
-                                        <select class="form-select" id="autoSizingSelect">
+                                        <select class="form-select" id="autoSizingSelect" name="attendance_mode">
                                             <option selected>Regime</option>
-                                            <option value="1">Remoto</option>
-                                            <option value="2">Presencial</option>
+                                            <option value="1" {{ request()->query('attendance_mode') == '1' ? 'selected' : '' }}>Remoto</option>
+                                            <option value="2" {{ request()->query('attendance_mode') == '2' ? 'selected' : '' }}>Presencial</option>
                                         </select>
                                     </div>
                                     <div class="col-auto">
-                                        <button type="button" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary">
                                             <i class="fa fa-search" aria-hidden="true"></i></button>
                                     </div>
+
+                                </form>
                                     <div class="col-auto ms-auto">
                                         <label class="input-group date" id="datepicker">
 
@@ -65,7 +74,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                        </form>
 
 
 
