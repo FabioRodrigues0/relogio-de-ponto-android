@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -13,6 +14,7 @@ Route::get('/', function () {
 Route::get('/home', [UserController::class, 'home'])->name('home.page')->middleware('auth');
 Route::get('/users', [UserController::class, 'index'])->name('users.home')->middleware('auth');
 Route::get('/users_delete/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
+Route::get('/homepage', [UserController::class, 'homepage'])->name('homepage.page');
 
 //autenticação
 Route::get('/login', [AuthController::class, 'login'])->name('login');

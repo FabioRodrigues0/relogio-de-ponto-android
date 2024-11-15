@@ -28,6 +28,9 @@ class UserController extends Controller
 
         return view('pages.users', compact('showUsers'));
     }
+    public function homepage(){
+        return view('pages.homepage');
+    }
 
     public function home(){
         $userTime = $this->getLastEntrance();
@@ -135,5 +138,5 @@ class UserController extends Controller
         return($checkAllFields);
     }
 
-   
+
 }
