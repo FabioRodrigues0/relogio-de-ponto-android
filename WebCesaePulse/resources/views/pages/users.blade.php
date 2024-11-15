@@ -5,6 +5,10 @@
         @if(session('message'))
             <div class="alert alert-success">{{ session('message') }}</div>
         @endif
+        <div class="container mt-5">
+            <h1 class="title-gradient text-center display-3">Consulta de funcionários</h1>
+        </div>
+        
         <div class="container my-4">
             <div class="row justify-content-center">
                 <!-- Coluna de Informações do Funcionário -->
