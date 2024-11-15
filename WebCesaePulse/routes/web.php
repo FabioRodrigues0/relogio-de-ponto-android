@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StatisticController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,7 +29,8 @@ Route::get('/admin_home', [AdminController::class, 'adminHome'])->name('admin.ho
 Route::get('/admin_search', [AdminController::class, 'adminSearch'])->name('admin.search')->middleware('auth');
 
 
-//fallback
+//Route::get('/statistics', [StatisticController::class, 'statistics']);
+Route::get('/admin/statistics', [StatisticController::class, 'statistics'])->name('admin.statistics');
 Route::fallback(function(){
     return '<h1> Esta página não existe! </h1>';
 });

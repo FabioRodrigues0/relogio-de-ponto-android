@@ -21,6 +21,7 @@ class AdminController extends Controller
 
             $entrances = $userLog['entrances'];
             $totalHours = $userLog['totalHours'];
+
             $cont = $userLog['cont'];
             $presences = $userLog['presences'];
 
