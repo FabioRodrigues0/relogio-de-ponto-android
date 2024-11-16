@@ -12,13 +12,13 @@ class StatisticController extends Controller
 {
     public function statistics()
     {
-        // Fetch all users' attendance data
-        $users = DB::table('users')->get(); // Get all users
 
-        // Collect data for each user
+        $users = DB::table('users')->get();
+
+
         $userData = [];
         foreach ($users as $user) {
-            // Aggregate attendance data per month for each user
+
             $attendance = DB::table('presence_record')
                 ->where('user_id', $user->id)
                 ->select(
@@ -35,7 +35,7 @@ class StatisticController extends Controller
             ];
         }
 
-        // Pass the user attendance data to the view
+       
         return view('admin.statistics', compact('userData'));
     }
 }

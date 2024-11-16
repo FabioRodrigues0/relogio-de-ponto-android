@@ -21,7 +21,8 @@
     <!-- Custom CSS (optional, remove if not needed) -->
     <link rel="stylesheet" href="{{ asset('CSS/styleMaster.css') }}">
     <script src="{{ asset('JS/app.js') }}" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
 </head>
 
@@ -45,10 +46,10 @@
                             class='bx bx-user nav_icon'></i>
                         <span class="nav_name">Meu Perfil</span> </a> <a href="#" class="nav_link"> <i
                             class='bx bx-message-square-detail nav_icon'></i>
-                        <span class="nav_name">Notificações</span> </a> <a href="#" class="nav_link">
+                        <span class="nav_name">Notificações</span> </a> <a href="{{ route('users.home') }}" class="nav_link">
                         <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Cesae Comunidade</span> </a>
-                    <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
-                        <span class="nav_name">Histórico</span> </a> <a href="#" class="nav_link"> <i
+                    <a href="" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
+                        <span class="nav_name">Histórico</span> </a> <a href="{{ route('admin.statistics') }}" class="nav_link"> <i
                             class='bx bx-bar-chart-alt-2 nav_icon'></i>
                         <span class="nav_name">Estatistica</span> </a>
                 </div>
