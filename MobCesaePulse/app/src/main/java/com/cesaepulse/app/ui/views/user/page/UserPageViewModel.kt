@@ -1,4 +1,4 @@
-package com.cesaepulse.app.ui.views.UserPage
+package com.cesaepulse.app.ui.views.user.page
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

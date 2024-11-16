@@ -1,9 +1,8 @@
-package com.cesaepulse.app.ui.views.UsersList
+package com.cesaepulse.app.ui.views.user.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cesaepulse.app.data.mockRepositories.MockUserRepo
-import com.cesaepulse.app.data.repository.UserRepository
 import com.cesaepulse.app.domain.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
