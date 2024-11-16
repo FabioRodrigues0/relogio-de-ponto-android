@@ -23,7 +23,7 @@ fun NavigationButton(text: String,
     onClick = onClick,
     modifier = Modifier
     .fillMaxWidth()
-    .background(color = MaterialTheme.colorScheme.surface, shape = Shapes.large)
+    .background(color = MaterialTheme.colorScheme.onPrimaryContainer, shape = Shapes.large)
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween
@@ -31,11 +31,11 @@ fun NavigationButton(text: String,
             Text(text = text, Modifier
                 .weight(1f)
                 .padding(start = 15.dp),
-                color = MaterialTheme.colorScheme.onSurface)
+                color = MaterialTheme.colorScheme.inversePrimary)
             Icon(
                 Icons.AutoMirrored.Filled.ArrowForward,
                 contentDescription = "Forward",
-                tint = MaterialTheme.colorScheme.onSurface,
+                tint = MaterialTheme.colorScheme.inversePrimary,
                 modifier = Modifier.padding(horizontal = 10.dp))
         }
 
