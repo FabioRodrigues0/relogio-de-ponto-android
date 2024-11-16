@@ -73,7 +73,7 @@
     <!--Container Main end-->
 
     <footer>
-        <div class="text-center m-3 text-muted">
+        <div class="text-center m-3 text-muted py-3 position-fixed bottom-0 w-100">
             Copyright © 2024 — Cesae
         </div>
 
