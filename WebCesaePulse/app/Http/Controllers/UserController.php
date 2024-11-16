@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-
-
     public function index(){
 
         $search = request()->query('search') ? request()->query('search') : null;
@@ -47,7 +45,6 @@ class UserController extends Controller
             $photo = Storage::putFile('uploadedImages', $request->photo);
 
         }
-
 
         User::where('id', $request->id)
         ->update([
@@ -87,7 +84,6 @@ class UserController extends Controller
 
             return $users;
     }
-
 
     public function getLastEntrance(){
         $id = Auth::user()->id;
@@ -135,5 +131,5 @@ class UserController extends Controller
         return($checkAllFields);
     }
 
-   
+
 }

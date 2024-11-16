@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     public function adminHome(){
+
+
         if (Auth::user()->users_type_id == 1){
 
             $userLog = $this->getTodaysEntrances();
@@ -19,6 +21,7 @@ class AdminController extends Controller
 
             $entrances = $userLog['entrances'];
             $totalHours = $userLog['totalHours'];
+
             $cont = $userLog['cont'];
             $presences = $userLog['presences'];
 
@@ -109,6 +112,22 @@ class AdminController extends Controller
         }
 
         return $entrances;
+    }
+
+    public function adminSearch(Request $request){
+        $search = $request->input('search');
+        $attendanceMode = $request->input('attendance_mode');
+
+        $users = DB::table('users');
+            $users = $users->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('email', 'LIKE', "%{$search}%")
+            // ->orWhere('users_type_id', '=', $type)
+            ->join('users_type', 'users.users_type_id', '=', 'users_type.id')
+            ->select('users.*', 'users_type.type')
+            ->orderBy('id')
+            ->simplePaginate(5);
+
+            return view('admin.homeAdmin');
     }
 
 }

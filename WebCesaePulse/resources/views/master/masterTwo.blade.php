@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <!DOCTYPE html>
+    <html lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -19,63 +21,62 @@
     <!-- Custom CSS (optional, remove if not needed) -->
     <link rel="stylesheet" href="{{ asset('CSS/styleMaster.css') }}">
     <script src="{{ asset('JS/app.js') }}" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
 </head>
 
 
-    <!---------------------------------------- NAVBAR ----------------------------------------------->
+<!---------------------------------------- NAVBAR ----------------------------------------------->
 
-    <body id="body-pd">
-        <header class="header" id="header">
+<body id="body-pd">
+    <header class="header" id="header">
 
-            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
 
-        </header>
+    </header>
 
-        <div class="l-navbar" id="nav-bar">
-            <nav class="nav">
-                <div> <a href="#" class="nav_logo"> <i class="fa-solid fa-user-clock nav_logo-icon"></i> <span
-                            class="nav_logo-name">CesaeClock</span> </a>
-                    <div class="nav_list"> <a href="{{ route('admin.home') }}" class="nav_link active"> <i
-                                class='bx bx-grid-alt nav_icon'></i>
-                            <span class="nav_name">Home</span> </a> <a href="{{ route('home.page') }}" class="nav_link"> <i
-                                class='bx bx-user nav_icon'></i>
-                            <span class="nav_name">Meu Perfil</span> </a> <a href="#" class="nav_link"> <i
-                                class='bx bx-message-square-detail nav_icon'></i>
-                            <span class="nav_name">Notificações</span> </a> <a href="#"
-                            class="nav_link">
-                            <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Cesae Comunidade</span> </a>
-                        <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
-                            <span class="nav_name">Histórico</span> </a> <a href="#" class="nav_link"> <i
-                                class='bx bx-bar-chart-alt-2 nav_icon'></i>
-                            <span class="nav_name">Estatistica</span> </a>
-                    </div>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div> <a href="#" class="nav_logo"> <i class="fa-solid fa-user-clock nav_logo-icon"></i> <span
+                        class="nav_logo-name">CesaeClock</span> </a>
+                <div class="nav_list"> <a href="{{ route('admin.home') }}" class="nav_link active"> <i
+                            class='bx bx-grid-alt nav_icon'></i>
+                        <span class="nav_name">Home</span> </a> <a href="{{ route('home.page') }}" class="nav_link"> <i
+                            class='bx bx-user nav_icon'></i>
+                        <span class="nav_name">Meu Perfil</span> </a> <a href="#" class="nav_link"> <i
+                            class='bx bx-message-square-detail nav_icon'></i>
+                        <span class="nav_name">Notificações</span> </a> <a href="{{ route('users.home') }}" class="nav_link">
+                        <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Cesae Comunidade</span> </a>
+                    <a href="" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
+                        <span class="nav_name">Histórico</span> </a> <a href="{{ route('admin.statistics') }}" class="nav_link"> <i
+                            class='bx bx-bar-chart-alt-2 nav_icon'></i>
+                        <span class="nav_name">Estatistica</span> </a>
                 </div>
-
-                <form method="POST" action="{{ route('logout') }}" id="logout-form">
-                    @csrf
-                    <li> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon' onclick="document.getElementById('logout-form').submit()"></i> <span
-                           class="nav_name" onclick="document.getElementById('logout-form').submit()">Logout</span> </a>
-
-                </form>
-
-            </nav>
-
-        </div>
-
-        <!--Container Main start-->
-        <main>
-            @yield('content')
-        </main>
-        <!--Container Main end-->
-
-        <footer>
-            <div class="text-center m-3 text-muted">
-                Copyright © 2024 — Cesae
             </div>
 
-        </footer>
-    </body>
+            <form method="POST" action="{{ route('logout') }}" id="logout-form">
+                @csrf
+                <li> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'
+                            onclick="document.getElementById('logout-form').submit()"></i> <span class="nav_name"
+                            onclick="document.getElementById('logout-form').submit()">Logout</span> </a>
 
+            </form>
 
+        </nav>
+
+    </div>
+
+    <!--Container Main start-->
+    <main>
+        @yield('content')
+    </main>
+    <!--Container Main end-->
+
+    <footer>
+        <div class="text-center m-3 text-muted">
+            Copyright © 2024 — Cesae
+        </div>
+
+    </footer>
+</body>
