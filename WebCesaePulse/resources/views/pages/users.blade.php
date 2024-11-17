@@ -35,63 +35,55 @@
             </div>
 
             <div class="card-body">
-                <form method="GET" class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="input-group w-50">
-                        <input
-                            value="{{ request()->query('search') }}"
-                            type="text"
-                            name="search"
-                            class="form-control"
-                            placeholder="Pesquisar por nome ou e-mail"
-                            aria-label="Pesquisar"
-                        >
-                        <select class="form-select ms-2" name="type" aria-label="Filtrar por tipo">
-                            <option value="">Filtrar por tipo</option>
-                            <option value="1" {{ request()->query('type') == '1' ? 'selected' : '' }}>Admin</option>
-                            <option value="2" {{ request()->query('type') == '2' ? 'selected' : '' }}>Funcionário</option>
-                        </select>
-                        <button class="btn btn-outline-success ms-2" type="submit">
-                            <i class="fa fa-search"></i> Procurar
-                        </button>
-                    </div>
-                </form>
-                <table class="table table-hover">
-                    <thead class="thead-light">
+            <form method="GET" class="mb-4">
+                <div class="input-group w-75 mx-auto">
+                    <input type="text" name="search" value="{{ request()->query('search') }}"
+                           class="form-control" placeholder="Pesquisar..." aria-label="Pesquisar">
+                    <select class="form-select ms-2" name="type">
+                        <option selected>Filtrar por tipo</option>
+                        <option value="1" {{ request()->query('type') == '1' ? 'selected' : '' }}>Admin</option>
+                        <option value="2" {{ request()->query('type') == '2' ? 'selected' : '' }}>Employee</option>
+                    </select>
+                    <button class="btn btn-blue ms-2" type="submit">
+                        <i class="fa fa-search text-white"></i>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Tabela de Resultados -->
+            <div class="table-responsive">
+                <table class="table table-striped align-middle">
+                    <thead style="background-color: #6f42c1; color: #ffffff;">
                         <tr>
-                            <th scope="col">Foto</th>
+                            <th scope="col"></th>
                             <th scope="col">#ID</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
                             <th scope="col">Tipo</th>
                             <th scope="col">Setor</th>
-                            <th scope="col">Ações</th>
+                            <th scope="col" class="text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($showUsers as $users)
+                        @foreach ($showUsers as $user)
                             <tr>
+                                <td><img src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('images/defaultUser.png') }}"
+                                         alt="Foto de {{ $user->name }}" class="rounded-circle" width="40" height="40"></td>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
                                 <td>
-                                    <img width="40px" height="40px"
-                                        src="{{ $users->foto ? asset('storage/' . $users->foto) : asset('images/defaultUser.png') }}"
-                                        alt="Foto de perfil"
-                                        class="rounded-circle">
-                                </td>
-                                <th scope="row">{{ $users->id }}</th>
-                                <td>{{ $users->name }}</td>
-                                <td>{{ $users->email }}</td>
-                                <td>
-                                    <span class="badge {{ $users->users_type_id == 1 ? 'bg-primary' : 'bg-secondary' }}">
-                                        {{ $users->users_type_id == 1 ? 'Admin' : 'Funcionário' }}
+                                    <span class="badge {{ $user->users_type_id == 1 ? 'bg-primary' : 'bg-secondary' }}">
+                                        {{ $user->users_type_id == 1 ? 'Admin' : 'Funcionário' }}
                                     </span>
                                 </td>
-                                <td>{{ $users->setor }}</td>
-                                <td>
-                                    <!-- Botões de ação com tooltips -->
-                                    <a href="{{ route('userContact.view', $users->id) }}" class="btn btn-outline-dark btn-sm" data-bs-toggle="tooltip" title="Atualizar">
+                                <td>{{ $user->setor }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('userContact.view', $user->id) }}" class="btn btn-outline-secondary btn-sm me-2" title="Atualizar">
                                         <i class="fa-solid fa-pen-to-square"></i> Atualizar
                                     </a>
-                                    <a href="{{ route('users.delete', $users->id) }}" class="btn btn-outline-danger btn-sm ms-2" data-bs-toggle="tooltip" title="Excluir">
-                                        <i class="fas fa-trash-alt"></i> Excluir
+                                    <a href="{{ route('users.delete', $user->id) }}" class="btn btn-outline-danger btn-sm" title="Apagar">
+                                        <i class="fas fa-trash-alt"></i> Apagar
                                     </a>
                                 </td>
                             </tr>
@@ -101,7 +93,7 @@
             </div>
         </div>
 
-        <!-- Paginação -->
+
         <div class="d-flex justify-content-center mt-4">
             {{ $showUsers->links('') }}
         </div>
