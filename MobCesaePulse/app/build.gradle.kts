@@ -13,7 +13,7 @@ android {
 
 	defaultConfig {
 		applicationId = "com.cesaepulse.app"
-		minSdk = 24
+		minSdk = 26
 		targetSdk = 34
 		versionCode = 1
 		versionName = "1.0"
@@ -100,10 +100,14 @@ dependencies {
 
 	// MARK: - Hilt (dagger/hilt)
 	implementation(libs.hilt.android)
+	testImplementation(libs.junit)
+	androidTestImplementation(libs.junit)
+	androidTestImplementation(platform(libs.androidx.compose.bom))
+	androidTestImplementation(libs.androidx.ui.test.junit4)
+	debugImplementation(libs.androidx.ui.tooling)
+	debugImplementation(libs.androidx.ui.test.manifest)
 	kapt(libs.hilt.compiler)
 	kapt(libs.hilt.android.compiler)
 	implementation(libs.androidx.hilt.navigation.compose)
 	kapt(libs.androidx.hilt.compiler)
 }
-
-// Allow references to generated code

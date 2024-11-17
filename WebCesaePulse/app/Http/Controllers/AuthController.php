@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -29,7 +30,6 @@ class AuthController extends Controller
     }
 
 
-
     public function userType(){
         $userType = DB::table('users_type')
                    ->get();
@@ -37,6 +37,14 @@ class AuthController extends Controller
     }
 
     public function createUser(Request $request){
+
+        $photo = null;
+
+        if($request->hasFile('foto')){
+            $photo = Storage::putFile('uploadedImages', $request->foto);
+
+        }
+
         $request->validate([
             'name' =>  'required|string|max:100',
             'email' => 'required|email|unique:users',
@@ -50,11 +58,11 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'foto' => $request->foto,
+            'foto' => $photo,
             'users_type_id' => $request->users_type_id,
             'setor' => $request->setor
         ]);
 
-        return redirect()->route('users.home')->with('message', 'Contact added successfully!');
+        return redirect()->route('login')->with('message', 'Contact added successfully!');
     }
 }

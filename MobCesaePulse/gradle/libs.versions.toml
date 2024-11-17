@@ -27,6 +27,10 @@ workRuntimeKtx = "2.9.0"
 ui = "1.7.0-alpha08"
 serialization = "1.6.3"
 navigationCompose = "2.8.0-beta02"
+junit = "4.12"
+monitor = "1.7.2"
+junitKtx = "1.2.1"
+uiTooling = "1.7.5"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidxActivity" }
@@ -64,6 +68,12 @@ retrofit2-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi",
 squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "squareupRetrofit" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-monitor = { group = "androidx.test", name = "monitor", version.ref = "monitor" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

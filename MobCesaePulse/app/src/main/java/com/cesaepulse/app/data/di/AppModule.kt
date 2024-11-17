@@ -33,9 +33,9 @@ object AppModule {
 			.build()
 			.create(CesaePulseApi::class.java)
 
-//	@Provides
-//	@Singleton
-//	fun provideCesaePulseRepository(cesaePulseApi: CesaePulseApi): ICesaePulseRepository =
-//		CesaePulseRepository(cesaePulseApi)
+	//	@Provides
+	//	@Singleton
+	//	fun provideCesaePulseRepository(cesaePulseApi: CesaePulseApi): ICesaePulseRepository =
+	//		CesaePulseRepository(cesaePulseApi)
 
 }

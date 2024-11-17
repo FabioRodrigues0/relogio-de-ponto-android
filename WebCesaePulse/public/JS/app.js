@@ -4,11 +4,7 @@ function setCurrentDate() {
 
     // Formatando a data para DD/MM/YYYY
     const day = String(today.getDate()).padStart(2, '0');
-<<<<<<< HEAD
-    const month = String(today.getMonth() + 1).padStart(2, '0'); 
-=======
     const month = String(today.getMonth() + 1).padStart(2, '0');
->>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
     const year = today.getFullYear();
 
     dateElement.textContent = `${day}/${month}/${year}`;
@@ -16,8 +12,6 @@ function setCurrentDate() {
 
 // Chamando a função ao carregar a página
 document.addEventListener('DOMContentLoaded', setCurrentDate);
-<<<<<<< HEAD
-=======
 
 //ADICIONADO
 
@@ -59,4 +53,43 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
      // Your code to run since DOM is loaded and ready
     });
->>>>>>> 8b50b1e126fa07bd56be6fe16c04f7796e3503e5
+    // Função para mostrar/ocultar o segundo calendário
+    function toggleSegundoCalendario() {
+        var checkBox = document.getElementById("inlineCheckbox1");
+        var segundoCalendarioContainer = document.getElementById("segundoCalendarioContainer");
+
+        if (checkBox.checked) {
+            segundoCalendarioContainer.style.display = "block"; // Mostra o segundo calendário
+        } else {
+            segundoCalendarioContainer.style.display = "none";  // Esconde o segundo calendário
+        }
+    }
+
+    // Garante que o segundo calendário inicie com o estado correto ao carregar a página
+    document.addEventListener("DOMContentLoaded", function() {
+        toggleSegundoCalendario();
+    });
+
+    $(document).ready(function() {
+        $('#datepicker').datepicker({
+          format: 'dd/mm/yyyy',
+          todayHighlight: true,
+          autoclose: true
+        });
+      });
+
+      $('#meuModal').on('shown.bs.modal', function () {
+        $('#meuInput').trigger('focus')
+      })
+      const exampleModal = document.getElementById('exampleModal')
+if (exampleModal) {
+  exampleModal.addEventListener('show.bs.modal', event => {
+    const button = event.relatedTarget
+    const recipient = button.getAttribute('data-bs-whatever')
+    const modalTitle = exampleModal.querySelector('.modal-title')
+    const modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+    modalTitle.textContent = `New message to ${recipient}`
+    modalBodyInput.value = recipient
+  })
+}
