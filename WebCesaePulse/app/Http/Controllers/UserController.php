@@ -59,6 +59,8 @@ class UserController extends Controller
 
 
     public function deleteUser($id){
+
+        DB::table('presence_record')->where('user_id', $id)->delete();
         User::where('id', $id)->delete();
         return back();
     }

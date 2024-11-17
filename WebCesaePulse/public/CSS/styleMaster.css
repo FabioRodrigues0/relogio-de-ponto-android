@@ -225,3 +225,6 @@ a {
     z-index: 1000;
 }
 
+.btn-blue{
+    background-color: rgba(73, 79, 191, 1);
+}
