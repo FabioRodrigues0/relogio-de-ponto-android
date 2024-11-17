@@ -14,7 +14,6 @@
         "APP_ENV": "production",
         "APP_DEBUG": "true",
         "APP_URL": "https://web-cesae-pulse.vercel.app",
-        "APP_KEY": "base64:SkX2BmwOKYKDwYx/pO4rxVgpbCozzKAlNuuLPz4cAjQ=",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
