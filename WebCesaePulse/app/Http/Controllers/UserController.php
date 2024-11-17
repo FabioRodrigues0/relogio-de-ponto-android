@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-
-
     public function index(){
 
         $search = request()->query('search') ? request()->query('search') : null;
@@ -48,7 +46,6 @@ class UserController extends Controller
 
         }
 
-
         User::where('id', $request->id)
         ->update([
             'name' => $request->name,
@@ -62,6 +59,8 @@ class UserController extends Controller
 
 
     public function deleteUser($id){
+
+        DB::table('presence_record')->where('user_id', $id)->delete();
         User::where('id', $id)->delete();
         return back();
     }
@@ -88,7 +87,6 @@ class UserController extends Controller
             return $users;
     }
 
-
     public function getLastEntrance(){
         $id = Auth::user()->id;
 
@@ -106,6 +104,9 @@ class UserController extends Controller
 
         return($checkTime);
     }
+
+
+    //PRESENÇAS -----------------------------------------------------------------
 
     public function getAllPresences(){
         $id = Auth::user()->id;
@@ -131,4 +132,6 @@ class UserController extends Controller
 
         return($checkAllFields);
     }
+
+
 }

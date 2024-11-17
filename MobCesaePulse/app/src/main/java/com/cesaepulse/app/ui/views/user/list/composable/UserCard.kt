@@ -1,10 +1,10 @@
-package com.cesaepulse.app.ui.views.UsersList.composable
+package com.cesaepulse.app.ui.views.user.list.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -30,7 +30,6 @@ fun UserCard(
 	) {
 		Row(
 			modifier = Modifier
-				.padding(6.dp)
 				.fillMaxWidth(),
 			horizontalArrangement = Arrangement.spacedBy(10.dp),
 			verticalAlignment = Alignment.CenterVertically
@@ -39,7 +38,8 @@ fun UserCard(
 				model = user.photo,
 				contentDescription = null,
 				modifier = Modifier
-					.size(96.dp)
+					.size(110.dp)
+					.fillMaxHeight()
 					.clip(RoundedCornerShape(10.dp)),
 				contentScale = ContentScale.Crop
 			)

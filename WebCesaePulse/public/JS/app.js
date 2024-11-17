@@ -1,3 +1,7 @@
+// import $ from 'jquery';
+// import 'bootstrap-datepicker';
+console.log("DEU!")
+
 function setCurrentDate() {
     const dateElement = document.getElementById('current-date');
     const today = new Date();
@@ -53,3 +57,43 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
      // Your code to run since DOM is loaded and ready
     });
+    // Função para mostrar/ocultar o segundo calendário
+    function toggleSegundoCalendario() {
+        var checkBox = document.getElementById("inlineCheckbox1");
+        var segundoCalendarioContainer = document.getElementById("segundoCalendarioContainer");
+
+        if (checkBox.checked) {
+            segundoCalendarioContainer.style.display = "block"; // Mostra o segundo calendário
+        } else {
+            segundoCalendarioContainer.style.display = "none";  // Esconde o segundo calendário
+        }
+    }
+
+    // Garante que o segundo calendário inicie com o estado correto ao carregar a página
+    document.addEventListener("DOMContentLoaded", function() {
+        toggleSegundoCalendario();
+    });
+
+    $(document).ready(function() {
+        $('#datepicker').datepicker({
+          format: 'dd/mm/yyyy',
+          todayHighlight: true,
+          autoclose: true
+        });
+      });
+
+      $('#meuModal').on('shown.bs.modal', function () {
+        $('#meuInput').trigger('focus')
+      })
+      const exampleModal = document.getElementById('exampleModal')
+if (exampleModal) {
+  exampleModal.addEventListener('show.bs.modal', event => {
+    const button = event.relatedTarget
+    const recipient = button.getAttribute('data-bs-whatever')
+    const modalTitle = exampleModal.querySelector('.modal-title')
+    const modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+    modalTitle.textContent = `New message to ${recipient}`
+    modalBodyInput.value = recipient
+  })
+}
