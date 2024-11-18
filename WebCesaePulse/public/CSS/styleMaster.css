@@ -228,3 +228,12 @@ a {
 .btn-blue{
     background-color: rgba(73, 79, 191, 1);
 }
+
+.card-alert{
+    cursor: pointer;
+}
+
+.no-link-style {
+    text-decoration: none;
+    color: inherit; 
+}

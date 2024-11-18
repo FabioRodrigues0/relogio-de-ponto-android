@@ -22,16 +22,19 @@
                             <div class="col-md-6 text-center">
                                 <p class="card-text"><strong>Data:</strong> <span id="current-date"></span></p>
                             </div>
+
                             <div class="col-md-6 text-center">
                                 <p class="card-text"><strong>Horas trabalhadas hoje:</strong> {{ $userTime->total_time ?? 'Sem registos' }}</p>
                             </div>
                         </div>
+
                         <div class="row mb-3">
+
                             <div class="col-md-6 text-center">
-                                <p class="card-text"><strong>Última entrada:</strong> {{ $userTime->entry_time ?? 'Sem registos' }}</p>
+                                <p class="card-text"><strong>Última entrada:</strong> {{ $userTime->date." às ".$userTime->entry_time ?? 'Sem registos' }}</p>
                             </div>
                             <div class="col-md-6 text-center">
-                                <p class="card-text"><strong>Última saída:</strong> {{ $userTime->exit_time ?? 'Sem registos' }}</p>
+                                <p class="card-text"><strong>Última saída:</strong> {{ $userTime->date." às ".$userTime->exit_time ?? 'Sem registos' }}</p>
                             </div>
                         </div>
                     </div>
@@ -46,14 +49,43 @@
                 <!-- Painel de Horas e Produtividade -->
                 <div class="col-lg-6 mb-4 d-flex justify-content-center">
                     <div class="card w-100 shadow">
-                        <div class="card-header text-center">Horas Semanais</div>
+                        <div class="card-header text-center">Horas Mensais</div>
                         <div class="card-body text-center">
-                            <p>Horas trabalhadas até agora: <strong>32h</strong></p>
-                            <p>Saldo de horas: <span class="text-success">+2h</span></p>
+                            @php
+                            $punctuality = round($performance->punctuality_percentage);
+                            @endphp
+                            <p>Horas mensais trabalhadas até agora: <strong>{{ $performance->total_hours }}</strong></p>
+                            @if($punctuality >= 90)
+                            <p>Pontualidade: <span class="text-success">Ótimo! Manter assim!</span></p>
+                            @elseif ($punctuality >= 70)
+                            <p>Pontualidade: <span class="text-primary">Está bom!</span></p>
+                            @elseif ($punctuality >= 50)
+                            <p>Pontualidade: <span class="text-warning">Podes melhorar!</span></p>
+                            @else
+                            <p>Pontualidade: <span class="text-danger">Não está bom!</span></p>
+                            @endif
+
                             <!-- Exemplo de Barra de Progresso -->
                             <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="40">80%</div>
-                            </div>
+
+
+                            @if($punctuality >= 90)
+                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ round($performance->punctuality_percentage) }}%;"
+                              aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">{{ round($performance->punctuality_percentage) }}%</div>
+                          @elseif ($punctuality >= 70)
+                             <div class="progress-bar bg-primary" role="progressbar" style="width: {{ round($performance->punctuality_percentage) }}%;"
+                              aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">{{ round($performance->punctuality_percentage) }}%</div>
+                          @elseif ($punctuality >= 50)
+                              <div class="progress-bar bg-warning" role="progressbar" style="width: {{ round($performance->punctuality_percentage) }}%;"
+                                  aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">{{ round($performance->punctuality_percentage) }}%</div>
+                          @else
+                              <div class="progress-bar bg-danger" role="progressbar" style="width: {{ round($performance->punctuality_percentage) }}%;"
+                                 aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">{{ round($performance->punctuality_percentage) }}%</div>
+                          @endif
+                        </div>
+
+
+
                         </div>
                     </div>
                 </div>
