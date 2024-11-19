@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -81,9 +82,21 @@ fun UsersPage(
 				horizontalArrangement = Arrangement.spacedBy(20.dp),
 				modifier = Modifier.padding(vertical = 10.dp)
 			) {
-				InfoHour(header = "Diárias", hour = "7h", color = primaryLight)
-				InfoHour(header = "Semanais", hour = "48h", color = secondaryLight)
-				InfoHour(header = "Mensais", hour = "120h", color = tertiaryLight)
+				InfoHour(
+					header = "Diárias",
+					hour = "7h",
+					color = MaterialTheme.colorScheme.primary,
+					colorText = MaterialTheme.colorScheme.onPrimary)
+				InfoHour(
+					header = "Semanais",
+					hour = "48h",
+					color = MaterialTheme.colorScheme.secondary,
+					colorText = MaterialTheme.colorScheme.onSecondary)
+				InfoHour(
+					header = "Mensais",
+					hour = "120h",
+					color = MaterialTheme.colorScheme.tertiary,
+					colorText = MaterialTheme.colorScheme.onTertiary)
 			}
 			NavigationButton(text = "Calendario", onClick = {})
 			NavigationButton(text = "Calendario", onClick = {})

@@ -21,7 +21,8 @@ import com.cesaepulse.app.ui.theme.Shapes
 fun InfoHour(
 	header: String,
 	hour: String,
-	color: Color
+	color: Color,
+	colorText: Color
 ){
 	Column(
 		horizontalAlignment = Alignment.CenterHorizontally,
@@ -33,12 +34,12 @@ fun InfoHour(
 		Text(
 			text = header,
 			modifier = Modifier.padding(top = 10.dp),
-			color = MaterialTheme.colorScheme.onPrimary)
+			color = colorText)
 		Text(
 			text = hour,
 			fontSize = TextUnit(25f, TextUnitType.Sp),
 			fontWeight = FontWeight.Bold,
-			color = MaterialTheme.colorScheme.onPrimary)
+			color = colorText)
 
 	}
 }

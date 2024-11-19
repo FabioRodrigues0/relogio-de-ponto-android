@@ -34,7 +34,7 @@ fun BottomNavBar(
         modifier = Modifier
             .padding(horizontal = 95.dp, vertical = 43.dp)
             .size(width = 220.dp, height = 50.dp)
-            .background(color = primaryLight, shape = MaterialTheme.shapes.medium)
+            .background(color = MaterialTheme.colorScheme.primary, shape = MaterialTheme.shapes.medium)
     ) {
         IconButton(
             modifier = Modifier.padding(horizontal = 10.dp),
