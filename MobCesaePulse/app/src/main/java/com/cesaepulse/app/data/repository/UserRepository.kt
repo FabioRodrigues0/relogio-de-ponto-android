@@ -6,7 +6,9 @@ import com.cesaepulse.app.domain.repository.IUserRepository
 import com.skydoves.sandwich.onSuccess
 import javax.inject.Inject
 
-class UserRepository @Inject constructor( private val api: CesaePulseApi ) : IUserRepository {
+class UserRepository @Inject constructor(
+	private val api: CesaePulseApi
+) : IUserRepository {
 
 	override suspend fun getUserById(id: Int): User? {
 		var user: User? = null

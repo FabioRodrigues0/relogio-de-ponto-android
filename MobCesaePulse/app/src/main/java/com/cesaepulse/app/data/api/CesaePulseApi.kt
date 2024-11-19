@@ -12,7 +12,7 @@ interface CesaePulseApi {
 	/**
 	 *  Call Api to get All User
 	 */
-	@GET("/users?token=&key=${secretKey}")
+	@GET("/users")
 	suspend fun getAllUsers(): ApiResponse<List<UsersDto>>
 
 	/**
@@ -20,13 +20,12 @@ interface CesaePulseApi {
 	 *
 	 *  @param id: Int
 	 */
-	@GET("/view_contact/{id}?token=&key=${secretKey}")
+	@GET("/users/{id}")
 	suspend fun getUserById(@Path("id") id: Int): ApiResponse<UsersDto>
 
 	// ------------------ JUSTIFICATION -----------------------
 
 	companion object {
-		const val baseUrl = "https://gawbignbvttgvuipsakm.supabase.co"
-		const val secretKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdhd2JpZ25idnR0Z3Z1aXBzYWttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE0MjMxODMsImV4cCI6MjA0Njk5OTE4M30.LP-IAQUBJ060Ib8W3kPohoMcd7zuzbYUFzcPVi-A6qA"
+		const val baseUrl = "https://formacaocesae.pt/Reskilling/2024/WEMD01PRT/TeamJF/public/api"
 	}
 }

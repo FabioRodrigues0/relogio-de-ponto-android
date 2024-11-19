@@ -22,7 +22,6 @@ fun NotificationItem(notification: UserNotifacation, onClick: () -> Unit){
 
 	DropdownMenuItem(
 		modifier = Modifier
-			.background(color = MaterialTheme.colorScheme.primaryContainer)
 			.padding(vertical = 2.dp),
 		onClick = { onClick	},
 		text = {
