@@ -2,7 +2,7 @@ package com.cesaepulse.app.ui.views.user.page
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cesaepulse.app.data.mockRepositories.MockUserRepo
+import com.cesaepulse.app.data.repository.UserRepository
 import com.cesaepulse.app.domain.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,10 +13,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UsersPageViewModel @Inject constructor(
-    private val repository: MockUserRepo
+    private val repository: UserRepository
 )  : ViewModel() {
-    //private val repository: UserRepository
-    // trocar depois o MockUserRepo por UserRepository
+
     private var _users = MutableStateFlow<User?>(null)
     val user = _users.asStateFlow()
 

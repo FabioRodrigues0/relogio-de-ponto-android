@@ -9,7 +9,7 @@ plugins {
 
 android {
 	namespace = "com.cesaepulse.app"
-	compileSdk = 35
+	compileSdk = 34
 
 	defaultConfig {
 		applicationId = "com.cesaepulse.app"
@@ -19,6 +19,9 @@ android {
 		versionName = "1.0"
 
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+		vectorDrawables {
+			useSupportLibrary = true
+		}
 	}
 
 	buildTypes {

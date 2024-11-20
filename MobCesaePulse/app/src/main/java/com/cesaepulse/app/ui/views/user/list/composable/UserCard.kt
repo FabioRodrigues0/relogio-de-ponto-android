@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.cesaepulse.app.data.api.CesaePulseApi
 import com.cesaepulse.app.domain.model.User
 
 @Composable
@@ -35,7 +36,7 @@ fun UserCard(
 			verticalAlignment = Alignment.CenterVertically
 		) {
 			AsyncImage(
-				model = user.photo,
+				model = user.foto ?: (CesaePulseApi.urlImage + "defaultUser.png"),
 				contentDescription = null,
 				modifier = Modifier
 					.size(110.dp)

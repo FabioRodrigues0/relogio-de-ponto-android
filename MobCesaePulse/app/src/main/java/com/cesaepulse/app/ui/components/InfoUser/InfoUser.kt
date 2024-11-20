@@ -26,7 +26,7 @@ fun InfoUser(user: User){
         verticalAlignment = Alignment.CenterVertically
     ){
         AsyncImage(
-            model = user.photo,
+            model = user.foto,
             contentDescription = null,
             modifier = Modifier
                 .padding(vertical = 20.dp)

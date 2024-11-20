@@ -24,12 +24,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
+import com.cesaepulse.app.data.api.CesaePulseApi
 import com.cesaepulse.app.ui.components.InfoHours.InfoHour
 import com.cesaepulse.app.ui.components.NavigationButton.NavigationButton
 import com.cesaepulse.app.ui.theme.Shapes
-import com.cesaepulse.app.ui.theme.primaryLight
-import com.cesaepulse.app.ui.theme.secondaryLight
-import com.cesaepulse.app.ui.theme.tertiaryLight
 
 @Composable
 fun UsersPage(
@@ -58,8 +56,8 @@ fun UsersPage(
 				verticalAlignment = Alignment.CenterVertically
 			){
 				AsyncImage(
-					model = user?.photo,
-					contentDescription = null,
+					model = user?.foto ?: (CesaePulseApi.urlImage + "defaultUser.png"),
+					contentDescription = user?.name,
 					modifier = Modifier
 						.padding(vertical = 20.dp)
 						.size(136.dp)
@@ -70,7 +68,7 @@ fun UsersPage(
 					modifier = Modifier.padding(start = 20.dp)
 				) {
 					Text(
-						text = "User",
+						text = user?.name ?: "Nome",
 						fontSize = TextUnit(30f, TextUnitType.Sp),
 						fontWeight = FontWeight.Bold)
 					Text(text = "2/11/2024 17:05")

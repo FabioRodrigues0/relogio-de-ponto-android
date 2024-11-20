@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.cesaepulse.app.domain.model.UserNotifacation
+import com.cesaepulse.app.domain.model.UserNotification
 import com.cesaepulse.app.ui.components.NotificationButton.item.NotificationItem
 
 @Composable
@@ -28,7 +28,7 @@ fun NotificationButton(
 	val notificationsList by viewModel.notificationsList.collectAsStateWithLifecycle()
 
 	for (i in 1..3) {
-		viewModel.addNotification(UserNotifacation(i,"Notification $i", "Description $i"))
+		viewModel.addNotification(UserNotification(i,"Notification $i", "Description $i"))
 	}
 
 	IconButton(

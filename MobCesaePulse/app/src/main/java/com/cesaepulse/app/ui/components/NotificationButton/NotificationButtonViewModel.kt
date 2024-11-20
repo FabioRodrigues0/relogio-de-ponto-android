@@ -3,7 +3,7 @@ package com.cesaepulse.app.ui.components.NotificationButton
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cesaepulse.app.data.mockRepositories.MockUserRepo
-import com.cesaepulse.app.domain.model.UserNotifacation
+import com.cesaepulse.app.domain.model.UserNotification
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,10 +18,10 @@ class NotificationButtonViewModel @Inject constructor(
 
 	private val _notificationsExpanded = MutableStateFlow<Boolean>(false)
 	val notificationsExpanded = _notificationsExpanded.asStateFlow()
-	private val _notificationsList = MutableStateFlow<ArrayList<UserNotifacation>>(arrayListOf<UserNotifacation>())
+	private val _notificationsList = MutableStateFlow<ArrayList<UserNotification>>(arrayListOf<UserNotification>())
 	val notificationsList = _notificationsList.asStateFlow()
 
-	fun addNotification(notification: UserNotifacation) {
+	fun addNotification(notification: UserNotification) {
 		viewModelScope.launch {
 			val list = ArrayList(_notificationsList.value)
 			list.add(notification)
@@ -32,7 +32,7 @@ class NotificationButtonViewModel @Inject constructor(
 		}
 	}
 
-	fun removeNotification(notification: UserNotifacation) {
+	fun removeNotification(notification: UserNotification) {
 		viewModelScope.launch {
 			val list = ArrayList(_notificationsList.value)
 			list.remove(notification)
