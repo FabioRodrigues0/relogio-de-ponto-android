@@ -45,8 +45,9 @@
                                         @endif
                                 </div>
                                 <div class="col-md-6 text-center">
-                                     @if($userTime === null || $userTime->exit_time === null)
                                     <p class="card-text"><strong>Última saída:</strong>
+                                     @if($userTime === null || $userTime->exit_time === null)
+
                                         Sem registos
                                         @else
                                         {{ $userTime->date ?? 'Sem registos' }} às {{ $userTime->exit_time ?? 'Sem registos' }}</p>

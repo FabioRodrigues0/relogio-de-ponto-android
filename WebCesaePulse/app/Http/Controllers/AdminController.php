@@ -51,7 +51,7 @@ class AdminController extends Controller
                 'attendance_mode.description'
             )
             ->orderBy('presence_record.entry_time', 'desc')
-            ->cursorPaginate(5);
+            ->simplePaginate(5);
 
         $totalMinutes = 0;
         $cont = 0;
@@ -118,67 +118,6 @@ class AdminController extends Controller
 
         return $entrances;
     }
-
-    // public function adminSearch(Request $request)
-    // {
-
-    //     $firstDate = $request->input('date');
-    //     $secondDate = $request->input('dateTwo');
-
-    //     if ($firstDate && $secondDate) {
-    //         $entrances = DB::table('presence_record')
-    //             ->join('users', 'users.id', '=', 'presence_record.user_id')
-    //             ->join('attendance_mode', 'attendance_mode.id', '=', 'presence_record.attendance_mode_id')
-    //             ->whereBetween('presence_record.date', [$firstDate, $secondDate])
-    //             ->select(
-    //                 'users.name',
-    //                 'users.foto',
-    //                 'presence_record.entry_time',
-    //                 'presence_record.date',
-    //                 'presence_record.exit_time',
-    //                 'attendance_mode.description'
-    //             )
-    //             ->orderBy('presence_record.entry_time', 'desc')
-    //             ->cursorPaginate(10);
-
-    //         $totalMinutes = 0;
-    //         $cont = 0;
-    //         $presences = 0;
-
-    //         foreach ($entrances as $presence) {
-
-    //             $entryTime = Carbon::parse($presence->entry_time);
-    //             $exitTime = Carbon::parse($presence->exit_time);
-    //             $timeNow = Carbon::parse(now());
-
-
-
-    //             if ($presence->exit_time) {
-    //                 $presence->total_time = $entryTime->diff($exitTime)->format('%H:%I');
-    //                 $durationInMinutes = $entryTime->diffInMinutes($exitTime);
-    //             } else {
-    //                 $durationInMinutes = $entryTime->diffInMinutes($timeNow);
-    //                 $presence->total_time = '';
-    //                 $cont++;
-    //             }
-    //             $totalMinutes += $durationInMinutes;
-    //             $presences++;
-    //         }
-
-
-    //         $formattedTotalHours = round($totalMinutes / 60, 2);
-    //         $casaDecimalInteiro = $formattedTotalHours - floor($totalMinutes / 60);
-    //         $casaDecimal = ceil($casaDecimalInteiro * 60) / 100;
-
-    //         $numeroInteiro = $formattedTotalHours - $casaDecimalInteiro;
-
-    //         $finalHour = $numeroInteiro + $casaDecimal;
-    //         return ['entrances' => $entrances, 'totalHours' => $finalHour, 'cont' => $cont, 'presences' => $presences];
-    //     }
-
-
-    //     return view('admin.homeAdmin');
-    // }
 
     public function alertPanel()
     {

@@ -150,7 +150,6 @@ class UserController extends Controller
             ->orderBy('users.id')
             ->simplePaginate(5);
 
-
         return $users;
     }
 
@@ -198,8 +197,11 @@ class UserController extends Controller
             }
         }
 
+
         return ($checkAllFields);
     }
+
+
 
 
 
@@ -233,12 +235,7 @@ class UserController extends Controller
         $minutes = $totalMinutes % 60;
         $totalHours = sprintf("%02d:%02d", $hours, $minutes);
 
-        // $hours = floor($entrances->total_minutes / 60);
-        // $minutes = $entrances->total_minutes % 60;
-        // $entrances->total_hours = sprintf("%02d:%02d", $hours, $minutes);
-
-
-
+        $entrances->total_hours = $totalHours;
         return $entrances;
     }
 
@@ -308,4 +305,5 @@ class UserController extends Controller
 
         return $loggedOutToday;
     }
+
 }
