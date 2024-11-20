@@ -8,7 +8,6 @@
         </div>
         @endif
         <div class="row justify-content-center">
-            <!-- Coluna de Informações do Funcionário -->
             <div class="col-lg-8">
                 <div class="card shadow mb-4">
 
@@ -97,7 +96,7 @@
 
             </div>
 
-            <!-- Modal de Solicitação de Alteração de Senha -->
+
             <div class="modal fade" id="solicitacaoSenhaModal" tabindex="-1" aria-labelledby="solicitacaoSenhaModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -113,7 +112,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
 
-                            <!-- Formulário para enviar solicitação ao servidor -->
+                       
                             <form action="{{ route('user.password') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-dark">Confirmar Solicitação</button>

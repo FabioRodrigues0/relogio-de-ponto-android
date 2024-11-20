@@ -9,16 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function adminHome(){
+    public function adminHome()
+    {
 
 
-        if (Auth::user()->users_type_id == 1){
+        if (Auth::user()->users_type_id == 1) {
 
             $alerts = $this->alertPanel();
             $userLog = $this->getTodaysEntrances();
             $userPerformance = $this->usersPerformance();
-            $actualMonthYear = Carbon::now()->month."/".Carbon::now()->year;
-            $actualDayMonthYear = Carbon::now()->day."/".Carbon::now()->month."/".Carbon::now()->year;
+            $actualMonthYear = Carbon::now()->month . "/" . Carbon::now()->year;
+            $actualDayMonthYear = Carbon::now()->day . "/" . Carbon::now()->month . "/" . Carbon::now()->year;
 
             $entrances = $userLog['entrances'];
             $totalHours = $userLog['totalHours'];
@@ -28,33 +29,35 @@ class AdminController extends Controller
 
 
             return view('admin.homeAdmin', compact('entrances', 'totalHours', 'cont', 'presences', 'userPerformance', 'actualMonthYear', 'actualDayMonthYear', 'alerts'));
+        } else {
+            return redirect()->route('login');
         }
-
-        else{
-            return redirect()->route('login');        }
     }
 
-    public function getTodaysEntrances(){
+    public function getTodaysEntrances()
+    {
         $today = Carbon::today();
 
         $entrances = DB::table('presence_record')
-        ->join('users', 'users.id', '=', 'presence_record.user_id')
-        ->join('attendance_mode', 'attendance_mode.id', '=', 'presence_record.attendance_mode_id')
-        ->whereDate('presence_record.date', $today)
-        ->select('users.name',
-        'users.foto',
-        'presence_record.entry_time',
-        'presence_record.date',
-        'presence_record.exit_time',
-        'attendance_mode.description')
-        ->orderBy('presence_record.entry_time', 'desc')
-        ->cursorPaginate(5);
+            ->join('users', 'users.id', '=', 'presence_record.user_id')
+            ->join('attendance_mode', 'attendance_mode.id', '=', 'presence_record.attendance_mode_id')
+            ->whereDate('presence_record.date', $today)
+            ->select(
+                'users.name',
+                'users.foto',
+                'presence_record.entry_time',
+                'presence_record.date',
+                'presence_record.exit_time',
+                'attendance_mode.description'
+            )
+            ->orderBy('presence_record.entry_time', 'desc')
+            ->cursorPaginate(5);
 
         $totalMinutes = 0;
         $cont = 0;
         $presences = 0;
 
-        foreach ($entrances as $presence){
+        foreach ($entrances as $presence) {
 
             $entryTime = Carbon::parse($presence->entry_time);
             $exitTime = Carbon::parse($presence->exit_time);
@@ -62,23 +65,22 @@ class AdminController extends Controller
 
 
 
-            if($presence->exit_time){
+            if ($presence->exit_time) {
                 $presence->total_time = $entryTime->diff($exitTime)->format('%H:%I');
                 $durationInMinutes = $entryTime->diffInMinutes($exitTime);
-            }
-            else{
+            } else {
                 $durationInMinutes = $entryTime->diffInMinutes($timeNow);
                 $presence->total_time = '';
-                $cont ++;
+                $cont++;
             }
             $totalMinutes += $durationInMinutes;
-            $presences ++;
+            $presences++;
         }
 
 
-        $formattedTotalHours = round($totalMinutes/60, 2);
-        $casaDecimalInteiro = $formattedTotalHours - floor($totalMinutes/60);
-        $casaDecimal = ceil($casaDecimalInteiro*60)/100;
+        $formattedTotalHours = round($totalMinutes / 60, 2);
+        $casaDecimalInteiro = $formattedTotalHours - floor($totalMinutes / 60);
+        $casaDecimal = ceil($casaDecimalInteiro * 60) / 100;
 
         $numeroInteiro = $formattedTotalHours - $casaDecimalInteiro;
 
@@ -86,14 +88,16 @@ class AdminController extends Controller
         return ['entrances' => $entrances, 'totalHours' => $finalHour, 'cont' => $cont, 'presences' => $presences];
     }
 
-    public function usersPerformance(){
+    public function usersPerformance()
+    {
         $monthStart = Carbon::now()->startOfMonth();
         $monthEnd = Carbon::now()->endOfMonth();
 
         $entrances = DB::table('presence_record')
             ->join('users', 'users.id', '=', 'presence_record.user_id')
             ->whereBetween('presence_record.entry_time', [$monthStart, $monthEnd])
-            ->select('users.name',
+            ->select(
+                'users.name',
                 DB::raw('SUM(TIMESTAMPDIFF(MINUTE, presence_record.entry_time, presence_record.exit_time)) as total_minutes'),
                 DB::raw('
                 100 - (AVG(ABS(
@@ -115,33 +119,81 @@ class AdminController extends Controller
         return $entrances;
     }
 
-    public function adminSearch(Request $request){
-        $search = $request->input('search');
-        $attendanceMode = $request->input('attendance_mode');
+    // public function adminSearch(Request $request)
+    // {
 
-        $users = DB::table('users');
-            $users = $users->where('name', 'LIKE', "%{$search}%")
-            ->orWhere('email', 'LIKE', "%{$search}%")
-            // ->orWhere('users_type_id', '=', $type)
-            ->join('users_type', 'users.users_type_id', '=', 'users_type.id')
-            ->select('users.*', 'users_type.type')
-            ->orderBy('id')
-            ->simplePaginate(5);
+    //     $firstDate = $request->input('date');
+    //     $secondDate = $request->input('dateTwo');
 
-            return view('admin.homeAdmin');
-    }
+    //     if ($firstDate && $secondDate) {
+    //         $entrances = DB::table('presence_record')
+    //             ->join('users', 'users.id', '=', 'presence_record.user_id')
+    //             ->join('attendance_mode', 'attendance_mode.id', '=', 'presence_record.attendance_mode_id')
+    //             ->whereBetween('presence_record.date', [$firstDate, $secondDate])
+    //             ->select(
+    //                 'users.name',
+    //                 'users.foto',
+    //                 'presence_record.entry_time',
+    //                 'presence_record.date',
+    //                 'presence_record.exit_time',
+    //                 'attendance_mode.description'
+    //             )
+    //             ->orderBy('presence_record.entry_time', 'desc')
+    //             ->cursorPaginate(10);
 
-    public function alertPanel(){
+    //         $totalMinutes = 0;
+    //         $cont = 0;
+    //         $presences = 0;
+
+    //         foreach ($entrances as $presence) {
+
+    //             $entryTime = Carbon::parse($presence->entry_time);
+    //             $exitTime = Carbon::parse($presence->exit_time);
+    //             $timeNow = Carbon::parse(now());
+
+
+
+    //             if ($presence->exit_time) {
+    //                 $presence->total_time = $entryTime->diff($exitTime)->format('%H:%I');
+    //                 $durationInMinutes = $entryTime->diffInMinutes($exitTime);
+    //             } else {
+    //                 $durationInMinutes = $entryTime->diffInMinutes($timeNow);
+    //                 $presence->total_time = '';
+    //                 $cont++;
+    //             }
+    //             $totalMinutes += $durationInMinutes;
+    //             $presences++;
+    //         }
+
+
+    //         $formattedTotalHours = round($totalMinutes / 60, 2);
+    //         $casaDecimalInteiro = $formattedTotalHours - floor($totalMinutes / 60);
+    //         $casaDecimal = ceil($casaDecimalInteiro * 60) / 100;
+
+    //         $numeroInteiro = $formattedTotalHours - $casaDecimalInteiro;
+
+    //         $finalHour = $numeroInteiro + $casaDecimal;
+    //         return ['entrances' => $entrances, 'totalHours' => $finalHour, 'cont' => $cont, 'presences' => $presences];
+    //     }
+
+
+    //     return view('admin.homeAdmin');
+    // }
+
+    public function alertPanel()
+    {
         $solicitations = Db::table('password_request')
-                        ->where('status', 'pending')
-                        ->orderByDesc('created_at')
-                        ->cursorPaginate(5);
+            ->join('users', 'users.id', '=', 'password_request.users_id')
+            ->where('status', 'pending')
+            ->orderByDesc('password_request.created_at')
+            ->cursorPaginate(5);
 
         return $solicitations;
     }
 
-    public function concludePasswordRequest($id){
-            Db::table('password_request')
+    public function concludePasswordRequest($id)
+    {
+        Db::table('password_request')
             ->where('password_request.users_id', $id)
             ->update([
                 'status' => 'completed',
