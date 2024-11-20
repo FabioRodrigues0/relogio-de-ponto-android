@@ -14,6 +14,7 @@ class AdminController extends Controller
 
         if (Auth::user()->users_type_id == 1){
 
+            $alerts = $this->alertPanel();
             $userLog = $this->getTodaysEntrances();
             $userPerformance = $this->usersPerformance();
             $actualMonthYear = Carbon::now()->month."/".Carbon::now()->year;
@@ -26,7 +27,7 @@ class AdminController extends Controller
             $presences = $userLog['presences'];
 
 
-            return view('admin.homeAdmin', compact('entrances', 'totalHours', 'cont', 'presences', 'userPerformance', 'actualMonthYear', 'actualDayMonthYear'));
+            return view('admin.homeAdmin', compact('entrances', 'totalHours', 'cont', 'presences', 'userPerformance', 'actualMonthYear', 'actualDayMonthYear', 'alerts'));
         }
 
         else{
@@ -130,4 +131,23 @@ class AdminController extends Controller
             return view('admin.homeAdmin');
     }
 
+    public function alertPanel(){
+        $solicitations = Db::table('password_request')
+                        ->where('status', 'pending')
+                        ->orderByDesc('created_at')
+                        ->cursorPaginate(5);
+
+        return $solicitations;
+    }
+
+    public function concludePasswordRequest($id){
+            Db::table('password_request')
+            ->where('password_request.users_id', $id)
+            ->update([
+                'status' => 'completed',
+                'updated_at' => Carbon::now()
+            ]);
+
+        return redirect()->back()->with('message', 'Solicitação marcada como concluída com sucesso!');
+    }
 }

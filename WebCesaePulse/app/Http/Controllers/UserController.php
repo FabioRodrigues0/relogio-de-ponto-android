@@ -28,9 +28,12 @@ class UserController extends Controller
     }
 
     public function home(){
+        $performance = $this->userPerformance();
         $userTime = $this->getLastEntrance();
+
         $allUserData = $this->getAllPresences();
-        return view('pages.home', compact('userTime', 'allUserData'));
+
+        return view('pages.home', compact('userTime', 'allUserData', 'performance'));
     }
 
     public function viewContact($id){
@@ -63,6 +66,13 @@ class UserController extends Controller
         DB::table('presence_record')->where('user_id', $id)->delete();
         User::where('id', $id)->delete();
         return back();
+    }
+
+    public function showUserProfile($id){
+
+
+        $userInfo = DB::table('users')->where('id', $id)->first();
+                    return view('pages.profile', compact('userInfo'));
     }
 
     public function getUsers(){
@@ -134,4 +144,47 @@ class UserController extends Controller
     }
 
 
+
+    public function userPerformance(){
+        $monthStart = Carbon::now()->startOfMonth();
+        $monthEnd = Carbon::now()->endOfMonth();
+        $id = Auth::user()->id;
+
+        $entrances = DB::table('presence_record')
+            ->join('users', 'users.id', '=', 'presence_record.user_id')
+            ->where('user_id', $id)
+            ->whereBetween('presence_record.entry_time', [$monthStart, $monthEnd])
+            ->select('users.name',
+                DB::raw('SUM(TIMESTAMPDIFF(MINUTE, presence_record.entry_time, presence_record.exit_time)) as total_minutes'),
+                DB::raw('
+                100 - (AVG(ABS(
+                    (HOUR(presence_record.entry_time) * 60 + MINUTE(presence_record.entry_time))
+                    - (HOUR(presence_record.entry_time) * 60)
+                )) / 60) * 100 AS punctuality_percentage
+            ')
+            )
+            ->groupBy('users.name')
+            ->first();
+
+
+
+
+
+            $hours = floor($entrances->total_minutes / 60);
+            $minutes = $entrances->total_minutes % 60;
+            $entrances->total_hours = sprintf("%02d:%02d", $hours, $minutes);
+
+
+        return $entrances;
+    }
+
+    public function passwordRequest(){
+        DB::table('password_request')->insert([
+            'users_id' => auth::user()->id,
+            'status'=> 'pending',
+            'created_at' => now(),
+        ]);
+
+        return redirect()->back()->with('message', 'Solicitação de alteração de palavra-passe enviada com sucesso!');
+    }
 }

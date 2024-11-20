@@ -93,11 +93,11 @@
                     </div>
                     <div class="card-footer py-3 border-0">
                         <div class="text-center">
-                            <a href="register.html" class="text-dark">Back to login</a>
+                            <a href="{{ route('login') }}" class="text-dark">Back to login</a>
                         </div>
                     </div>
                 </div>
-            
+
             </div>
         </div>
     </div>

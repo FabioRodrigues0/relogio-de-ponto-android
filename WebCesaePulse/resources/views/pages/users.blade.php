@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-5">
         @if(session('message'))
-            <div class="alert alert-success">{{ session('message') }}</div>
+            <div id="success-alert" class="alert alert-success">{{ session('message') }}</div>
         @endif
 
         <div class="card shadow-lg border-light mb-4 ">
