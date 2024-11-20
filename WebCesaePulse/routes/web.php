@@ -16,6 +16,8 @@ Route::get('/users', [UserController::class, 'index'])->name('users.home')->midd
 Route::get('/users_delete/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
 Route::get('/user_profile/{id}', [UserController::class, 'showUserProfile'])->name('user.profile');
 Route::post('/password_request', [UserController::class, 'passwordRequest'])->name('user.password');
+Route::post('/check_in', [UserController::class, 'checkInRequest'])->name('user.checkIn');
+Route::post('/check_out', [UserController::class, 'checkOutRequest'])->name('user.checkOut');
 
 //autenticação
 Route::get('/login', [AuthController::class, 'login'])->name('login');
