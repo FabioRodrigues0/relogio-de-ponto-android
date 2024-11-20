@@ -56,7 +56,7 @@ fun UsersPage(
 				verticalAlignment = Alignment.CenterVertically
 			){
 				AsyncImage(
-					model = user?.foto ?: (CesaePulseApi.urlImage + "defaultUser.png"),
+					model = user?.foto ?: (CesaePulseApi.urlImage + "defaultUserBack.png"),
 					contentDescription = user?.name,
 					modifier = Modifier
 						.padding(vertical = 20.dp)

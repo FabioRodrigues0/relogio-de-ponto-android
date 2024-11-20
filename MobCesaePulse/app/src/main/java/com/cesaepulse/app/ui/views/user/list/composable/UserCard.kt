@@ -36,7 +36,7 @@ fun UserCard(
 			verticalAlignment = Alignment.CenterVertically
 		) {
 			AsyncImage(
-				model = user.foto ?: (CesaePulseApi.urlImage + "defaultUser.png"),
+				model = user.foto ?: (CesaePulseApi.urlImage + "defaultUserBack.png"),
 				contentDescription = null,
 				modifier = Modifier
 					.size(110.dp)
