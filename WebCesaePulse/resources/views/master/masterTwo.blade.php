@@ -40,19 +40,20 @@
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div> <a href="#" class="nav_logo"> <i class="fa-solid fa-user-clock nav_logo-icon"></i> <span
-                        class="nav_logo-name">CesaeClock</span> </a>
-                <div class="nav_list"> <a href="{{ route('admin.home') }}" class="nav_link active"> <i
+                        class="nav_logo-name">CesaePulse</span> </a>
+                <div class="nav_list"> <a href="{{ route('admin.home') }}" class="nav_link {{ request()->routeIs('admin.home') ? 'active' : '' }}"> <i
                             class='bx bx-grid-alt nav_icon'></i>
-                        <span class="nav_name">Home</span> </a> <a href="{{ route('home.page') }}" class="nav_link"> <i
+                        <span class="nav_name">Home</span> </a> <a href="{{ route('home.page') }}" class="nav_link {{ request()->routeIs('home.page') ? 'active' : '' }}"> <i
                             class='bx bx-user nav_icon'></i>
-                        <span class="nav_name">Meu Perfil</span> </a> <a href="#" class="nav_link"> <i
+                        <span class="nav_name">Meu Perfil</span> </a>  <a href="{{ route('users.home') }}" class="nav_link {{ request()->routeIs('users.home') ? 'active' : '' }}">
+                        <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Cesae Utilizadores</span> </a>
+                        <a href="{{ route('register.get') }}" class="nav_link {{ request()->routeIs('register.get') ? 'active' : '' }}"> <i
                             class='bx bx-message-square-detail nav_icon'></i>
-                        <span class="nav_name">Notificações</span> </a> <a href="{{ route('users.home') }}" class="nav_link">
-                        <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Cesae Comunidade</span> </a>
-                    <a href="" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
-                        <span class="nav_name">Histórico</span> </a> <a href="{{ route('admin.statistics') }}" class="nav_link"> <i
+                        <span class="nav_name">Registar Utilizador</span> </a>
+                    <a href="{{ route('admin.statistics') }}" class="nav_link {{ request()->routeIs('admin.statistics') ? 'active' : '' }}"> <i
                             class='bx bx-bar-chart-alt-2 nav_icon'></i>
-                        <span class="nav_name">Estatistica</span> </a>
+                        <span class="nav_name">Estatística</span> </a>
+
                 </div>
             </div>
 
@@ -65,7 +66,7 @@
             </form>
 
         </nav>
-   
+
     </div>
 
     <!--Container Main start-->

@@ -60,6 +60,6 @@ class AuthController extends Controller
             'setor' => $request->setor
         ]);
 
-        return redirect()->route('login')->with('message', 'Contact added successfully!');
+        return redirect()->route('admin.home')->with('message', 'Contacto adicionado com sucesso!');
     }
 }

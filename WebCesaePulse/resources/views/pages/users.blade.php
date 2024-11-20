@@ -12,7 +12,7 @@
                         alt="logo" width="150">
                 </div>
                 <hr>
-                <h1 class="title-gradient display-4 mb-2">Consulta de Funcionários</h1>
+                <h1 class="title-gradient display-5 mb-2">Consulta de Funcionários</h1>
                 <p class="text-muted">Encontre, edite ou exclua os funcionários registados no sistema.</p>
             </div>
         </div>

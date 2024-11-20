@@ -280,7 +280,7 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
+        {{-- <div class="row justify-content-center">
             <div class="col-sm-3">
                 <div class="card shadow" style="border-color: #5b1bd2;">
                     <div class="card-body">
@@ -296,15 +296,15 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-sm-3">
+            <div class="col-8 d-flex justify-content-center">
                 <div class="card shadow" style="border-color: #5b1bd2;">
                     <div class="card-body">
                         <h5 class="card-title" style="color: #5b1bd2;">Atividades</h5>
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Enviar Alertas
+                                Gerar aviso geral
                                 <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal" data-bs-whatever="@mdo">Enviar alertas </button>
                             </li>
@@ -312,7 +312,7 @@
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
 
-                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-dialog modal-lg modal-dialog-centered w-100">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Enviar Alerta</h1>
@@ -345,7 +345,7 @@
                                 Emails dos funcionários <button class="btn btn-outline-dark">Consultar</button>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Verificar quem está online <button class="btn btn-outline-dark">Ver</button>
+                                Verificar faltas <button class="btn btn-outline-dark">Ver</button>
                             </li>
                         </ul>
                     </div>

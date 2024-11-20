@@ -1,4 +1,5 @@
 @extends('master.master')
+
 @section('content')
     <div class="container my-4">
         @if (session('message'))
@@ -18,22 +19,7 @@
                         </div>
                         <div class="container">
                             <div class="row mb-3">
-                                {{-- <div class="col-md-6 text-center"> --}}
-
                                 </div>
-                                {{-- <div class="col-md-6 text-center">
-                                    <p class="card-text"> --}}
-                                        {{-- @if (isset($userTime) && \Carbon\Carbon::parse($userTime->date)->isToday())
-                                            <strong>Horas trabalhadas hoje:</strong>
-                                            @if($userTime->total_time)
-                                            {{ $userTime->total_time }}
-                                          @endif
-                                        @else
-                                            <strong>Horas trabalhadas hoje:</strong>
-                                            Sem registos
-                                        @endif --}}
-                                    {{-- </p>
-                                </div> --}}
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-6 text-center">

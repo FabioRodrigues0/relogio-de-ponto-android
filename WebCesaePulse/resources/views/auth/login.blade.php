@@ -37,6 +37,7 @@
                                 </div>
                                 <input id="password" type="password" class="form-control" name="password" required=""
                                     fdprocessedid="2y22z">
+                    
                                 <div class="invalid-feedback">
                                     Password is required
                                 </div>
@@ -53,11 +54,15 @@
                             </div>
                         </form>
                     </div>
+                    @auth
+                    @if (Auth::user()->user_type_id == 1)
                     <div class="card-footer py-3 border-0">
                         <div class="text-center">
                             Add a new user? <a href={{ route('register.get') }} class="text-dark">Register here</a>
                         </div>
                     </div>
+                    @endif
+                    @endauth
                 </div>
             </div>
         </div>
