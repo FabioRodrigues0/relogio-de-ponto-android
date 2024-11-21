@@ -8,24 +8,34 @@ import com.cesaepulse.app.domain.model.User
  *  @param id: Int
  *  @param name: String
  *  @param email: String
- *  @param email_verified_at: String?
- *  @param photo: String?
- *  @param sector: String
+ *  @param users_type_id: Int,
+ *  @param foto: String?
+ *  @param setor: String
  */
 data class UsersDto(
 	val id: Int,
 	val name: String,
 	val email: String,
-	val email_verified_at: String?,
-	val photo: String?,
-	val sector: String,
-	val created_at: String,
-	val updated_at: String
+	val users_type_id: Int,
+	val foto: String?,
+	val setor: String,
 ){
 	/**
 	 *  Convert UserDto to User
 	 *
 	 */
 	fun toModel():  User =
-		User(id= id, name = name, email = email, email_verified_at = email_verified_at, photo = photo, sector = sector)
+		User(id= id, name = name, email = email, foto = foto, users_type_id = users_type_id, setor = setor)
+}
+
+data class UserResponse(
+	val data: UsersDto
+){
+	fun toModel(): User = data.toModel()
+}
+
+data class ListUserResponse(
+	val data: List<UsersDto>
+){
+	fun toModel(): List<User> = data.map { it.toModel() }
 }

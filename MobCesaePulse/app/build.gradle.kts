@@ -9,7 +9,7 @@ plugins {
 
 android {
 	namespace = "com.cesaepulse.app"
-	compileSdk = 35
+	compileSdk = 34
 
 	defaultConfig {
 		applicationId = "com.cesaepulse.app"
@@ -19,6 +19,9 @@ android {
 		versionName = "1.0"
 
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+		vectorDrawables {
+			useSupportLibrary = true
+		}
 	}
 
 	buildTypes {
@@ -102,11 +105,12 @@ dependencies {
 	implementation(libs.hilt.android)
 	testImplementation(libs.junit)
 	androidTestImplementation(libs.junit)
+	androidTestImplementation(platform(libs.androidx.compose.bom))
+	androidTestImplementation(libs.androidx.ui.test.junit4)
 	debugImplementation(libs.androidx.ui.tooling)
+	debugImplementation(libs.androidx.ui.test.manifest)
 	kapt(libs.hilt.compiler)
 	kapt(libs.hilt.android.compiler)
 	implementation(libs.androidx.hilt.navigation.compose)
 	kapt(libs.androidx.hilt.compiler)
-	androidTestImplementation (libs.androidx.junit)
-	androidTestImplementation (libs.androidx.espresso.core)
 }

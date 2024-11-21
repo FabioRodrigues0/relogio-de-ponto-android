@@ -1,6 +1,8 @@
 package com.cesaepulse.app.data.di
 
 import com.cesaepulse.app.data.api.CesaePulseApi
+import com.cesaepulse.app.data.repository.UserRepository
+import com.cesaepulse.app.domain.repository.IUserRepository
 import com.skydoves.sandwich.retrofit.adapters.ApiResponseCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -33,9 +35,8 @@ object AppModule {
 			.build()
 			.create(CesaePulseApi::class.java)
 
-//	@Provides
-//	@Singleton
-//	fun provideCesaePulseRepository(cesaePulseApi: CesaePulseApi): ICesaePulseRepository =
-//		CesaePulseRepository(cesaePulseApi)
-
+	@Singleton
+	@Provides
+	fun provideUserRepository(api: CesaePulseApi): IUserRepository =
+		UserRepository(api = api)
 }

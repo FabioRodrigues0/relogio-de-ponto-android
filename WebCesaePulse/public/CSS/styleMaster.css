@@ -5,7 +5,7 @@
 :root {
   --header-height: 3rem;
   --nav-width: 68px;
-  --first-color: #4723D9;
+  --first-color: #6252a3;
   --first-color-light: #AFA5D9;
   --white-color: #F7F6FB;
   --body-font: 'Nunito', sans-serif;
@@ -199,4 +199,41 @@ a {
 
 .bg-purple{
     background-color: blueviolet;
+}
+
+.input-group-append {
+    cursor: pointer;
+  }
+
+  .modal {
+    position: fixed; /* Ensures it stays in place while scrolling */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers it */
+    z-index: 1000; /* Keeps it on top of other elements */
+}
+.modal-overlay {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.btn-blue{
+    background-color: rgba(73, 79, 191, 1);
+}
+
+.card-alert{
+    cursor: pointer;
+}
+
+.no-link-style {
+    text-decoration: none;
+    color: inherit; 
 }

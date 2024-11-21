@@ -1,4 +1,4 @@
-package com.cesaepulse.app.ui.views.UsersList
+package com.cesaepulse.app.ui.views.user.page
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,18 +12,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UsersListViewModel @Inject constructor(
-	private val repository: UserRepository
+class UsersPageViewModel @Inject constructor(
+    private val repository: UserRepository
 )  : ViewModel() {
 
-	private var _usersList = MutableStateFlow<List<User>>(emptyList())
-	val usersList = _usersList.asStateFlow()
+    private var _users = MutableStateFlow<User?>(null)
+    val user = _users.asStateFlow()
 
-	init {
-		viewModelScope.launch {
-			_usersList.update {
-				repository.getAllUsers()
-			}
-		}
-	}
+    fun fetchUser(id: Int) {
+        viewModelScope.launch {
+            _users.update { repository.getUserById(id) }
+        }
+    }
+
 }
