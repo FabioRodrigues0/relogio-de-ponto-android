@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container mt-5">
-        @if (session('message'))
-            <div id="success-alert" class="alert alert-success">{{ session('message') }}</div>
+        @if(session('message'))
+            <div class="alert alert-success">{{ session('message') }}</div>
         @endif
 
         <div class="card shadow-lg border-light mb-4 ">
@@ -17,6 +17,17 @@
             </div>
         </div>
 
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10">
+                <div class="card shadow">
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela de Funcionários -->
         <div class="card shadow-lg">
 
             <div class="card-header bg-purple fs-5 text-white text-center">Utilizadores
