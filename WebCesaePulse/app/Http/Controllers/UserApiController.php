@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProfileResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\UserResource;
 
@@ -26,9 +28,28 @@ class UserApiController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function checkInRequest()
     {
-        //
+        DB::table('presence_record')->insert([
+            'date' => now()->format('Y-m-d'),
+            'entry_time' => now()->format('H:i:s'),
+            'attendance_mode_id' => 1,
+            'user_id' => auth::user()->id,
+            'created_at' => now(),
+        ]);
+    }
+
+    public function checkOutRequest()
+    {
+        DB::table('presence_record')
+            ->where('user_id', Auth::user()->id)
+            ->whereDate('date', now()->format('Y-m-d'))
+            ->whereNull('exit_time')
+            ->update([
+                'exit_time' => now()->format('H:i:s'),
+                'updated_at' => now()
+            ]);
+
     }
 
     /**
@@ -42,9 +63,12 @@ class UserApiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($id)
     {
-        return new UserResource($user);
+        $user = User::with(['userType', 'presenceRecords.attendanceMode'])
+            ->findOrFail($id);
+
+        return new ProfileResource($user);
     }
 
     /**

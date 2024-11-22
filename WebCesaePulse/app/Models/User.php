@@ -49,4 +49,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function userType()
+    {
+        return $this->belongsTo(UserType::class, 'users_type_id');
+    }
+
+    public function presenceRecords()
+    {
+        return $this->hasMany(PresenceRecord::class, 'user_id');
+    }
 }
