@@ -104,6 +104,7 @@ class AdminController extends Controller
             ->whereBetween('presence_record.entry_time', [$monthStart, $monthEnd])
             ->select(
                 'users.name',
+                'users.setor',
                 DB::raw('SUM(TIMESTAMPDIFF(MINUTE, presence_record.entry_time, presence_record.exit_time)) as total_minutes'),
                 DB::raw('
                 100 - (AVG(ABS(
@@ -112,9 +113,12 @@ class AdminController extends Controller
                 )) / 60) * 100 AS punctuality_percentage
             ')
             )
-            ->groupBy('users.name')
-            ->orderByDesc('total_minutes')
-            ->simplePaginate(5);
+            ->groupBy('users.name', 'users.setor')
+            ->orderByDesc('total_minutes', 'desc')
+            ->get();
+            // dd($entrances);
+            // ->simplePaginate(5);
+
 
         foreach ($entrances as $entry) {
             $hours = floor($entry->total_minutes / 60);

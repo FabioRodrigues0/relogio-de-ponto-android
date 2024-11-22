@@ -45,6 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    $('#data-tablePerformance').DataTable({
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-PT.json"
+        },
+        order: [[1, 'desc']],
+        paging: true,
+        searching: true,
+        info: true,
+        pageLength: 5,
+        lengthMenu: [ [5, 10, 25, 50, 100], [5, 10, 25, 50, 100] ]
+    });
+});
+
 function setCurrentDate() {
     const dateElement = document.getElementById('current-date');
     const today = new Date();

@@ -5,29 +5,21 @@
         @if (session('message'))
             <div id="success-alert" class="alert alert-success">{{ session('message') }}</div>
         @endif
-
         <div class="card shadow-lg border-light mb-4 ">
             <div class="card-body text-center">
                 <div class="text-center my-2"><img src="https://www.layoutcriativo.com/wp-content/uploads/2021/06/cesae.png"
                         alt="logo" width="150">
                 </div>
                 <hr>
-                <h1 class="title-gradient display-5 mb-2">Consulta de Funcionários</h1>
+                <h2 class="card-title mb-2">Consulta de Funcionários</h2>
                 <p class="text-muted">Encontre, edite ou exclua os funcionários registados no sistema.</p>
             </div>
         </div>
-
         <div class="card shadow-lg">
-
             <div class="card-header bg-purple fs-5 text-white text-center">Utilizadores
             </div>
-
             <div class="card-body">
-
                     </div>
-
-
-                <!-- Tabela de Resultados -->
                 <div class="table-responsive p-2">
                     <table class="table table-striped align-middle" id="data-tableUsers">
                         <thead style="background-color: #6f42c1; color: #ffffff;">
@@ -111,7 +103,7 @@
                 <div class="card text-center shadow">
                     <div class="card-body">
                         <h5 class="card-title">Faltas</h5>
-                        <p class="card-text fs-4">Sem dados</p> <!-- Este valor pode ser dinâmico -->
+                        <p class="card-text fs-4">Sem dados</p>
                     </div>
                 </div>
                 </div>

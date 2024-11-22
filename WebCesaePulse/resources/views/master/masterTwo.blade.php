@@ -51,7 +51,7 @@
                         <a href="{{ route('register.get') }}" class="nav_link {{ request()->routeIs('register.get') ? 'active' : '' }}"> <i
                             class='bx bx-message-square-detail nav_icon'></i>
                         <span class="nav_name">Registar Utilizador</span> </a>
-                    <a href="{{ route('admin.statistics') }}" class="nav_link {{ request()->routeIs('admin.statistics') ? 'active' : '' }}"> <i
+                    <a href="{{ route('admin.allStatistics') }}" class="nav_link {{ request()->routeIs('admin.allStatistics') ? 'active' : '' }}"> <i
                             class='bx bx-bar-chart-alt-2 nav_icon'></i>
                         <span class="nav_name">Estatística</span> </a>
 

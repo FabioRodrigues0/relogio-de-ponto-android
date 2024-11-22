@@ -231,19 +231,23 @@
                             {{ $actualMonthYear }}
                         </div>
                         <div class="card-body table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-striped" id="data-tablePerformance">
                                 <thead class="table-dark">
                                     <tr>
                                         <th scope="col">Funcionário</th>
                                         <th scope="col">Horas Trabalhadas</th>
+                                        <th scope="col">Setor</th>
                                         <th scope="col">Pontualidade</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     @foreach ($userPerformance as $user)
+
                                         <tr>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->total_hours }}h</td>
+                                            <td>{{ $user->setor }}</td>
                                             <td>
                                                 <div class="progress" style="height: 20px;">
                                                     @php
@@ -277,9 +281,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <div class="d-flex justify-content-center">
+                            {{-- <div class="d-flex justify-content-center">
                                 {{ $userPerformance->links('') }}
-                            </div>
+                            </div> --}}
                         </div>
 
                     </div>
