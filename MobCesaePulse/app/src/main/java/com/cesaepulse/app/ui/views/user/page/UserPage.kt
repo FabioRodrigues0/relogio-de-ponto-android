@@ -38,7 +38,7 @@ fun UsersPage(
 		viewModel.fetchUser(id)
 	}
 
-	val user by viewModel.user.collectAsStateWithLifecycle()
+	val profile by viewModel.profile.collectAsStateWithLifecycle()
 
 	Card(
 		modifier = Modifier
@@ -56,8 +56,8 @@ fun UsersPage(
 				verticalAlignment = Alignment.CenterVertically
 			){
 				AsyncImage(
-					model = user?.foto ?: (CesaePulseApi.urlImage + "defaultUserBack.png"),
-					contentDescription = user?.name,
+					model = profile?.foto ?: (CesaePulseApi.urlImage + "defaultUserBack.png"),
+					contentDescription = profile?.name,
 					modifier = Modifier
 						.padding(vertical = 20.dp)
 						.size(136.dp)
@@ -68,10 +68,10 @@ fun UsersPage(
 					modifier = Modifier.padding(start = 20.dp)
 				) {
 					Text(
-						text = user?.name ?: "Nome",
+						text = profile?.name ?: "Nome",
 						fontSize = TextUnit(30f, TextUnitType.Sp),
 						fontWeight = FontWeight.Bold)
-					Text(text = "2/11/2024 17:05")
+					Text(text = profile?.presences?.first().toString())
 				}
 			}
 			Text(text = "Horas", fontSize = TextUnit(25f, TextUnitType.Sp), fontWeight = FontWeight.Bold)

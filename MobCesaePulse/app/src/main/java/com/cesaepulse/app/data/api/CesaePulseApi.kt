@@ -1,7 +1,7 @@
 package com.cesaepulse.app.data.api
 
 import com.cesaepulse.app.data.api.dto.ListUserResponse
-import com.cesaepulse.app.data.api.dto.UserResponse
+import com.cesaepulse.app.data.api.dto.ProfileResponse
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -21,10 +21,19 @@ interface CesaePulseApi {
 	 *
 	 *  @param id: Int
 	 */
-	@GET("users/{id}/")
-	suspend fun getUserById(@Path("id") id: Int): ApiResponse<UserResponse>
+	@GET("profile/{id}/")
+	suspend fun getProfileById(@Path("id") id: Int): ApiResponse<ProfileResponse>
 
-	// ------------------ JUSTIFICATION -----------------------
+	// ------------------ SCHEDULE -----------------------
+
+	/**
+	 *  Call Api to get One Shedules from one User by Id
+	 *
+	 *  @param id: Int
+	 */
+	@GET("schedules/{id}/")
+	suspend fun getSchedulesByUserId(@Path("id") id: Int): ApiResponse<ProfileResponse>
+
 
 	companion object {
 		const val baseUrl = "https://formacaocesae.pt/Reskilling/2024/WEMD01PRT/TeamJF/public/api/"

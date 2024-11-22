@@ -14,22 +14,6 @@ class UserRepository @Inject constructor(
 	private val api: CesaePulseApi
 ) : IUserRepository {
 
-	override suspend fun getUserById(id: Int): User? {
-		var user: User? = null
-		api.getUserById(id)
-			.onSuccess {
-				user = data.toModel()
-			}
-			.onError {
-				Log.e(TAG, "Fail ou getting user {$id}")
-			}
-			.onException {
-				Log.d("getUserById", "exception - ${this.message}")
-			}
-
-		return user
-	}
-
 	override suspend fun getAllUsers(): List<User> {
 		var users: List<User> = emptyList()
 		api.getAllUsers()
