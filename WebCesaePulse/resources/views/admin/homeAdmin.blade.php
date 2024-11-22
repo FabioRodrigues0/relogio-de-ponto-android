@@ -277,8 +277,8 @@
             </div>
 
         </div>
-        <div class="col-8 d-flex justify-content-center mt-3">
-            <div class="card mb-4 w-75 shadow">
+        <div class="col-lg-10 d-flex justify-content-center mt-3">
+            <div class="card mb-4 w-100 shadow">
                 <div id="alerts" class="card-header bg-warning text-white text-center alerts">Alertas</div>
                 <div class="card-body">
                     <ul>

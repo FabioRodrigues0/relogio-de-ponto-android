@@ -36,6 +36,7 @@ Route::get('/admin/home', [AdminController::class, 'adminHome'])->name('admin.ge
 
 //Route::get('/statistics', [StatisticController::class, 'statistics']);
 Route::get('/admin/statistics', [StatisticController::class, 'statistics'])->name('admin.statistics');
+Route::get('/admin/all_statistics', [StatisticController::class, 'allStatistics'])->name('admin.allStatistics');
 Route::fallback(function(){
     return '<h1> Esta página não existe! </h1>';
 });

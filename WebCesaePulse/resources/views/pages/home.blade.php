@@ -125,7 +125,7 @@
                 <div class="row">
                     <div class="col-lg-6 mb-4 d-flex justify-content-center">
                         <div class="card w-100 shadow">
-                            <div class="card-header bg-dark text-white text-center">Horas Mensais</div>
+                            <div class="card-header bg-purple text-white text-center">Horas Mensais</div>
                             <div class="card-body text-center">
                                 @php
                                     $punctuality = round($performance->punctuality_percentage ?? -1);
@@ -171,7 +171,7 @@
                     </div>
                     <div class="col-lg-6 mb-4 d-flex justify-content-center">
                         <div class="card w-100 shadow">
-                            <div class="card-header bg-dark text-white text-center">Avisos do Cesae</div>
+                            <div class="card-header bg-purple text-white text-center">Avisos do Cesae</div>
                             <div class="card-body">
                                 <p>Reunião geral na sexta-feira, dia 10/11, às 15:00.</p>
                                 <p>Próxima revisão de ponto: dia 15/11.</p>
