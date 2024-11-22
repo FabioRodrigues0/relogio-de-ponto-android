@@ -9,17 +9,22 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function adminHome()
+    public function adminHome(Request $request)
     {
 
 
         if (Auth::user()->users_type_id == 1) {
 
+            $selectedDate = $request->input('date', Carbon::now()->format('Y/m/d'));
+            $actualDayMonthYear = $selectedDate;
+
+            $registers = $this->getLastRegisters();
             $alerts = $this->alertPanel();
-            $userLog = $this->getTodaysEntrances();
+            // $userLog = $this->getTodaysEntrances();
+            $userLog = $this->getEntrancesByDate($request->input('date'));
             $userPerformance = $this->usersPerformance();
             $actualMonthYear = Carbon::now()->month . "/" . Carbon::now()->year;
-            $actualDayMonthYear = Carbon::now()->day . "/" . Carbon::now()->month . "/" . Carbon::now()->year;
+            // $actualDayMonthYear = Carbon::now()->day . "/" . Carbon::now()->month . "/" . Carbon::now()->year;
 
             $entrances = $userLog['entrances'];
             $totalHours = $userLog['totalHours'];
@@ -28,65 +33,66 @@ class AdminController extends Controller
             $presences = $userLog['presences'];
 
 
-            return view('admin.homeAdmin', compact('entrances', 'totalHours', 'cont', 'presences', 'userPerformance', 'actualMonthYear', 'actualDayMonthYear', 'alerts'));
+            return view('admin.homeAdmin', compact('entrances', 'totalHours', 'cont', 'presences', 'userPerformance', 'actualMonthYear', 'actualDayMonthYear', 'alerts', 'registers'));
         } else {
             return redirect()->route('login');
         }
     }
 
-    public function getTodaysEntrances()
-    {
-        $today = Carbon::today();
+    // public function getTodaysEntrances()
+    // {
+    //     $today = Carbon::today();
 
-        $entrances = DB::table('presence_record')
-            ->join('users', 'users.id', '=', 'presence_record.user_id')
-            ->join('attendance_mode', 'attendance_mode.id', '=', 'presence_record.attendance_mode_id')
-            ->whereDate('presence_record.date', $today)
-            ->select(
-                'users.name',
-                'users.foto',
-                'presence_record.entry_time',
-                'presence_record.date',
-                'presence_record.exit_time',
-                'attendance_mode.description'
-            )
-            ->orderBy('presence_record.entry_time', 'desc')
-            ->simplePaginate(5);
+    //     $entrances = DB::table('presence_record')
+    //         ->join('users', 'users.id', '=', 'presence_record.user_id')
+    //         ->join('attendance_mode', 'attendance_mode.id', '=', 'presence_record.attendance_mode_id')
+    //         ->whereDate('presence_record.date', $today)
+    //         ->select(
+    //             'users.name',
+    //             'users.foto',
+    //             'presence_record.entry_time',
+    //             'presence_record.date',
+    //             'presence_record.exit_time',
+    //             'attendance_mode.description'
+    //         )
+    //         ->orderBy('presence_record.entry_time', 'desc')
+    //         // ->simplePaginate(5);
+    //         ->get();
 
-        $totalMinutes = 0;
-        $cont = 0;
-        $presences = 0;
+    //     $totalMinutes = 0;
+    //     $cont = 0;
+    //     $presences = 0;
 
-        foreach ($entrances as $presence) {
+    //     foreach ($entrances as $presence) {
 
-            $entryTime = Carbon::parse($presence->entry_time);
-            $exitTime = Carbon::parse($presence->exit_time);
-            $timeNow = Carbon::parse(now());
-
-
-
-            if ($presence->exit_time) {
-                $presence->total_time = $entryTime->diff($exitTime)->format('%H:%I');
-                $durationInMinutes = $entryTime->diffInMinutes($exitTime);
-            } else {
-                $durationInMinutes = $entryTime->diffInMinutes($timeNow);
-                $presence->total_time = '';
-                $cont++;
-            }
-            $totalMinutes += $durationInMinutes;
-            $presences++;
-        }
+    //         $entryTime = Carbon::parse($presence->entry_time);
+    //         $exitTime = Carbon::parse($presence->exit_time);
+    //         $timeNow = Carbon::parse(now());
 
 
-        $formattedTotalHours = round($totalMinutes / 60, 2);
-        $casaDecimalInteiro = $formattedTotalHours - floor($totalMinutes / 60);
-        $casaDecimal = ceil($casaDecimalInteiro * 60) / 100;
 
-        $numeroInteiro = $formattedTotalHours - $casaDecimalInteiro;
+    //         if ($presence->exit_time) {
+    //             $presence->total_time = $entryTime->diff($exitTime)->format('%H:%I');
+    //             $durationInMinutes = $entryTime->diffInMinutes($exitTime);
+    //         } else {
+    //             $durationInMinutes = $entryTime->diffInMinutes($timeNow);
+    //             $presence->total_time = '';
+    //             $cont++;
+    //         }
+    //         $totalMinutes += $durationInMinutes;
+    //         $presences++;
+    //     }
 
-        $finalHour = $numeroInteiro + $casaDecimal;
-        return ['entrances' => $entrances, 'totalHours' => $finalHour, 'cont' => $cont, 'presences' => $presences];
-    }
+
+    //     $formattedTotalHours = round($totalMinutes / 60, 2);
+    //     $casaDecimalInteiro = $formattedTotalHours - floor($totalMinutes / 60);
+    //     $casaDecimal = ceil($casaDecimalInteiro * 60) / 100;
+
+    //     $numeroInteiro = $formattedTotalHours - $casaDecimalInteiro;
+
+    //     $finalHour = $numeroInteiro + $casaDecimal;
+    //     return ['entrances' => $entrances, 'totalHours' => $finalHour, 'cont' => $cont, 'presences' => $presences];
+    // }
 
     public function usersPerformance()
     {
@@ -141,4 +147,68 @@ class AdminController extends Controller
 
         return redirect()->back()->with('message', 'Solicitação marcada como concluída com sucesso!');
     }
+
+    public function getEntrancesByDate($selectedDate = null)
+{
+    // Usa a data de hoje como padrão, caso nenhuma seja enviada
+    $date = $selectedDate ? Carbon::parse($selectedDate) : Carbon::today();
+
+    $entrances = DB::table('presence_record')
+        ->join('users', 'users.id', '=', 'presence_record.user_id')
+        ->join('attendance_mode', 'attendance_mode.id', '=', 'presence_record.attendance_mode_id')
+        ->whereDate('presence_record.date', $date) // Filtro pela data selecionada
+        ->select(
+            'users.name',
+            'users.foto',
+            'presence_record.entry_time',
+            'presence_record.date',
+            'presence_record.exit_time',
+            'attendance_mode.description'
+        )
+        ->orderBy('presence_record.entry_time', 'desc')
+        ->get();
+
+    $totalMinutes = 0;
+    $cont = 0;
+    $presences = 0;
+
+    foreach ($entrances as $presence) {
+        $entryTime = Carbon::parse($presence->entry_time);
+        $exitTime = Carbon::parse($presence->exit_time);
+        $timeNow = Carbon::parse(now());
+
+        if ($presence->exit_time) {
+            $presence->total_time = $entryTime->diff($exitTime)->format('%H:%I');
+            $durationInMinutes = $entryTime->diffInMinutes($exitTime);
+        } else {
+            $durationInMinutes = $entryTime->diffInMinutes($timeNow);
+            $presence->total_time = '';
+            $cont++;
+        }
+
+        $totalMinutes += $durationInMinutes;
+        $presences++;
+    }
+
+    $formattedTotalHours = round($totalMinutes / 60, 2);
+    $casaDecimalInteiro = $formattedTotalHours - floor($totalMinutes / 60);
+    $casaDecimal = ceil($casaDecimalInteiro * 60) / 100;
+
+    $numeroInteiro = $formattedTotalHours - $casaDecimalInteiro;
+
+    $finalHour = $numeroInteiro + $casaDecimal;
+    return ['entrances' => $entrances, 'totalHours' => $finalHour, 'cont' => $cont, 'presences' => $presences];
+}
+
+public function getLastRegisters(){
+    $registers = DB::table('presence_record')
+                 ->selectRaw('DATE(date) as day, MAX(date) as latest_date')
+                 ->where('date', '>=', now()->subDays(10))
+                 ->groupBy('day')
+                 ->orderBy('day', 'desc')
+                 ->get();
+
+    return $registers;
+}
+
 }

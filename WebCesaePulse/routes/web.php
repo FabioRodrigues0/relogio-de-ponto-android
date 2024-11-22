@@ -32,6 +32,7 @@ Route::post("/update_contact", [UserController::class, 'updateUser'])->name('upd
 Route::get('/admin_home', [AdminController::class, 'adminHome'])->name('admin.home')->middleware('auth');
 Route::get('/admin_search', [AdminController::class, 'adminSearch'])->name('admin.search')->middleware('auth');
 Route::post('/admin_password_request/{id}', [AdminController::class, 'concludePasswordRequest'])->name('admin.password');
+Route::get('/admin/home', [AdminController::class, 'adminHome'])->name('admin.get')->middleware('auth');
 
 //Route::get('/statistics', [StatisticController::class, 'statistics']);
 Route::get('/admin/statistics', [StatisticController::class, 'statistics'])->name('admin.statistics');

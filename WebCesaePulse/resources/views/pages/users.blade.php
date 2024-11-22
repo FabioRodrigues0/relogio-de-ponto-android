@@ -23,24 +23,13 @@
             </div>
 
             <div class="card-body">
-                <form method="GET" class="mb-4">
-                    <div class="input-group w-75 mx-auto">
-                        <input type="text" name="search" value="{{ request()->query('search') }}" class="form-control"
-                            placeholder="Pesquisar..." aria-label="Pesquisar">
-                        <select class="form-select ms-2" name="type">
-                            <option selected>Filtrar por tipo</option>
-                            <option value="1" {{ request()->query('type') == '1' ? 'selected' : '' }}>Admin</option>
-                            <option value="2" {{ request()->query('type') == '2' ? 'selected' : '' }}>Employee</option>
-                        </select>
-                        <button class="btn btn-blue ms-2" type="submit">
-                            <i class="fa fa-search text-white"></i>
-                        </button>
+
                     </div>
-                </form>
+
 
                 <!-- Tabela de Resultados -->
-                <div class="table-responsive">
-                    <table class="table table-striped align-middle">
+                <div class="table-responsive p-2">
+                    <table class="table table-striped align-middle" id="data-tableUsers">
                         <thead style="background-color: #6f42c1; color: #ffffff;">
                             <tr>
                                 <th scope="col"></th>
@@ -95,9 +84,9 @@
             </div>
 
 
-            <div class="d-flex justify-content-center mt-4">
+            {{-- <div class="d-flex justify-content-center mt-4">
                 {{ $showUsers->links('') }}
-            </div>
+            </div> --}}
         </div>
 
 

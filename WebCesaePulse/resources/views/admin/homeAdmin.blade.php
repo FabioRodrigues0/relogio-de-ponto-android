@@ -48,18 +48,37 @@
                     <div class="card mb-4 w-100 shadow">
                         <div class="card-header bg-purple fs-5 text-white text-center">Registo de Utilizadores
                         </div>
-                        <div class="fs-5 mt-2 text-center form-control">{{ $actualDayMonthYear }}
-                        </div>
+
+                        <form method="get" action="{{ route('admin.get') }}">
+                            <div class="fs-5 mt-2 text-center form-control">{{ $actualDayMonthYear }}
+
+                                <button class="btn btn-outline-secondary dropdown-toggle p-0" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false"
+                                    style="border: none; background: none; width: 30px; text-align: center;">
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+
+
+                                <ul class="dropdown-menu">
+                                    @foreach ($registers as $day)
+                                        <li>
+                                            <button class="dropdown-item" type="submit" name="date"
+                                                value="{{ $day->day }}">{{ $day->day }}</button>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </form>
                         <div class="container mb-2"> <label> </label>
 
-                            <form method="GET" action="{{ route('admin.search') }}">
-                                @csrf
+                            {{-- <form method="GET" action="{{ route('admin.search') }}">
+                                @csrf --}}
 
-                                <div class="row gy-2 gx-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label class="visually-hidden" for="autoSizingInput">Filtro</label>
+                            <div class="row gy-2 gx-3 align-items-center">
+                                {{-- <div class="col-auto">
+                                        <label class="visually-hidden" for="autoSizingInput">Filtro</label> --}}
 
-                                        <input type="text" name="searchName"
+                                {{-- <input type="text" name="searchName"
                                             class="form-control" placeholder="Procurar..." aria-label="Pesquisar"
                                             aria-describedby="basic-addon2">
                                     </div>
@@ -74,18 +93,18 @@
                                             <option value="2"
                                                 {{ request()->query('attendance_mode') == '2' ? 'selected' : '' }}>
                                                 Presencial</option>
-                                        </select>
-                                    </div>
+                                        </select> --}}
+                                {{-- </div>
                                     <div class="col-auto">
                                         <button type="submit" class="btn btn-primary">
                                             <i class="fa fa-search" aria-hidden="true"></i></button>
-                                    </div>
-                            </form>
+                                    </div> --}}
+                                {{-- </form> --}}
 
-                            <div class="col-auto ms-auto">
+                                {{-- <div class="col-auto ms-auto">
                                 <form action="{{ route('admin.search') }}" method="GET">
-                                    @csrf
-                                    <div class="card-text fs-5 mb-1 text-muted text-center">
+                                    @csrf --}}
+                                {{-- <div class="card-text fs-5 mb-1 text-muted text-center">
                                         Período temporal
                                     </div>
                                     <label class="input-group date" id="datepicker">
@@ -95,98 +114,105 @@
                                         <input type="date" class="form-control" id="dateTwo" name="dateTwo">
                                         <button type="submit" class="btn btn-primary">
                                             <i class="fa fa-search" aria-hidden="true"></i></button>
-                                    </label>
+                                    </label> --}}
+                                {{-- </div> --}}
                             </div>
                         </div>
-                    </div>
-                    </form>
-                    <div class="card-body table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Perfil</th>
-                                    <th>Nome</th>
-                                    <th>Entrada</th>
-                                    <th>Saída</th>
-                                    <th>Total</th>
-                                    <th>Regime</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($entrances as $user)
+                        </form>
+                        <div class="card-body table-responsive">
+                            <table class="table table-striped" id="data-tableAdmin">
+                                <thead>
                                     <tr>
-                                        <td class="align-middle"><img width="30px" height="30px"
-                                                src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('images/defaultUser.png') }}"
-                                                alt="" style="border-radius: 50%"></td>
-                                        <td class="align-middle">{{ $user->name ?? 'Sem registos' }}</td>
-                                        <td class="align-middle">{{ $user->entry_time ?? 'Sem registos' }}</td>
-                                        <td class="align-middle">{{ $user->exit_time ?? '-' }}</td>
-                                        <td class="align-middle">{{ $user->total_time }}</td>
-                                        <td>
-                                            @if (!empty($user->description) && $user->description == 'Remote')
-                                                <span class="badge bg-success">Remoto</span>
-                                            @elseif(!empty($user->description) && $user->description == 'In-Person')
-                                                <span class="badge bg-primary">Presencial</span>
-                                            @else
-                                                Sem registos
-                                            @endif
-                                        </td>
-                                        <td class="align-middle"><button class="btn btn-outline-dark">Ver</button>
-                                        </td>
+                                        <th>Perfil</th>
+                                        <th>Nome</th>
+                                        <th>Entrada</th>
+                                        <th>Saída</th>
+                                        <th>Total</th>
+                                        <th>Regime</th>
+                                        <th>Estado</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($entrances as $user)
+                                        <tr>
+                                            <td class="align-middle"><img width="30px" height="30px"
+                                                    src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('images/defaultUser.png') }}"
+                                                    alt="" style="border-radius: 50%"></td>
+                                            <td class="align-middle">{{ $user->name ?? 'Sem registos' }}</td>
+                                            <td class="align-middle">{{ $user->entry_time ?? 'Sem registos' }}</td>
+                                            <td class="align-middle">{{ $user->exit_time ?? '-' }}</td>
+                                            <td class="align-middle">{{ $user->total_time }}</td>
+                                            <td>
+                                                @if (!empty($user->description) && $user->description == 'Remote')
+                                                    <span class="badge bg-success">Remoto</span>
+                                                @elseif(!empty($user->description) && $user->description == 'In-Person')
+                                                    <span class="badge bg-primary">Presencial</span>
+                                                @else
+                                                    Sem registos
+                                                @endif
+                                            </td>
+                                            {{-- <td class="align-middle"><button class="btn btn-outline-dark">Ver</button> --}}
 
-                        <div class="d-flex justify-content-center">
+                                            @if ($user->exit_time)
+                                                <td class="align-middle">
+                                                    <div class="ballDivInactive"></div>
+                                                @else
+                                                <td class="align-middle">
+                                                    <div class="ballDivActive"></div>
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                            {{-- <div class="d-flex justify-content-center">
                             {{ $entrances->links('') }}
+                        </div> --}}
+
+
                         </div>
 
-
                     </div>
 
                 </div>
 
             </div>
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">Total de Horas</h5>
+                            <p class="card-text fs-4">{{ $totalHours }}h</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">Utilizadores Ativos</h5>
+                            <p class="card-text fs-4">{{ $cont }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">Presenças</h5>
+                            <p class="card-text fs-4">{{ $presences }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">Faltas</h5>
+                            <p class="card-text fs-4">Sem dados</p> <!-- Este valor pode ser dinâmico -->
+                        </div>
 
-        </div>
-        <div class="row mb-4">
-            <div class="col-md-3">
-                <div class="card text-center shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">Total de Horas</h5>
-                        <p class="card-text fs-4">{{ $totalHours }}h</p>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-center shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">Utilizadores Ativos</h5>
-                        <p class="card-text fs-4">{{ $cont }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-center shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">Presenças</h5>
-                        <p class="card-text fs-4">{{ $presences }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-center shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">Faltas</h5>
-                        <p class="card-text fs-4">Sem dados</p> <!-- Este valor pode ser dinâmico -->
-                    </div>
-
                 </div>
             </div>
         </div>
-    </div>
     </div>
     </div>
 
@@ -261,7 +287,8 @@
                             @foreach ($alerts as $alert)
                                 <li class="d-flex justify-content-between align-items-center">
                                     <span>
-                                        Solicitação de alteração de palavra-passe pendente para o utilizador com o email: <b>
+                                        Solicitação de alteração de palavra-passe pendente para o utilizador com o email:
+                                        <b>
                                             {{ $alert->email }}.</b>
                                     </span>
                                     <form action="{{ route('admin.password', $alert->users_id) }}" method="POST"
@@ -298,60 +325,60 @@
                 </div>
             </div> --}}
 
-            <div class="col-8 d-flex justify-content-center">
-                <div class="card shadow" style="border-color: #5b1bd2;">
-                    <div class="card-body">
-                        <h5 class="card-title" style="color: #5b1bd2;">Atividades</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Gerar aviso geral
-                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal" data-bs-whatever="@mdo">Enviar alertas </button>
-                            </li>
+        <div class="col-8 d-flex justify-content-center">
+            <div class="card shadow" style="border-color: #5b1bd2;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #5b1bd2;">Atividades</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Gerar aviso geral
+                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" data-bs-whatever="@mdo">Enviar alertas </button>
+                        </li>
 
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
 
-                                <div class="modal-dialog modal-lg modal-dialog-centered w-100">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Enviar Alerta</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="mb-3">
-                                                    <label for="recipient-name" class="col-form-label">e-mail:</label>
-                                                    <input type="text" class="form-control" id="recipient-name">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="message-text" class="col-form-label">Messagem:</label>
-                                                    <textarea class="form-control" id="message-text"></textarea>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Fechar</button>
-                                            <button type="button" class="btn btn-outline-dark">Enviar alerta</button>
-                                        </div>
+                            <div class="modal-dialog modal-lg modal-dialog-centered w-100">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Enviar Alerta</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">e-mail:</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Messagem:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Fechar</button>
+                                        <button type="button" class="btn btn-outline-dark">Enviar alerta</button>
                                     </div>
                                 </div>
                             </div>
-                            </li>
+                        </div>
+                        </li>
 
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Emails dos funcionários <button class="btn btn-outline-dark">Consultar</button>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Verificar faltas <button class="btn btn-outline-dark">Ver</button>
-                            </li>
-                        </ul>
-                    </div>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Emails dos funcionários <button class="btn btn-outline-dark">Consultar</button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Verificar faltas <button class="btn btn-outline-dark">Ver</button>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 

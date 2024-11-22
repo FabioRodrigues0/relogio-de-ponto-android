@@ -11,7 +11,7 @@
     <script src="{{ asset('JS/app.js') }}" defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/d5fba335cd.js" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
 <body>
 
@@ -84,5 +84,7 @@
     <div class="text-center m-3 text-muted">
         Copyright © 2024 — Cesae
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </body>
 </html>

@@ -95,7 +95,7 @@ class UserController extends Controller
             )
             ->select('users.*', 'users_type.type', 'pr.status')
             ->orderBy('users.id')
-            ->cursorPaginate(5);
+            ->get();
 
         return $allUsers;
     }
@@ -184,7 +184,8 @@ class UserController extends Controller
             ->join('attendance_mode', 'presence_record.attendance_mode_id', '=', 'attendance_mode.id')
             ->select('presence_record.date', 'presence_record.entry_time', 'presence_record.exit_time', 'attendance_mode.description')
             ->orderBy('date', 'desc')
-            ->cursorPaginate(5);
+            ->get();
+            // ->cursorPaginate(5);
 
         foreach ($checkAllFields as $presence) {
             $entryTime = Carbon::parse($presence->entry_time);
@@ -227,6 +228,15 @@ class UserController extends Controller
             )
             ->groupBy('users.name')
             ->first();
+            
+            if (!$entrances) {
+                return (object) [
+                    'name' => Auth::user()->name,
+                    'total_minutes' => 0,
+                    'punctuality_percentage' => 0,
+                    'total_hours' => '00:00',
+                ];
+            }
 
         $totalMinutes = $entrances->total_minutes ?? 0;
         $totalHours = $entrances->total_hours ?? 0;

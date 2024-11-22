@@ -41,15 +41,20 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="col-md-12 text-center">
-                                <p class="card-text fs-5"><strong><span id="current-date"></span></strong></p>
+                            <p class="card-text text-center fs-5"><strong><span id="current-date"></span></strong></p>
+                            <div class="col-md-12 d-flex justify-content-center align-items-center text-center">
+
                             @if($loggedToday == false)
                             <form action="{{ route('user.checkIn') }}" method="POST">
                                 @csrf
+                                <div class="card shadow card-alert " style="width: 16rem;">
+                                    <div class="card-body text-center">
                                 <div class="d-flex justify-content-center">
                                     <button class="btn btn-success "
                                         style="height: 90px; width: 90px; border-radius: 50%;">Dar Entrada</button>
                                 </div>
+                            </div>
+                        </div>
                             </form>
                             @elseif($loggedOutToday == false)
                             <form action="{{ route('user.checkOut') }}" method="POST">
@@ -63,7 +68,7 @@
                             <div class="d-flex justify-content-center">
                             <strong class="text-center">Horas trabalhadas hoje: </strong>
                             </div class="d-flex justify-content-center">
-                                    <div class="d-flex justify-content-center">
+                                    <div class=" ms-1 d-flex justify-content-center">
                                     {{ $userTime->total_time }}
                                     </div>
                             @endif
@@ -134,7 +139,7 @@
                         <div class="card mb-4 w-100 shadow">
                             <div class="card-header bg-purple text-white text-center">Histórico de Ponto</div>
                             <div class="card-body table-responsive">
-                                <table class="table table-striped">
+                                <table class="table table-striped" id="data-table">
                                     <thead>
                                         <tr>
                                             <th>Data</th>
@@ -164,9 +169,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
+                                {{-- <div class="d-flex justify-content-center">
                                     {{ $allUserData->links('') }}
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
