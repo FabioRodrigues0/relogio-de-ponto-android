@@ -87,11 +87,11 @@
             {{-- <div class="d-flex justify-content-center mt-4">
                 {{ $showUsers->links('') }}
             </div> --}}
-        </div>
 
 
-        <div class="row mb-4 m-4">
-            <div class="col">
+
+        <div class="row mb-4 mt-4">
+            <div class="col-4">
                 <div class="card text-center shadow">
                     <div class="card-body">
                         <h5 class="card-title">Users registados</h5>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-4">
                 <div class="card text-center shadow">
                     <div class="card-body">
                         <h5 class="card-title">Passwords pendentes</h5>
@@ -107,17 +107,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-4">
                 <div class="card text-center shadow">
                     <div class="card-body">
                         <h5 class="card-title">Faltas</h5>
                         <p class="card-text fs-4">Sem dados</p> <!-- Este valor pode ser dinâmico -->
                     </div>
-
+                </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
 @endsection

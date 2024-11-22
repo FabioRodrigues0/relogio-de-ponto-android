@@ -4,12 +4,12 @@
         @if (session('message'))
             <div class="alert alert-success">{{ session('message') }}</div>
         @endif
-        <div class="row justify-content-sm-center h-100">
-            <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+        <div class="row justify-content-sm-center h-100 mt-5">
+            <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 mt-5">
                 <div class="text-center my-5">
 
                 </div>
-                <div class="card shadow-lg">
+                <div class="card shadow-lg ">
                     <div class="card-body p-5">
                         <div class="text-center my-2"><img
                                 src="https://www.layoutcriativo.com/wp-content/uploads/2021/06/cesae.png" alt="logo"
@@ -37,7 +37,7 @@
                                 </div>
                                 <input id="password" type="password" class="form-control" name="password" required=""
                                     fdprocessedid="2y22z">
-                    
+
                                 <div class="invalid-feedback">
                                     Password is required
                                 </div>
@@ -67,5 +67,8 @@
             </div>
         </div>
     </div>
+    </div>
+    <div class="empurra_footer">
+
     </div>
 @endsection

@@ -6,7 +6,7 @@
             <div id="success-alert" class="alert alert-success">{{ session('message') }}</div>
         @endif
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-10">
                 <div class="card shadow mb-4">
                     <div class="card-body">
                         <div class="text-center mb-4">
@@ -59,10 +59,14 @@
                             @elseif($loggedOutToday == false)
                             <form action="{{ route('user.checkOut') }}" method="POST">
                                 @csrf
+                                <div class="card shadow card-alert " style="width: 16rem;">
+                                    <div class="card-body text-center">
                                 <div class="d-flex justify-content-center">
                                     <button class="btn btn-outline-danger "
                                         style="height: 90px; width: 90px; border-radius: 50%;">Dar Saída</button>
                                 </div>
+                                 </div>
+                            </div>
                             </form>
                             @else
                             <div class="d-flex justify-content-center">
@@ -75,12 +79,53 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-8 ">
+
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="card mb-4 w-100 shadow">
+                        <div class="card-header bg-purple fs-5 text-white text-center">Histórico de Ponto</div>
+                        <div class="card-body table-responsive">
+                            <table class="table table-striped" id="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Entrada</th>
+                                        <th>Saída</th>
+                                        <th>Total (H)</th>
+                                        <th>Regime</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($allUserData as $data)
+                                        <tr>
+                                            <td>{{ $data->date ?? 'Sem registos' }}</td>
+                                            <td>{{ $data->entry_time ?? 'Sem registos' }}</td>
+                                            <td>{{ $data->exit_time ?? 'Sem registos' }}</td>
+                                            <td>{{ $data->total_time ?? 'Sem registos' }}</td>
+                                            <td>
+                                                @if (!empty($data->description) && $data->description == 'Remote')
+                                                    <span class="badge bg-success">Remoto</span>
+                                                @elseif(!empty($data->description) && $data->description == 'In-Person')
+                                                    <span class="badge bg-primary">Presencial</span>
+                                                @else
+                                                    Sem registos
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {{-- <div class="d-flex justify-content-center">
+                                {{ $allUserData->links('') }}
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-6 mb-4 d-flex justify-content-center">
                         <div class="card w-100 shadow">
-                            <div class="card-header text-center">Horas Mensais</div>
+                            <div class="card-header bg-dark text-white text-center">Horas Mensais</div>
                             <div class="card-body text-center">
                                 @php
                                     $punctuality = round($performance->punctuality_percentage ?? -1);
@@ -126,7 +171,7 @@
                     </div>
                     <div class="col-lg-6 mb-4 d-flex justify-content-center">
                         <div class="card w-100 shadow">
-                            <div class="card-header text-center">Avisos do Cesae</div>
+                            <div class="card-header bg-dark text-white text-center">Avisos do Cesae</div>
                             <div class="card-body">
                                 <p>Reunião geral na sexta-feira, dia 10/11, às 15:00.</p>
                                 <p>Próxima revisão de ponto: dia 15/11.</p>
@@ -134,47 +179,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 d-flex justify-content-center">
-                        <div class="card mb-4 w-100 shadow">
-                            <div class="card-header bg-purple text-white text-center">Histórico de Ponto</div>
-                            <div class="card-body table-responsive">
-                                <table class="table table-striped" id="data-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Data</th>
-                                            <th>Entrada</th>
-                                            <th>Saída</th>
-                                            <th>Total (H)</th>
-                                            <th>Regime</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($allUserData as $data)
-                                            <tr>
-                                                <td>{{ $data->date ?? 'Sem registos' }}</td>
-                                                <td>{{ $data->entry_time ?? 'Sem registos' }}</td>
-                                                <td>{{ $data->exit_time ?? 'Sem registos' }}</td>
-                                                <td>{{ $data->total_time ?? 'Sem registos' }}</td>
-                                                <td>
-                                                    @if (!empty($data->description) && $data->description == 'Remote')
-                                                        <span class="badge bg-success">Remoto</span>
-                                                    @elseif(!empty($data->description) && $data->description == 'In-Person')
-                                                        <span class="badge bg-primary">Presencial</span>
-                                                    @else
-                                                        Sem registos
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                {{-- <div class="d-flex justify-content-center">
-                                    {{ $allUserData->links('') }}
-                                </div> --}}
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="col-12 d-flex justify-content-center">
                         <div class="card mb-4 w-100 shadow">
                             <div class="card-header bg-warning text-white text-center">Alertas</div>

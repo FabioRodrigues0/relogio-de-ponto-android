@@ -5,7 +5,7 @@
             <div id="success-alert" class="alert alert-success">{{ session('message') }}</div>
         @endif
         <div class="row justify-content-center">
-            <div class="col-lg-8 mt-4">
+            <div class="col-lg-10 mt-4">
                 <div class="card shadow mb-4">
                     <div class="card-body">
                         <div class="text-center mb-4">
@@ -44,7 +44,7 @@
         </div>
         <div>
             <div class="row d-flex justify-content-center">
-                <div class="col-12 d-flex justify-content-center">
+                <div class="col-10 d-flex justify-content-center">
                     <div class="card mb-4 w-100 shadow">
                         <div class="card-header bg-purple fs-5 text-white text-center">Registo de Utilizadores
                         </div>
@@ -177,48 +177,49 @@
                 </div>
 
             </div>
-            <div class="row mb-4">
-                <div class="col-md-3">
-                    <div class="card text-center shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Total de Horas</h5>
-                            <p class="card-text fs-4">{{ $totalHours }}h</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-center shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Utilizadores Ativos</h5>
-                            <p class="card-text fs-4">{{ $cont }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-center shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Presenças</h5>
-                            <p class="card-text fs-4">{{ $presences }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-center shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Faltas</h5>
-                            <p class="card-text fs-4">Sem dados</p> <!-- Este valor pode ser dinâmico -->
-                        </div>
 
+            <div class="row justify-content-center mt-2">
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card text-center shadow">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total de Horas</h5>
+                                    <p class="card-text fs-4">{{ $totalHours }}h</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center shadow">
+                                <div class="card-body">
+                                    <h5 class="card-title">Utilizadores Ativos</h5>
+                                    <p class="card-text fs-4">{{ $cont }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center shadow">
+                                <div class="card-body">
+                                    <h5 class="card-title">Presenças</h5>
+                                    <p class="card-text fs-4">{{ $presences }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center shadow">
+                                <div class="card-body">
+                                    <h5 class="card-title">Faltas</h5>
+                                    <p class="card-text fs-4">Sem dados</p> <!-- Este valor pode ser dinâmico -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    </div>
 
-    <div class="row justify-content-center">
-        <div class="col-6 d-flex justify-content-center">
-            <div class="card mb-4 w-100 shadow">
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-10">
+            <div class="card mb-4 shadow ">
                 <div class="card-header fs-5 text-center"> Ranking horas mensais Utilizadores - Mês {{ $actualMonthYear }}
                 </div>
                 <div class="card-body table-responsive">
@@ -325,7 +326,7 @@
                 </div>
             </div> --}}
 
-        <div class="col-8 d-flex justify-content-center">
+        {{-- <div class="col-8 d-flex justify-content-center">
             <div class="card shadow" style="border-color: #5b1bd2;">
                 <div class="card-body">
                     <h5 class="card-title" style="color: #5b1bd2;">Atividades</h5>
@@ -379,7 +380,7 @@
             </div>
         </div>
     </div>
-    </div>
+    </div> --}}
 
 
 @endsection

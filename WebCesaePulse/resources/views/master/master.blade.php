@@ -16,7 +16,7 @@
 <body>
 
     <!---------------------------------------- NAVBAR ----------------------------------------------->
-    <header class="p-3 mb-3 border-bottom">
+    <header class="p-3 mb-3">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
@@ -81,9 +81,11 @@
       <!---------------------------------------- END NAVBAR ----------------------------------------------->
 
     @yield('content')
+    <footer>
     <div class="text-center m-3 text-muted">
         Copyright © 2024 — Cesae
     </div>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </body>
