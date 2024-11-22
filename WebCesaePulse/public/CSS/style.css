@@ -4,6 +4,13 @@
 
 
 .bg-purple{
-    background-color: blueviolet;
+    background-color: #1E0C3C;
 }
 
+.bg-blueProject{
+    background-color: #0D9CDE;
+}
+
+.empurra_footer{
+    height: 230px;
+}

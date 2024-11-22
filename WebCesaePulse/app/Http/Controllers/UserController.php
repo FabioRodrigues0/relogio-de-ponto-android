@@ -95,7 +95,7 @@ class UserController extends Controller
             )
             ->select('users.*', 'users_type.type', 'pr.status')
             ->orderBy('users.id')
-            ->cursorPaginate(5);
+            ->get();
 
         return $allUsers;
     }
@@ -150,7 +150,6 @@ class UserController extends Controller
             ->orderBy('users.id')
             ->simplePaginate(5);
 
-
         return $users;
     }
 
@@ -185,7 +184,8 @@ class UserController extends Controller
             ->join('attendance_mode', 'presence_record.attendance_mode_id', '=', 'attendance_mode.id')
             ->select('presence_record.date', 'presence_record.entry_time', 'presence_record.exit_time', 'attendance_mode.description')
             ->orderBy('date', 'desc')
-            ->cursorPaginate(5);
+            ->get();
+            // ->cursorPaginate(5);
 
         foreach ($checkAllFields as $presence) {
             $entryTime = Carbon::parse($presence->entry_time);
@@ -198,8 +198,11 @@ class UserController extends Controller
             }
         }
 
+
         return ($checkAllFields);
     }
+
+
 
 
 
@@ -225,6 +228,15 @@ class UserController extends Controller
             )
             ->groupBy('users.name')
             ->first();
+            
+            if (!$entrances) {
+                return (object) [
+                    'name' => Auth::user()->name,
+                    'total_minutes' => 0,
+                    'punctuality_percentage' => 0,
+                    'total_hours' => '00:00',
+                ];
+            }
 
         $totalMinutes = $entrances->total_minutes ?? 0;
         $totalHours = $entrances->total_hours ?? 0;
@@ -233,12 +245,7 @@ class UserController extends Controller
         $minutes = $totalMinutes % 60;
         $totalHours = sprintf("%02d:%02d", $hours, $minutes);
 
-        // $hours = floor($entrances->total_minutes / 60);
-        // $minutes = $entrances->total_minutes % 60;
-        // $entrances->total_hours = sprintf("%02d:%02d", $hours, $minutes);
-
-
-
+        $entrances->total_hours = $totalHours;
         return $entrances;
     }
 
@@ -308,4 +315,5 @@ class UserController extends Controller
 
         return $loggedOutToday;
     }
+
 }

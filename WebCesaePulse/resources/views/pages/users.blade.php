@@ -12,7 +12,7 @@
                         alt="logo" width="150">
                 </div>
                 <hr>
-                <h1 class="title-gradient display-4 mb-2">Consulta de Funcionários</h1>
+                <h1 class="title-gradient display-5 mb-2">Consulta de Funcionários</h1>
                 <p class="text-muted">Encontre, edite ou exclua os funcionários registados no sistema.</p>
             </div>
         </div>
@@ -23,24 +23,13 @@
             </div>
 
             <div class="card-body">
-                <form method="GET" class="mb-4">
-                    <div class="input-group w-75 mx-auto">
-                        <input type="text" name="search" value="{{ request()->query('search') }}" class="form-control"
-                            placeholder="Pesquisar..." aria-label="Pesquisar">
-                        <select class="form-select ms-2" name="type">
-                            <option selected>Filtrar por tipo</option>
-                            <option value="1" {{ request()->query('type') == '1' ? 'selected' : '' }}>Admin</option>
-                            <option value="2" {{ request()->query('type') == '2' ? 'selected' : '' }}>Employee</option>
-                        </select>
-                        <button class="btn btn-blue ms-2" type="submit">
-                            <i class="fa fa-search text-white"></i>
-                        </button>
+
                     </div>
-                </form>
+
 
                 <!-- Tabela de Resultados -->
-                <div class="table-responsive">
-                    <table class="table table-striped align-middle">
+                <div class="table-responsive p-2">
+                    <table class="table table-striped align-middle" id="data-tableUsers">
                         <thead style="background-color: #6f42c1; color: #ffffff;">
                             <tr>
                                 <th scope="col"></th>
@@ -95,14 +84,14 @@
             </div>
 
 
-            <div class="d-flex justify-content-center mt-4">
+            {{-- <div class="d-flex justify-content-center mt-4">
                 {{ $showUsers->links('') }}
-            </div>
-        </div>
+            </div> --}}
 
 
-        <div class="row mb-4 m-4">
-            <div class="col">
+
+        <div class="row mb-4 mt-4">
+            <div class="col-4">
                 <div class="card text-center shadow">
                     <div class="card-body">
                         <h5 class="card-title">Users registados</h5>
@@ -110,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-4">
                 <div class="card text-center shadow">
                     <div class="card-body">
                         <h5 class="card-title">Passwords pendentes</h5>
@@ -118,17 +107,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-4">
                 <div class="card text-center shadow">
                     <div class="card-body">
                         <h5 class="card-title">Faltas</h5>
                         <p class="card-text fs-4">Sem dados</p> <!-- Este valor pode ser dinâmico -->
                     </div>
-
+                </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
 @endsection

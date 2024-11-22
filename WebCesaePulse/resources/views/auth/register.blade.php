@@ -1,4 +1,4 @@
-@extends('master.master')
+@extends('master.masterTwo')
 @section('content')
     <div class="container h-100">
         <div class="row justify-content-sm-center h-100">
@@ -12,14 +12,15 @@
                                 src="https://www.layoutcriativo.com/wp-content/uploads/2021/06/cesae.png" alt="logo"
                                 width="150"></div>
 
-                        <h1 class="fs-4 card-title fw-bold mb-4">Register</h1>
+                        <h1 class="fs-4 card-title fw-bold mb-4 mt-4 text-center">Registar Utilizador</h1>
                         <form method="POST" action="{{ route('user.create') }}" class="needs-validation" autocomplete="off"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
-                                <label class="mb-2 text-muted" for="name">Name</label>
-                                <input id="name" type="name" class="form-control" name="name" value=""
-                                    autofocus="" fdprocessedid="8f7bri" required>
+                                <i class="fas fa-user"></i>
+                                <label class="mb-2 ms-1 text-muted" for="name"> Nome  </label>
+                                <input  id="name" type="name" class="form-control" name="name" value=""
+                                    autofocus="" fdprocessedid="8f7bri"  required >
                                 @error('name')
                                     <div>
                                         Name is invalid!
@@ -28,12 +29,13 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="mb-2 text-muted" for="email">Email</label>
+                                <i class="fas fa-envelope"></i>
+                                <label class="mb-2 text-muted ms-1" for="email">Email</label>
                                 <input id="email" type="email" class="form-control" name="email" value=""
                                     autofocus="" fdprocessedid="8f7bri" required>
                                 @error('email')
                                     <div>
-                                        Email is invalid!
+                                        Email é inválido!
                                     </div>
                                 @enderror
                             </div>
@@ -41,24 +43,26 @@
 
                             <div class="mb-3">
                                 <div class="mb-2 w-100">
-                                    <label class="text-muted" for="password">Password</label>
+                                    <i class="fas fa-lock"></i>
+                                    <label class="text-muted ms-1" for="password">Password</label>
 
                                 </div>
                                 <input id="password" type="password" class="form-control" name="password" required=""
                                     fdprocessedid="2y22z">
                                 <div class="invalid-feedback">
-                                    Password is required
+                                    Password é obrigatória
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">Photo</label>
+                                <i class="fas fa-image"></i>
+                                <label for="formFile" class="form-label ms-1">Foto</label>
                                 <input class="form-control" type="file" id="formFile" name="foto">
                             </div>
 
 
                             <div class="mb-3">
                                 <div class="mb-2 w-100">
-                                    <label class="text-muted" for="password">User Type</label>
+                                    <label class="text-muted" for="password">Tipo utilizador</label>
                                 </div>
                                 <select class="form-select form-select-m" aria-label="Small select example" required
                                     name ="users_type_id">
@@ -71,7 +75,7 @@
 
                             <div class="mb-3">
                                 <div class="mb-2 w-100">
-                                    <label class="text-muted" for="password">Sector</label>
+                                    <label class="text-muted" for="password">Setor</label>
                                 </div>
                                 <select class="form-select form-select-m" aria-label="Small select example" name ="setor"
                                     required>
@@ -93,7 +97,7 @@
                     </div>
                     <div class="card-footer py-3 border-0">
                         <div class="text-center">
-                            <a href="{{ route('login') }}" class="text-dark">Back to login</a>
+                            <a href="{{ route('admin.home') }}" class="text-dark">Voltar</a>
                         </div>
                     </div>
                 </div>

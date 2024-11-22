@@ -11,23 +11,22 @@
     <script src="{{ asset('JS/app.js') }}" defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/d5fba335cd.js" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
 <body>
 
     <!---------------------------------------- NAVBAR ----------------------------------------------->
-    <header class="p-3 mb-3 border-bottom">
+    <header class="p-3 mb-3">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
-              <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
             </a>
 @auth
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-              <li><a href="#" class="nav-link px-2 link-body-emphasis">Inventory</a></li>
-              <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>
-              <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
+              <li><a href="{{ route('home.page') }}" class="nav-link px-2 link-secondary">Home</a></li>
+              @if (Auth::user()->users_type_id == 1)
+              <li><a href="{{ route('admin.home') }}" class="nav-link px-2 link-body-emphasis">Painel Admin</a></li>
+              @endif
             </ul>
 @endauth
             @if (Route::has('login'))
@@ -82,8 +81,12 @@
       <!---------------------------------------- END NAVBAR ----------------------------------------------->
 
     @yield('content')
+    <footer>
     <div class="text-center m-3 text-muted">
         Copyright © 2024 — Cesae
     </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </body>
 </html>
