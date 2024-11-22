@@ -26,8 +26,10 @@ class ProfileResource extends JsonResource
                     'date' => $presence->date,
                     'entry_time' => $presence->entry_time,
                     'exit_time' => $presence->exit_time,
-                    'attendance_mode' => $presence->attendanceMode->description
-                    
+                    'attendance_mode' => [
+                        'id' => $presence->attendanceMode->id,
+                        'description' => $presence->attendanceMode->description
+                    ]
                 ];
             })
         ];

@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 
-class ScheduleController extends Controller
+class ScheduleApiController extends Controller
 {
     // Listar todos os horários
     public function index()

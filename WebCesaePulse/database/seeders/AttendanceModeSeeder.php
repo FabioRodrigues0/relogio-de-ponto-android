@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class AttendanceModeSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class AttendanceModeSeeder extends Seeder
         DB::table('attendance_mode')->insert([
             ['description' => 'Online', 'created_at' => now(), 'updated_at' => now()],
             ['description' => 'Presencial', 'created_at' => now(), 'updated_at' => now()],
-            ['description' => 'Híbrido', 'created_at' => now(), 'updated_at' => now()],
+            ['description' => 'Externo', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }
