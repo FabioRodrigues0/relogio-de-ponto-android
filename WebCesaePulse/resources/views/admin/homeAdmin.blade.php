@@ -50,15 +50,14 @@
                         </div>
 
                         <form method="get" action="{{ route('admin.get') }}">
-                            <div class="fs-5 mt-2 text-center form-control">{{ $actualDayMonthYear }}
+                            <div class="fs-5 mt-2 text-center form-control " style="display: flex; justify-content: center; align-items: center;">
+                                {{-- {{ $actualDayMonthYear }} --}}
 
-                                <button class="btn btn-outline-secondary dropdown-toggle p-0" type="button"
+                                {{-- <button class="btn btn-outline-secondary dropdown-toggle p-0" type="button"
                                     data-bs-toggle="dropdown" aria-expanded="false"
                                     style="border: none; background: none; width: 30px; text-align: center;">
                                     <i class="bi bi-chevron-down"></i>
                                 </button>
-
-
                                 <ul class="dropdown-menu">
                                     @foreach ($registers as $day)
                                         <li>
@@ -66,7 +65,15 @@
                                                 value="{{ $day->day }}">{{ $day->day }}</button>
                                         </li>
                                     @endforeach
-                                </ul>
+                                </ul> --}}
+                                <select name="date" class="form-select " aria-label="Default select example"
+                                    onchange="this.form.submit()" style="width: 140px; text-align: center;">
+                                    @foreach ($registers as $day)
+                                        <option value="{{ $day->day }}"
+                                            @if ($day->day == $actualDayMonthYear) selected @endif>
+                                            {{ $day->day }}
+                                    @endforeach
+                                </select>
                             </div>
                         </form>
                         <div class="container mb-2"> <label> </label>
@@ -219,96 +226,98 @@
 
             <div class="row justify-content-center mt-4">
                 <div class="col-lg-10">
-            <div class="card mb-4 shadow ">
-                <div class="card-header fs-5 text-center"> Ranking horas mensais Utilizadores - Mês {{ $actualMonthYear }}
-                </div>
-                <div class="card-body table-responsive">
-                    <table class="table table-striped">
-                        <thead class="table-dark">
-                            <tr>
-                                <th scope="col">Funcionário</th>
-                                <th scope="col">Horas Trabalhadas</th>
-                                <th scope="col">Pontualidade</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($userPerformance as $user)
-                                <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->total_hours }}h</td>
-                                    <td>
-                                        <div class="progress" style="height: 20px;">
-                                            @php
-                                                $punctuality = round($user->punctuality_percentage);
-                                            @endphp
-                                            @if ($punctuality >= 90)
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                    style="width: {{ round($user->punctuality_percentage) }}%;"
-                                                    aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-                                                    {{ round($user->punctuality_percentage) }}%</div>
-                                            @elseif ($punctuality >= 70)
-                                                <div class="progress-bar bg-primary" role="progressbar"
-                                                    style="width: {{ round($user->punctuality_percentage) }}%;"
-                                                    aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-                                                    {{ round($user->punctuality_percentage) }}%</div>
-                                            @elseif ($punctuality >= 50)
-                                                <div class="progress-bar bg-warning" role="progressbar"
-                                                    style="width: {{ round($user->punctuality_percentage) }}%;"
-                                                    aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-                                                    {{ round($user->punctuality_percentage) }}%</div>
-                                            @else
-                                                <div class="progress-bar bg-danger" role="progressbar"
-                                                    style="width: {{ round($user->punctuality_percentage) }}%;"
-                                                    aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-                                                    {{ round($user->punctuality_percentage) }}%</div>
-                                            @endif
+                    <div class="card mb-4 shadow ">
+                        <div class="card-header fs-5 text-center"> Ranking horas mensais Utilizadores - Mês
+                            {{ $actualMonthYear }}
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">Funcionário</th>
+                                        <th scope="col">Horas Trabalhadas</th>
+                                        <th scope="col">Pontualidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($userPerformance as $user)
+                                        <tr>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->total_hours }}h</td>
+                                            <td>
+                                                <div class="progress" style="height: 20px;">
+                                                    @php
+                                                        $punctuality = round($user->punctuality_percentage);
+                                                    @endphp
+                                                    @if ($punctuality >= 90)
+                                                        <div class="progress-bar bg-success" role="progressbar"
+                                                            style="width: {{ round($user->punctuality_percentage) }}%;"
+                                                            aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                                                            {{ round($user->punctuality_percentage) }}%</div>
+                                                    @elseif ($punctuality >= 70)
+                                                        <div class="progress-bar bg-primary" role="progressbar"
+                                                            style="width: {{ round($user->punctuality_percentage) }}%;"
+                                                            aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                                                            {{ round($user->punctuality_percentage) }}%</div>
+                                                    @elseif ($punctuality >= 50)
+                                                        <div class="progress-bar bg-warning" role="progressbar"
+                                                            style="width: {{ round($user->punctuality_percentage) }}%;"
+                                                            aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                                                            {{ round($user->punctuality_percentage) }}%</div>
+                                                    @else
+                                                        <div class="progress-bar bg-danger" role="progressbar"
+                                                            style="width: {{ round($user->punctuality_percentage) }}%;"
+                                                            aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                                                            {{ round($user->punctuality_percentage) }}%</div>
+                                                    @endif
 
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div class="d-flex justify-content-center">
-                        {{ $userPerformance->links('') }}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center">
+                                {{ $userPerformance->links('') }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-lg-10 d-flex justify-content-center mt-3">
+                    <div class="card mb-4 w-100 shadow">
+                        <div id="alerts" class="card-header bg-warning text-white text-center alerts">Alertas</div>
+                        <div class="card-body">
+                            <ul>
+                                @if ($alerts->isEmpty())
+                                    <li>Não há solicitações de alteração de palavra-passe pendentes.</li>
+                                @else
+                                    @foreach ($alerts as $alert)
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span>
+                                                Solicitação de alteração de palavra-passe pendente para o utilizador com o
+                                                email:
+                                                <b>
+                                                    {{ $alert->email }}.</b>
+                                            </span>
+                                            <form action="{{ route('admin.password', $alert->users_id) }}" method="POST"
+                                                style="display:inline;">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="btn btn-sm btn-outline-success m-1">Concluído</button>
+                                            </form>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            {{ $alerts->links('') }}
+                        </div>
                     </div>
                 </div>
-
-            </div>
-
-        </div>
-        <div class="col-lg-10 d-flex justify-content-center mt-3">
-            <div class="card mb-4 w-100 shadow">
-                <div id="alerts" class="card-header bg-warning text-white text-center alerts">Alertas</div>
-                <div class="card-body">
-                    <ul>
-                        @if ($alerts->isEmpty())
-                            <li>Não há solicitações de alteração de palavra-passe pendentes.</li>
-                        @else
-                            @foreach ($alerts as $alert)
-                                <li class="d-flex justify-content-between align-items-center">
-                                    <span>
-                                        Solicitação de alteração de palavra-passe pendente para o utilizador com o email:
-                                        <b>
-                                            {{ $alert->email }}.</b>
-                                    </span>
-                                    <form action="{{ route('admin.password', $alert->users_id) }}" method="POST"
-                                        style="display:inline;">
-                                        @csrf
-                                        <button type="submit"
-                                            class="btn btn-sm btn-outline-success m-1">Concluído</button>
-                                    </form>
-                                </li>
-                            @endforeach
-                        @endif
-                    </ul>
-                </div>
-                <div class="d-flex justify-content-center">
-                    {{ $alerts->links('') }}
-                </div>
-            </div>
-        </div>
-        {{-- <div class="row justify-content-center">
+                {{-- <div class="row justify-content-center">
             <div class="col-sm-3">
                 <div class="card shadow" style="border-color: #5b1bd2;">
                     <div class="card-body">
@@ -326,7 +335,7 @@
                 </div>
             </div> --}}
 
-        {{-- <div class="col-8 d-flex justify-content-center">
+                {{-- <div class="col-8 d-flex justify-content-center">
             <div class="card shadow" style="border-color: #5b1bd2;">
                 <div class="card-body">
                     <h5 class="card-title" style="color: #5b1bd2;">Atividades</h5>
@@ -383,4 +392,4 @@
     </div> --}}
 
 
-@endsection
+            @endsection
