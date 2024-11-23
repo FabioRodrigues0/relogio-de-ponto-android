@@ -171,20 +171,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
-                            {{-- <div class="d-flex justify-content-center">
-                            {{ $entrances->links('') }}
-                        </div> --}}
-
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
             <div class="row justify-content-center mt-2">
                 <div class="col-lg-10">
                     <div class="row">
@@ -208,7 +198,11 @@
                             <div class="card text-center shadow">
                                 <div class="card-body">
                                     <h5 class="card-title">Presenças</h5>
+                                    @if($presences > 0)
+                                    <p class="card-text fs-4" style="color: green">{{ $presences }}</p>
+                                    @else
                                     <p class="card-text fs-4">{{ $presences }}</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -216,7 +210,11 @@
                             <div class="card text-center shadow">
                                 <div class="card-body">
                                     <h5 class="card-title">Faltas</h5>
-                                    <p class="card-text fs-4">Sem dados</p> <!-- Este valor pode ser dinâmico -->
+                                    @if($totalUserAbsence > 0)
+                                    <p class="card-text fs-4" style="color: red">{{ $totalUserAbsence }}</p>
+                                    @else
+                                    <p class="card-text fs-4">{{ $totalUserAbsence }}</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>

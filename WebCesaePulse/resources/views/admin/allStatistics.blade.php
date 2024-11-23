@@ -12,15 +12,16 @@
                                     width="150">
                             </div>
                             <hr>
-                            <h3 class="card-title mb-3 ">Estatísticas Gerais
+                            <h3 class="card-title mb-3 ">Estatísticas Mensais
                             </h3>
-                            <p class="card-text fs-5 text-muted">Consulta as estatísticas do Cesae</p>
-                            <hr>
-                            <div class="row">
+
+                            <p class="card-text fs-5 text-muted">{{ $currentMonth }} de {{ now()->year }}</p>
+
+                            <div class="row mt-4">
                                 <div class="col-md-3">
                                     <div class="card text-white bg-primary mb-3">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title">Utilizadores Ativos Mensal</h5>
+                                            <h5 class="card-title">Utilizadores</h5>
                                             <h3 class="card-text">{{ $getTotalUsers }}</h3>
                                         </div>
                                     </div>
@@ -29,23 +30,23 @@
                                     <div class="card text-white bg-success mb-3">
                                         <div class="card-body text-center">
                                             <h5 class="card-title">Horas Totais</h5>
-                                            <h3 class="card-text">850</h3>
+                                            <h3 class="card-text">{{ $totalHours }}</h3>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="card text-white bg-warning mb-3">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title">Presença Média</h5>
-                                            <h3 class="card-text">6.3 dias</h3>
+                                            <h5 class="card-title">Presenças totais</h5>
+                                            <h3 class="card-text">{{ $totalPresences }}</h3>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="card text-white bg-danger mb-3">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title">Crescimento</h5>
-                                            <h3 class="card-text">+15%</h3>
+                                            <h5 class="card-title">Faltas</h5>
+                                            <h3 class="card-text">{{ $usersAbsence }}</h3>
                                         </div>
                                     </div>
                                 </div>

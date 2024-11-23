@@ -4,9 +4,12 @@
         @if (session('message'))
             <div class="alert alert-success">{{ session('message') }}</div>
         @endif
+
+
         <div class="row justify-content-sm-center h-100 mt-5">
             <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 mt-5">
                 <div class="text-center my-5">
+
 
                 </div>
                 <div class="card shadow-lg ">
@@ -21,11 +24,14 @@
                             @csrf
                             <div class="mb-3">
                                 <label class="mb-2 text-muted" for="email">E-Mail Address</label>
-                                <input id="email" type="email" class="form-control" name="email" value=""
+                                <input id="email" type="email"
+                                    class="form-control" name="email" value=""
                                     required="" autofocus="" fdprocessedid="8f7bri">
-                                <div class="invalid-feedback">
-                                    Email is invalid
-                                </div>
+
+                                    <div class="invalid-feedback">
+                                        Email is invalid
+                                    </div>
+
                             </div>
 
                             <div class="mb-3">
@@ -35,12 +41,14 @@
                                         Forgot Password?
                                     </a>
                                 </div>
-                                <input id="password" type="password" class="form-control" name="password" required=""
-                                    fdprocessedid="2y22z">
+                                <input id="password" type="password"
+                                    class="form-control" name="password"
+                                    required="" fdprocessedid="2y22z">
 
-                                <div class="invalid-feedback">
-                                    Password is required
-                                </div>
+                                    <div class="invalid-feedback">
+                                        Password is required
+                                    </div>
+
                             </div>
 
                             <div class="d-flex align-items-center">
@@ -54,20 +62,28 @@
                             </div>
                         </form>
                     </div>
+
+
+
                     @auth
-                    @if (Auth::user()->user_type_id == 1)
-                    <div class="card-footer py-3 border-0">
-                        <div class="text-center">
-                            Add a new user? <a href={{ route('register.get') }} class="text-dark">Register here</a>
-                        </div>
-                    </div>
-                    @endif
+                        @if (Auth::user()->user_type_id == 1)
+                            <div class="card-footer py-3 border-0">
+                                <div class="text-center">
+                                    Add a new user? <a href={{ route('register.get') }} class="text-dark">Register here</a>
+                                </div>
+                            </div>
+                        @endif
                     @endauth
                 </div>
             </div>
         </div>
     </div>
     </div>
+    @if ($errors->any())
+                    <div class="container alert alert-danger text-center mt-4 w-50">
+                        {{ str_replace('These credentials do not match our records.', 'As credenciais que introduziu estão incorretas.', $errors->first()) }}
+                    </div>
+                    @endif
     <div class="empurra_footer">
 
     </div>
