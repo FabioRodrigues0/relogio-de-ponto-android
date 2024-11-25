@@ -29,6 +29,7 @@ import com.cesaepulse.app.data.api.CesaePulseApi
 import com.cesaepulse.app.ui.CalendarRoute
 import com.cesaepulse.app.ui.components.InfoHours.InfoHour
 import com.cesaepulse.app.ui.components.NavigationButton.NavigationButton
+import com.cesaepulse.app.ui.detailsHoursRoute
 import com.cesaepulse.app.ui.theme.Shapes
 
 @Composable
@@ -100,7 +101,9 @@ fun UsersPage(
 					colorText = MaterialTheme.colorScheme.onTertiary)
 			}
 			NavigationButton(text = "Calendario", onClick = {navController.navigate(CalendarRoute)})
-			NavigationButton(text = "Calendario", onClick = {})
+			NavigationButton(text = "Contagem de horas", onClick = {navController.navigate(
+				detailsHoursRoute
+			)})
 			NavigationButton(text = "Calendario", onClick = {})
 			NavigationButton(text = "Calendario", onClick = {})
 			NavigationButton(text = "Calendario", onClick = {})

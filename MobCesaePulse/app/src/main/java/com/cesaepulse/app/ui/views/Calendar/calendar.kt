@@ -32,7 +32,7 @@ import androidx.navigation.NavController
 import java.time.YearMonth
 
 
-// Tela de Calendário Mensal
+// menu com os meses para selecionar
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DropDown(
@@ -50,7 +50,9 @@ fun DropDown(
     ) {
         ExposedDropdownMenuBox(
             expanded = isExpanded,
-            onExpandedChange = { viewModel.changeExpanded() }
+            onExpandedChange = { viewModel.changeExpanded() },
+            modifier = Modifier.width(180.dp),
+
         ) {
             TextField(
                 value = selectedText,
@@ -63,10 +65,13 @@ fun DropDown(
                 }
             )
 
-            // Aqui foi ajustado o estado de `isExpanded`
+            // Reduz o tamanho do dropdown com Modifier.width() ou Modifier.size()
             ExposedDropdownMenu(
                 expanded = isExpanded,
-                onDismissRequest = {  viewModel.changeExpanded() }) {
+                onDismissRequest = { viewModel.changeExpanded() },
+                modifier = Modifier.width(120.dp)
+
+            ) {
                 viewModel.list.forEachIndexed { index, text ->
                     DropdownMenuItem(
                         text = { Text(text = text) },
@@ -77,13 +82,25 @@ fun DropDown(
                         contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
                     )
                 }
+
             }
         }
 
-        // Exibe o mês selecionado
-        Text(text = "Currently selected: $selectedText")
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+//botoes de semanal e reset
 
 @Composable
 fun Calendar(navController: NavController) {
@@ -99,14 +116,14 @@ fun Calendar(navController: NavController) {
         verticalArrangement = Arrangement.Top
     ) {
 
-        Row (
+        Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
-        ){
+        ) {
 
             Button(onClick = {
                 // Navega para "weekCalendar"
-                navController.navigate("weekCalendar")
+                navController.navigate(" weekCalendar")
             }) {
                 Text("semanal")
             }
@@ -121,6 +138,8 @@ fun Calendar(navController: NavController) {
             }
         }
 
+        //botoes de passar os meses+menu
+
         Row {
 
             DropDown()
@@ -128,7 +147,7 @@ fun Calendar(navController: NavController) {
                 navController.navigate("")
 
 
-            }){
+            }) {
                 Text("<")
 
             }
@@ -137,7 +156,7 @@ fun Calendar(navController: NavController) {
                 navController.navigate("")
 
 
-            }){
+            }) {
                 Text(">")
 
             }
@@ -145,7 +164,8 @@ fun Calendar(navController: NavController) {
         }
 
 
-        // Usando Column com verticalArrangement para centralizar os itens
+        //calendario mensal
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -205,7 +225,10 @@ fun Calendar(navController: NavController) {
             )
         }
     }
+
 }
+
+
 
 
 

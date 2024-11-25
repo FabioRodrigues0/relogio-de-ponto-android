@@ -19,3 +19,6 @@ data object CalendarRoute
 
 @Serializable
 data object WeekCalendarRoute
+
+@Serializable
+data object detailsHoursRoute
