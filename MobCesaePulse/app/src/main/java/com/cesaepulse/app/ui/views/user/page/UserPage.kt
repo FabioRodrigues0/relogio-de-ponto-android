@@ -39,11 +39,15 @@ fun UsersPage(
 	}
 
 	val profile by viewModel.profile.collectAsStateWithLifecycle()
+	val hoursDay by viewModel.hoursDay.collectAsStateWithLifecycle()
+	val hoursWeek by viewModel.hoursWeek.collectAsStateWithLifecycle()
+	val hoursMonth by viewModel.hoursMonth.collectAsStateWithLifecycle()
+	val lastPresence by viewModel.lastPresence.collectAsStateWithLifecycle()
 
 	Card(
 		modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 105.dp, start = 10.dp, end = 10.dp, bottom = 10.dp)
+			.fillMaxSize()
+			.padding(top = 105.dp, start = 10.dp, end = 10.dp, bottom = 10.dp)
 	) {
 		Column(
 			verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -71,7 +75,7 @@ fun UsersPage(
 						text = profile?.name ?: "Nome",
 						fontSize = TextUnit(30f, TextUnitType.Sp),
 						fontWeight = FontWeight.Bold)
-					Text(text = profile?.presences?.first().toString())
+					Text(text = "Ultima Entrada: $lastPresence")
 				}
 			}
 			Text(text = "Horas", fontSize = TextUnit(25f, TextUnitType.Sp), fontWeight = FontWeight.Bold)
@@ -82,17 +86,17 @@ fun UsersPage(
 			) {
 				InfoHour(
 					header = "Diárias",
-					hour = "7h",
+					hour = "${hoursDay}h",
 					color = MaterialTheme.colorScheme.primary,
 					colorText = MaterialTheme.colorScheme.onPrimary)
 				InfoHour(
 					header = "Semanais",
-					hour = "48h",
+					hour = "${hoursWeek}h",
 					color = MaterialTheme.colorScheme.secondary,
 					colorText = MaterialTheme.colorScheme.onSecondary)
 				InfoHour(
 					header = "Mensais",
-					hour = "120h",
+					hour = "${hoursMonth}h",
 					color = MaterialTheme.colorScheme.tertiary,
 					colorText = MaterialTheme.colorScheme.onTertiary)
 			}
