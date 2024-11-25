@@ -14,25 +14,29 @@ class UserController extends Controller
 {
     public function index()
     {
+        if (Auth::user()->users_type_id == 1) {
+            $search = request()->query('search') ? request()->query('search') : null;
+            $type = request()->query('type') ? request()->query('type') : null;
 
-        $search = request()->query('search') ? request()->query('search') : null;
-        $type = request()->query('type') ? request()->query('type') : null;
 
+            if ($search || $type) {
+                $showUsers = $this->findUsers($search, $type);
+            } else {
+                $showUsers = $this->getUsers();
+            }
 
-        if ($search || $type) {
-            $showUsers = $this->findUsers($search, $type);
+            $countUsersNumber = $this->countUsers();
+            $countPasswordsNumber = $this->countPasswords();
+
+            return view('pages.users', compact('showUsers', 'countUsersNumber', 'countPasswordsNumber'));
         } else {
-            $showUsers = $this->getUsers();
+            return redirect()->route('login');
         }
-
-        $countUsersNumber = $this->countUsers();
-        $countPasswordsNumber = $this->countPasswords();
-
-        return view('pages.users', compact('showUsers', 'countUsersNumber', 'countPasswordsNumber'));
     }
 
     public function home()
     {
+
         $performance = $this->userPerformance();
         $userTime = $this->getLastEntrance();
         $allUserData = $this->getAllPresences();
@@ -40,7 +44,12 @@ class UserController extends Controller
         $loggedToday = $this->checkIfLoggedToday();
         $loggedOutToday = $this->checkIfLoggedOutToday();
 
+        if (Auth::user()->users_type_id == 1) {
+            return view('pages.adminHome', compact('userTime', 'allUserData', 'performance', 'userAlerts', 'loggedToday', 'loggedOutToday'));
+        }
+        else{
         return view('pages.home', compact('userTime', 'allUserData', 'performance', 'userAlerts', 'loggedToday', 'loggedOutToday'));
+    }
     }
 
     public function viewContact($id)
@@ -185,7 +194,7 @@ class UserController extends Controller
             ->select('presence_record.date', 'presence_record.entry_time', 'presence_record.exit_time', 'attendance_mode.description')
             ->orderBy('date', 'desc')
             ->get();
-            // ->cursorPaginate(5);
+        // ->cursorPaginate(5);
 
         foreach ($checkAllFields as $presence) {
             $entryTime = Carbon::parse($presence->entry_time);
@@ -228,15 +237,15 @@ class UserController extends Controller
             )
             ->groupBy('users.name')
             ->first();
-            
-            if (!$entrances) {
-                return (object) [
-                    'name' => Auth::user()->name,
-                    'total_minutes' => 0,
-                    'punctuality_percentage' => 0,
-                    'total_hours' => '00:00',
-                ];
-            }
+
+        if (!$entrances) {
+            return (object) [
+                'name' => Auth::user()->name,
+                'total_minutes' => 0,
+                'punctuality_percentage' => 0,
+                'total_hours' => '00:00',
+            ];
+        }
 
         $totalMinutes = $entrances->total_minutes ?? 0;
         $totalHours = $entrances->total_hours ?? 0;
@@ -315,5 +324,4 @@ class UserController extends Controller
 
         return $loggedOutToday;
     }
-
 }

@@ -26,7 +26,7 @@
 
                             </div>
                             <h3 class="card-title mb-3">{{ Auth::user()->name }}</h3>
-                            <p class="card-text text-muted">Estas são as informações da sua conta:</p>
+                            <p class="card-text text-muted">Estas são as informações da tua conta:</p>
                         </div>
                         <div class="container">
                             <div
@@ -85,7 +85,7 @@
                                     </a>
                                     <button class="btn btn-dark" data-bs-toggle="modal"
                                     data-bs-target="#solicitacaoSenhaModal">
-                                    Solicitar Alteração de Senha
+                                    Solicitar Alteração de Password
                                 </button>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
 
-                       
+
                             <form action="{{ route('user.password') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-dark">Confirmar Solicitação</button>

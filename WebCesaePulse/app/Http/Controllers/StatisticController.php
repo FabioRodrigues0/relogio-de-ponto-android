@@ -7,15 +7,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class StatisticController extends Controller
 {
     public function statistics()
     {
+        if (Auth::user()->users_type_id == 1) {
 
         $users = DB::table('users')->get();
-
-
         $userData = [];
         foreach ($users as $user) {
 
@@ -34,13 +34,16 @@ class StatisticController extends Controller
                 'attendance' => $attendance,
             ];
         }
-
-
         return view('admin.statistics', compact('userData'));
+    }
+    else{
+        return redirect()->route('login');
+    }
     }
 
     public function allStatistics()
     {
+        if (Auth::user()->users_type_id == 1) {
         $users = DB::table('users')->get();
 
         $userData = [];
@@ -90,13 +93,17 @@ class StatisticController extends Controller
         $getTotalUsersData = $this->getTotalHours();
         $currentMonth = $this->getCurrentMonth();
         $usersAbsence = $this->usersAbsence();
-        
+
 
         $totalHours = $getTotalUsersData['totalHours'];
         $totalPresences = $getTotalUsersData['presences'];
 
 
         return view('admin.allStatistics', compact('userData', 'chartLabels', 'chartValues', 'getTotalUsers', 'totalHours', 'totalPresences', 'currentMonth', 'usersAbsence'));
+        }
+        else{
+            return redirect()->route('login');
+        }
     }
 
     public function getUsersNumber()

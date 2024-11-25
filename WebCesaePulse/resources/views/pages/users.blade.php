@@ -11,8 +11,8 @@
                         alt="logo" width="150">
                 </div>
                 <hr>
-                <h2 class="card-title mb-2">Consulta de Funcionários</h2>
-                <p class="text-muted">Encontre, edite ou exclua os funcionários registados no sistema.</p>
+                <h2 class="card-title mb-2">Consulta de Utilizadores</h2>
+                <p class="text-muted">Encontra, edita ou exclui os funcionários registados no sistema.</p>
             </div>
         </div>
         <div class="card shadow-lg">
@@ -86,7 +86,7 @@
             <div class="col-4">
                 <div class="card text-center shadow">
                     <div class="card-body">
-                        <h5 class="card-title">Users registados</h5>
+                        <h5 class="card-title">Utilizadores registados</h5>
                         <p class="card-text fs-4">{{ $countUsersNumber }}</p>
                     </div>
                 </div>

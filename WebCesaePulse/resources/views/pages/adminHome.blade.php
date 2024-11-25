@@ -1,4 +1,4 @@
-@extends('master.master')
+@extends('master.masterTwo')
 
 @section('content')
     <div class="container my-4">

@@ -154,6 +154,8 @@
                                                     <span class="badge bg-success">Remoto</span>
                                                 @elseif(!empty($user->description) && $user->description == 'In-Person')
                                                     <span class="badge bg-primary">Presencial</span>
+                                                @elseif(!empty($user->description) && $user->description == 'External')
+                                                    <span class="badge bg-info">Externo</span>
                                                 @else
                                                     Sem registos
                                                 @endif

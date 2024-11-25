@@ -65,12 +65,11 @@
               </a>
               <ul class="dropdown-menu text-small" style="">
                 <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="{{ route('user.profile', Auth::user()->id) }}">Profile</a></li>
+                <li><a class="dropdown-item" href="{{ route('user.profile', Auth::user()->id) }}">Perfil</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <form method="POST" action="{{ route('logout') }}" id="logout-form">
                     @csrf
-                    <li><a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit()">Sign out</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit()">Logout</a></li>
                 </form>
               </ul>
             </div>

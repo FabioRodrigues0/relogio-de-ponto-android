@@ -11,35 +11,41 @@ use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
-    public function login(){
-        if (Auth::check()){
+    public function login()
+    {
+        if (Auth::check()) {
             return redirect()->route('home.page');
+        } else {
+            return view("auth.login");
+        }
+    }
+
+    public function register()
+    {
+        if (Auth::user()->users_type_id == 1) {
+            $sendUserType = $this->userType();
+            return view("auth.register", compact('sendUserType'));
         }
         else{
-        return view("auth.login");
+            return redirect()->route('login');
         }
     }
 
-    public function register(){
-        $sendUserType = $this->userType();
-        return view("auth.register", compact('sendUserType'));
 
-    }
-
-
-    public function userType(){
+    public function userType()
+    {
         $userType = DB::table('users_type')
-                   ->get();
-        return($userType);
+            ->get();
+        return ($userType);
     }
 
-    public function createUser(Request $request){
+    public function createUser(Request $request)
+    {
 
         $photo = null;
 
-        if($request->hasFile('foto')){
+        if ($request->hasFile('foto')) {
             $photo = Storage::putFile('uploadedImages', $request->foto);
-
         }
 
         $request->validate([

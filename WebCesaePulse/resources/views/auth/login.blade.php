@@ -23,7 +23,7 @@
                             autocomplete="off">
                             @csrf
                             <div class="mb-3">
-                                <label class="mb-2 text-muted" for="email">E-Mail Address</label>
+                                <label class="mb-2 text-muted" for="email">Email</label>
                                 <input id="email" type="email"
                                     class="form-control" name="email" value=""
                                     required="" autofocus="" fdprocessedid="8f7bri">
@@ -38,7 +38,7 @@
                                 <div class="mb-2 w-100">
                                     <label class="text-muted" for="password">Password</label>
                                     <a href="forgot.html" class="float-end">
-                                        Forgot Password?
+                                        Esqueceste-te da password?
                                     </a>
                                 </div>
                                 <input id="password" type="password"
@@ -46,7 +46,7 @@
                                     required="" fdprocessedid="2y22z">
 
                                     <div class="invalid-feedback">
-                                        Password is required
+                                        Esqueceste-te da password?
                                     </div>
 
                             </div>
@@ -54,10 +54,10 @@
                             <div class="d-flex align-items-center">
                                 <div class="form-check">
                                     <input type="checkbox" name="remember" id="remember" class="form-check-input">
-                                    <label for="remember" class="form-check-label">Remember Me</label>
+                                    <label for="remember" class="form-check-label">Lembrar-me</label>
                                 </div>
                                 <button type="submit" class="btn btn-primary ms-auto" fdprocessedid="i5syyn">
-                                    Login
+                                    Entrar
                                 </button>
                             </div>
                         </form>
