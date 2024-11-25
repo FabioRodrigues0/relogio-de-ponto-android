@@ -21,7 +21,7 @@ class UserApiController extends Controller
             ->join('users_type', 'users.users_type_id', '=', 'users_type.id')
             ->select('users.*', 'users_type.type')
             ->orderBy('users.id')
-            ->cursorPaginate(5);
+            ->get();
 
         return UserResource::collection($allUsers);
     }
@@ -29,21 +29,21 @@ class UserApiController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function checkInRequest()
+    public function checkInRequest($id, $type)
     {
         DB::table('presence_record')->insert([
             'date' => now()->format('Y-m-d'),
             'entry_time' => now()->format('H:i:s'),
-            'attendance_mode_id' => 1,
-            'user_id' => auth::user()->id,
+            'attendance_mode_id' => $type,
+            'user_id' => $id,
             'created_at' => now(),
         ]);
     }
 
-    public function checkOutRequest()
+    public function checkOutRequest($id)
     {
         DB::table('presence_record')
-            ->where('user_id', Auth::user()->id)
+            ->where('user_id', $id)
             ->whereDate('date', now()->format('Y-m-d'))
             ->whereNull('exit_time')
             ->update([
