@@ -2,8 +2,10 @@ package com.cesaepulse.app.data.di
 
 import com.cesaepulse.app.data.api.CesaePulseApi
 import com.cesaepulse.app.data.repository.ProfileRepository
+import com.cesaepulse.app.data.repository.ScheduleRepository
 import com.cesaepulse.app.data.repository.UserRepository
 import com.cesaepulse.app.domain.repository.IProfileRepository
+import com.cesaepulse.app.domain.repository.IScheduleRepository
 import com.cesaepulse.app.domain.repository.IUserRepository
 import com.skydoves.sandwich.retrofit.adapters.ApiResponseCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -46,4 +48,9 @@ object AppModule {
 	@Provides
 	fun provideProfileRepository(api: CesaePulseApi): IProfileRepository =
 		ProfileRepository(api = api)
+
+	@Singleton
+	@Provides
+	fun provideScheduleRepository(api: CesaePulseApi): IScheduleRepository =
+		ScheduleRepository(api = api)
 }

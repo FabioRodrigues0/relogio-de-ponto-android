@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/users', [UserApiController::class, 'index']);
 Route::get('/profile/{id}', [UserApiController::class, 'show']);
-Route::get('/check-in/{id}/{type}', [UserApiController::class, 'checkInRequest']);
-Route::get('/check-out/{id}', [UserApiController::class, 'checkOutRequest']);
+Route::post('/check-in/{id}/{type}', [UserApiController::class, 'checkInRequest']);
+Route::post('/check-out/{id}', [UserApiController::class, 'checkOutRequest']);
 
 
 // Rotas para o ScheduleApiController

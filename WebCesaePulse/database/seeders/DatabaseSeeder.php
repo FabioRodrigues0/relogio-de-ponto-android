@@ -15,11 +15,14 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'setor' => 'Tecnologia',
-            'users_type_id' => 1,
-        ]);
+        $this->call([
+            ScheduleSeeder::class]);
+
+//        User::factory()->create([
+//            'name' => 'Test User',
+//            'email' => 'test@example.com',
+//            'setor' => 'Tecnologia',
+//            'users_type_id' => 1,
+//        ]);
     }
 }
