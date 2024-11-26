@@ -23,14 +23,17 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.cesaepulse.app.data.api.CesaePulseApi
+import com.cesaepulse.app.ui.CalendarRoute
 import com.cesaepulse.app.ui.components.InfoHours.InfoHour
 import com.cesaepulse.app.ui.components.NavigationButton.NavigationButton
 import com.cesaepulse.app.ui.theme.Shapes
 
 @Composable
 fun UsersPage(
+	navController: NavHostController,
 	viewModel: UsersPageViewModel = hiltViewModel(),
 	id: Int
 ) {
@@ -100,7 +103,7 @@ fun UsersPage(
 					color = MaterialTheme.colorScheme.tertiary,
 					colorText = MaterialTheme.colorScheme.onTertiary)
 			}
-			NavigationButton(text = "Calendario", onClick = {})
+			NavigationButton(text = "Calendario", onClick = { navController.navigate(CalendarRoute) })
 			NavigationButton(text = "Calendario", onClick = {})
 			NavigationButton(text = "Calendario", onClick = {})
 			NavigationButton(text = "Calendario", onClick = {})

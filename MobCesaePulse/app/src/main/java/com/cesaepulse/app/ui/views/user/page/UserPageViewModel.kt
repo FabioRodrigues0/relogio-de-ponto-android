@@ -57,8 +57,11 @@ class UsersPageViewModel @Inject constructor(
             filterPresences?.map { presence ->
                 val format: SimpleDateFormat = SimpleDateFormat("HH:mm:ss");
                 val entry_time: Date = format.parse(presence.entry_time);
-                val exit_time: Date = format.parse(presence.exit_time);
-                difference = exit_time.getTime() - entry_time.getTime();
+                if (presence.exit_time != null){
+                    val exit_time: Date = format.parse(presence.exit_time);
+                    difference = exit_time.getTime() - entry_time.getTime();
+                }
+
 
             }
             if (filterPresences != null) {
@@ -79,8 +82,10 @@ class UsersPageViewModel @Inject constructor(
             filterPresences?.map { presence ->
                 val formatHour: SimpleDateFormat = SimpleDateFormat("HH:mm:ss");
                 val entry_time: Date = formatHour.parse(presence.entry_time);
-                val exit_time: Date = formatHour.parse(presence.exit_time);
-                difference += exit_time.getTime() - entry_time.getTime();
+                if (presence.exit_time != null){
+                    val exit_time: Date = formatHour.parse(presence.exit_time);
+                    difference += exit_time.getTime() - entry_time.getTime();
+                }
 
             }
             if (filterPresences != null) {
@@ -101,8 +106,10 @@ class UsersPageViewModel @Inject constructor(
             filterPresences?.map { presence ->
                 val formatHour: SimpleDateFormat = SimpleDateFormat("HH:mm:ss");
                 val entry_time: Date = formatHour.parse(presence.entry_time);
-                val exit_time: Date = formatHour.parse(presence.exit_time);
-                difference += exit_time.getTime() - entry_time.getTime();
+                if (presence.exit_time != null){
+                    val exit_time: Date = formatHour.parse(presence.exit_time);
+                    difference += exit_time.getTime() - entry_time.getTime();
+                }
 
             }
             if (filterPresences != null) {
