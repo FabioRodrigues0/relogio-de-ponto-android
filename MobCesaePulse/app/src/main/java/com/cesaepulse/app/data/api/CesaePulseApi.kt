@@ -1,5 +1,6 @@
 package com.cesaepulse.app.data.api
 
+import com.cesaepulse.app.data.api.dto.ListScheduleResponse
 import com.cesaepulse.app.data.api.dto.ListUserResponse
 import com.cesaepulse.app.data.api.dto.ProfileResponse
 import com.skydoves.sandwich.ApiResponse
@@ -30,9 +31,11 @@ interface CesaePulseApi {
 	 *  Call Api to get One Shedules from one User by Id
 	 *
 	 *  @param id: Int
+	 *  @param month: Int
+	 *
 	 */
-	@GET("schedules/{id}/")
-	suspend fun getSchedulesByUserId(@Path("id") id: Int): ApiResponse<ProfileResponse>
+	@GET("schedules/{id}/{month}")
+	suspend fun getSchedulesByUserId(@Path("id") id: Int, @Path("month") month: Int): ApiResponse<ListScheduleResponse>
 
 
 	companion object {

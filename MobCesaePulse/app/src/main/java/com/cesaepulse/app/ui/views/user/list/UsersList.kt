@@ -27,7 +27,8 @@ import com.cesaepulse.app.ui.views.user.list.composable.UserCard
 @Composable
 fun SharedTransitionScope.UsersList(
 	onUserClick: (Int) -> Unit,
-	viewModel: UsersListViewModel = hiltViewModel()){
+	viewModel: UsersListViewModel = hiltViewModel()
+){
 
 	val usersList by viewModel.usersList.collectAsStateWithLifecycle()
 
