@@ -51,14 +51,17 @@ class UsersPageViewModel @Inject constructor(
         if (profile.value != null && profile.value?.presences != emptyList<PresenceRecord>()) {
             var difference: Long = 0;
             val filterPresences = profile.value?.presences?.filter{ presences ->
-                presences.date.equals(now().toString().split('T')[0])
+                presences.date == now().toString().split('T')[0]
             }
 
             filterPresences?.map { presence ->
                 val format: SimpleDateFormat = SimpleDateFormat("HH:mm:ss");
-                val entry_time: Date = format.parse(presence.entry_time.toString());
-                val exit_time: Date = format.parse(presence.exit_time.toString());
-                difference = exit_time.getTime() - entry_time.getTime();
+                val entry_time: Date = format.parse(presence.entry_time);
+                if (presence.exit_time != null){
+                    val exit_time: Date = format.parse(presence.exit_time);
+                    difference = exit_time.getTime() - entry_time.getTime();
+                }
+
 
             }
             if (filterPresences != null) {
@@ -73,14 +76,16 @@ class UsersPageViewModel @Inject constructor(
             val formatWeek: SimpleDateFormat = SimpleDateFormat("WW");
             var difference: Long = 0;
             val filterPresences = profile.value?.presences?.filter{ presences ->
-                formatWeek.parse(presences.date.toString()) == formatWeek.parse(now().toString().split('T')[0])
+                formatWeek.parse(presences.date) == formatWeek.parse(now().toString().split('T')[0])
             }
 
             filterPresences?.map { presence ->
                 val formatHour: SimpleDateFormat = SimpleDateFormat("HH:mm:ss");
-                val entry_time: Date = formatHour.parse(presence.entry_time.toString());
-                val exit_time: Date = formatHour.parse(presence.exit_time.toString());
-                difference += exit_time.getTime() - entry_time.getTime();
+                val entry_time: Date = formatHour.parse(presence.entry_time);
+                if (presence.exit_time != null){
+                    val exit_time: Date = formatHour.parse(presence.exit_time);
+                    difference += exit_time.getTime() - entry_time.getTime();
+                }
 
             }
             if (filterPresences != null) {
@@ -95,14 +100,16 @@ class UsersPageViewModel @Inject constructor(
             val formatMonth: SimpleDateFormat = SimpleDateFormat("MM");
             var difference: Long = 0;
             val filterPresences = profile.value?.presences?.filter{ presences ->
-                formatMonth.parse(presences.date.toString()) == formatMonth.parse(now().toString().split('T')[0])
+                formatMonth.parse(presences.date) == formatMonth.parse(now().toString().split('T')[0])
             }
 
             filterPresences?.map { presence ->
                 val formatHour: SimpleDateFormat = SimpleDateFormat("HH:mm:ss");
-                val entry_time: Date = formatHour.parse(presence.entry_time.toString());
-                val exit_time: Date = formatHour.parse(presence.exit_time.toString());
-                difference += exit_time.getTime() - entry_time.getTime();
+                val entry_time: Date = formatHour.parse(presence.entry_time);
+                if (presence.exit_time != null){
+                    val exit_time: Date = formatHour.parse(presence.exit_time);
+                    difference += exit_time.getTime() - entry_time.getTime();
+                }
 
             }
             if (filterPresences != null) {
