@@ -1,6 +1,7 @@
 package com.cesaepulse.app.data.api.dto
 
 import com.cesaepulse.app.domain.model.PresenceRecord
+import java.sql.Time
 
 /**
  *  Data Class of PresenceRecord
@@ -11,9 +12,9 @@ import com.cesaepulse.app.domain.model.PresenceRecord
  *  @param attenance_mode: AttendanceModeDto
  */
 data class PresenceRecordDto(
-	val date: String,
-	val entry_time: String,
-	val exit_time: String?,
+	val date: Time,
+	val entry_time: Time,
+	val exit_time: Time?,
 	val attendance_mode: AttendanceModeDto,
 ) {
 	/**

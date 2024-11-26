@@ -14,8 +14,11 @@ data class UserRoute(val id: Int)
 @Serializable
 data object HomeRoute
 
-@Serializable
-data object CalendarRoute
-
-@Serializable
-data object WeekCalendarRoute
+//@Serializable
+//data object CalendarRoute
+//
+//@Serializable
+//data object CalendarWeekRoute
+//
+//@Serializable
+//data object detailsHoursRoute

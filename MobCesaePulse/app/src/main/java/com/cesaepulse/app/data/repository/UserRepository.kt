@@ -30,4 +30,40 @@ class UserRepository @Inject constructor(
 
 		return users
 	}
+
+	override suspend fun postCheckIn(id: Int, type: Int): Boolean {
+		var result: Boolean = false
+		api.postCheckIn(id, type)
+			.onSuccess {
+				Log.d("postCheckIn", "success")
+				result = true
+			}
+			.onError {
+				Log.e(TAG, "Fail on check-in")
+				result = false
+			}
+			.onException {
+				Log.d("postCheckIn", "exception - ${this.message}")
+				result = false
+			}
+		return result
+	}
+
+	override suspend fun postCheckOut(id: Int): Boolean {
+		var result: Boolean = false
+		api.postCheckOut(id)
+			.onSuccess {
+				Log.d("postCheckIn", "success")
+				result = true
+			}
+			.onError {
+				Log.e(TAG, "Fail on check-in")
+				result = false
+			}
+			.onException {
+				Log.d("postCheckIn", "exception - ${this.message}")
+				result = false
+			}
+		return result
+	}
 }

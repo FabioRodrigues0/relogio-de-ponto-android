@@ -5,4 +5,9 @@ import com.cesaepulse.app.domain.model.User
 interface IUserRepository {
 
 	suspend fun getAllUsers(): List<User>
+
+	suspend fun postCheckIn(id: Int, type: Int): Boolean
+
+	suspend fun postCheckOut(id: Int): Boolean
+
 }

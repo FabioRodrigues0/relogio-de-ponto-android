@@ -16,11 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cesaepulse"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.components.BottomNavBar.tesat"
-            android:exported="false"
-            android:label="@string/title_activity_tesat"
-            android:theme="@style/Theme.Cesaepulse" />
+<!--        <activity-->
+<!--            android:name=".ui.components.BottomNavBar.tesat"-->
+<!--            android:exported="false"-->
+<!--            android:label="@string/title_activity_tesat"-->
+<!--            android:theme="@style/Theme.Cesaepulse" />-->
 
         <meta-data
             android:name="com.google.android.gms.version"

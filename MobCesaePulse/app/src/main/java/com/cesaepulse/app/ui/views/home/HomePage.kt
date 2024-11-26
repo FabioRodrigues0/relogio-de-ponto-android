@@ -28,7 +28,7 @@ fun HomePage(
 ){
 
 	LaunchedEffect(key1 = true) {
-		viewModel.fetchUser()
+
 	}
 
 	val user by viewModel.user.collectAsStateWithLifecycle()

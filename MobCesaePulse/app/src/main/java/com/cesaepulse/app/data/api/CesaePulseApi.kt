@@ -1,5 +1,6 @@
 package com.cesaepulse.app.data.api
 
+import com.cesaepulse.app.data.api.dto.ListScheduleResponse
 import com.cesaepulse.app.data.api.dto.ListUserResponse
 import com.cesaepulse.app.data.api.dto.ProfileResponse
 import com.skydoves.sandwich.ApiResponse
@@ -24,6 +25,23 @@ interface CesaePulseApi {
 	@GET("profile/{id}/")
 	suspend fun getProfileById(@Path("id") id: Int): ApiResponse<ProfileResponse>
 
+	/**
+	 *  Call Api to check-in Entrance
+	 *
+	 *  @param id: Int
+	 */
+	@GET("check-in/{id}/{type}")
+	suspend fun postCheckIn(@Path("id") id: Int, @Path("type") type: Int): ApiResponse<Void>
+
+
+	/**
+	 *  Call Api to check-out Entrance
+	 *
+	 *  @param id: Int
+	 */
+	@GET("check-out/{id}")
+	suspend fun postCheckOut(@Path("id") id: Int): ApiResponse<Void>
+
 	// ------------------ SCHEDULE -----------------------
 
 	/**
@@ -32,7 +50,7 @@ interface CesaePulseApi {
 	 *  @param id: Int
 	 */
 	@GET("schedules/{id}/")
-	suspend fun getSchedulesByUserId(@Path("id") id: Int): ApiResponse<ProfileResponse>
+	suspend fun getSchedulesByUserId(@Path("id") id: Int): ApiResponse<ListScheduleResponse>
 
 
 	companion object {
