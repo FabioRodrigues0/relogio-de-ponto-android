@@ -62,7 +62,6 @@
                     </header>
 
                     <div class="row container-fluid-xxl mt-4">
-                        <!-- Coluna Esquerda (Gráfico Grande) -->
                         <div class="col-md-6 mb-4">
                             <div class="card shadow h-100">
                                 <div class="card-header bg-purple text-white text-center">
@@ -79,9 +78,7 @@
                             </div>
                         </div>
 
-                        <!-- Coluna Direita (Dois Gráficos Empilhados) -->
                         <div class="col-md-6 mb-4 d-flex flex-column">
-                            <!-- Gráfico 1 -->
                             <div class="card shadow flex-fill mb-2">
                                 <div class="card-header bg-purple text-white text-center">
                                     <h5 class="mb-0">Desempenho Diário</h5>
@@ -95,8 +92,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Gráfico 2 -->
                             <div class="card flex-fill">
                                 <div class="card-header bg-purple text-white text-center">
                                     <h5 class="mb-0">Horas Mensais</h5>
@@ -118,18 +113,32 @@
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
                     @php
-                        $combinedLabels = []; // Unique months across all users
+                        $combinedLabels = [];
+                        $monthNames = [
+                            1 => 'Janeiro',
+                            2 => 'Fevereiro',
+                            3 => 'Março',
+                            4 => 'Abril',
+                            5 => 'Maio',
+                            6 => 'Junho',
+                            7 => 'Julho',
+                            8 => 'Agosto',
+                            9 => 'Setembro',
+                            10 => 'Outubro',
+                            11 => 'Novembro',
+                            12 => 'Dezembro',
+                        ];
 
-                        // Collect unique months from all users
                         foreach ($userData as $user) {
                             foreach ($user['attendance'] as $attendance) {
-                                if (!in_array($attendance->month, $combinedLabels)) {
-                                    $combinedLabels[] = $attendance->month;
+                                $monthName = $monthNames[$attendance->month];
+                                if (!in_array($monthName, $combinedLabels)) {
+                                    $combinedLabels[] = $monthName;
                                 }
                             }
                         }
-
                     @endphp
+
 
                     <script>
                         document.addEventListener("DOMContentLoaded", function() {
@@ -152,17 +161,15 @@
                             ];
 
 
-
-                            // Combined Bar Chart
                             const combinedLabels = {!! json_encode($combinedLabels) !!};
 
                             const userColors = [
-                                'rgba(75, 192, 192, 0.5)', // Teal
-                                'rgba(255, 99, 132, 0.5)', // Pink
-                                'rgba(54, 162, 235, 0.5)', // Blue
-                                'rgba(255, 206, 86, 0.5)', // Yellow
-                                'rgba(153, 102, 255, 0.5)', // Purple
-                                'rgba(201, 203, 207, 0.5)', // Grey
+                                'rgba(75, 192, 192, 0.5)',
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(153, 102, 255, 0.5)',
+                                'rgba(201, 203, 207, 0.5)',
                                 'rgba(255, 159, 64, 0.5)',
                                 'rgba(0, 128, 0, 0.5)',
                                 'rgba(128, 0, 128, 0.5)',
@@ -177,7 +184,8 @@
                                                 @php
                                                     $totalHours = 0;
                                                     foreach ($user['attendance'] as $attendance) {
-                                                        if ($attendance->month === $label) {
+                                                        $attendanceMonthName = $monthNames[$attendance->month];
+                                                        if ($attendanceMonthName === $label) {
                                                             $totalHours = $attendance->total_hours;
                                                             break;
                                                         }
@@ -203,10 +211,10 @@
                                 options: {
                                     plugins: {
                                         legend: {
-                                            display: false // Desativa a legenda superior
+                                            display: false
                                         },
                                         tooltip: {
-                                            enabled: true // Mantém os tooltips ao passar o mouse
+                                            enabled: true
                                         }
                                     },
                                     responsive: true,
@@ -220,8 +228,8 @@
                                     }
                                 }
                             });
-                            const lineChartLabels = {!! json_encode($chartLabels) !!}; // Dias no eixo X
-                            const lineChartValues = {!! json_encode($chartValues) !!}; // Valores no eixo Y
+                            const lineChartLabels = {!! json_encode($chartLabels) !!};
+                            const lineChartValues = {!! json_encode($chartValues) !!};
 
                             const lineChartCtx = document.getElementById('dailyLineChart').getContext('2d');
                             new Chart(lineChartCtx, {
@@ -262,28 +270,28 @@
 
 
                         document.addEventListener("DOMContentLoaded", function() {
-                            // Obtém os dados dos setores passados do controlador
+
                             const sectorLabels = [
                                 @foreach ($sectors as $sector)
-                                    "{{ $sector->setor }}", // Nome do setor
+                                    "{{ $sector->setor }}",
                                 @endforeach
                             ];
 
                             const sectorValues = [
                                 @foreach ($sectors as $sector)
-                                    {{ $sector->total_users }}, // Número de usuários no setor
+                                    {{ $sector->total_users }},
                                 @endforeach
                             ];
 
-                            // Criação do gráfico de Doughnut
+
                             const sectorPieCtx = document.getElementById('combinedPieChart').getContext('2d');
 
                             new Chart(sectorPieCtx, {
-                                type: 'doughnut', // Tipo de gráfico
+                                type: 'doughnut',
                                 data: {
-                                    labels: sectorLabels, // Nomes dos setores
+                                    labels: sectorLabels,
                                     datasets: [{
-                                        data: sectorValues, // Quantidade de usuários por setor
+                                        data: sectorValues,
                                         backgroundColor: [
                                             'rgba(75, 192, 192, 0.5)',
                                             'rgba(255, 99, 132, 0.5)',
@@ -323,7 +331,6 @@
                             });
                         });
 
-                        //PIE CHART FUNCIONÁRIOS
 
                         const combinedPieCtx = document.getElementById('combinedPieChartaa').getContext('2d');
                         new Chart(combinedPieCtx, {
@@ -371,6 +378,5 @@
                             }
                         });
 
-                        // OUTRO CHART
                     </script>
                 @endsection

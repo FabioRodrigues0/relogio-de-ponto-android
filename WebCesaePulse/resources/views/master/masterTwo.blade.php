@@ -16,10 +16,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Boxicons -->
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/d5fba335cd.js" crossorigin="anonymous"></script>
-    <!-- Custom CSS (optional, remove if not needed) -->
     <link rel="stylesheet" href="{{ asset('CSS/styleMaster.css') }}">
     <script src="{{ asset('JS/app.js') }}" defer></script>
     <link rel="stylesheet"
@@ -66,11 +64,11 @@
         </nav>
     </div>
 
-    <!--Container Main start-->
+
     <main>
         @yield('content')
     </main>
-    <!--Container Main end-->
+
 
     <footer>
         <div class="text-center m-3 text-muted">

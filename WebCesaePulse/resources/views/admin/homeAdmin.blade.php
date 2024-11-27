@@ -51,21 +51,6 @@
 
                         <form method="get" action="{{ route('admin.get') }}">
                             <div class="fs-5 mt-2 text-center form-control " style="display: flex; justify-content: center; align-items: center;">
-                                {{-- {{ $actualDayMonthYear }} --}}
-
-                                {{-- <button class="btn btn-outline-secondary dropdown-toggle p-0" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false"
-                                    style="border: none; background: none; width: 30px; text-align: center;">
-                                    <i class="bi bi-chevron-down"></i>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    @foreach ($registers as $day)
-                                        <li>
-                                            <button class="dropdown-item" type="submit" name="date"
-                                                value="{{ $day->day }}">{{ $day->day }}</button>
-                                        </li>
-                                    @endforeach
-                                </ul> --}}
                                 <select name="date" class="form-select " aria-label="Default select example"
                                     onchange="this.form.submit()" style="width: 140px; text-align: center;">
                                     @foreach ($registers as $day)
@@ -77,52 +62,7 @@
                             </div>
                         </form>
                         <div class="container mb-2"> <label> </label>
-
-                            {{-- <form method="GET" action="{{ route('admin.search') }}">
-                                @csrf --}}
-
                             <div class="row gy-2 gx-3 align-items-center">
-                                {{-- <div class="col-auto">
-                                        <label class="visually-hidden" for="autoSizingInput">Filtro</label> --}}
-
-                                {{-- <input type="text" name="searchName"
-                                            class="form-control" placeholder="Procurar..." aria-label="Pesquisar"
-                                            aria-describedby="basic-addon2">
-                                    </div>
-
-                                    <div class="col-auto">
-                                        <label class="visually-hidden" for="autoSizingSelect">Departamento</label>
-                                        <select class="form-select" id="autoSizingSelect" name="attendance_mode">
-                                            <option selected>Regime</option>
-                                            <option value="1"
-                                                {{ request()->query('attendance_mode') == '1' ? 'selected' : '' }}>Remoto
-                                            </option>
-                                            <option value="2"
-                                                {{ request()->query('attendance_mode') == '2' ? 'selected' : '' }}>
-                                                Presencial</option>
-                                        </select> --}}
-                                {{-- </div>
-                                    <div class="col-auto">
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fa fa-search" aria-hidden="true"></i></button>
-                                    </div> --}}
-                                {{-- </form> --}}
-
-                                {{-- <div class="col-auto ms-auto">
-                                <form action="{{ route('admin.search') }}" method="GET">
-                                    @csrf --}}
-                                {{-- <div class="card-text fs-5 mb-1 text-muted text-center">
-                                        Período temporal
-                                    </div>
-                                    <label class="input-group date" id="datepicker">
-                                        <label for="data"> </label>
-                                        <input type="date" class="form-control" id="date" name="date">
-                                        <label for="data"> </label>
-                                        <input type="date" class="form-control" id="dateTwo" name="dateTwo">
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fa fa-search" aria-hidden="true"></i></button>
-                                    </label> --}}
-                                {{-- </div> --}}
                             </div>
                         </div>
                         </form>
@@ -160,7 +100,7 @@
                                                     Sem registos
                                                 @endif
                                             </td>
-                                            {{-- <td class="align-middle"><button class="btn btn-outline-dark">Ver</button> --}}
+                                       
 
                                             @if ($user->exit_time)
                                                 <td class="align-middle">

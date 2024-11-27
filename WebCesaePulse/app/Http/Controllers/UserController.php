@@ -267,20 +267,6 @@ class UserController extends Controller
         return redirect()->back()->with('message', 'Solicitação de alteração de palavra-passe enviada com sucesso!');
     }
 
-    // public function checkInRequest()
-    // {
-    //     DB::table('presence_record')->insert([
-    //         'date' => now()->format('Y-m-d'),
-    //         'entry_time' => now()->format('H:i:s'),
-    //         'attendance_mode_id' => 1,
-    //         'user_id' => auth::user()->id,
-    //         'created_at' => now(),
-    //     ]);
-
-    //     return redirect()->route('home.page')->with('message', 'Olá! Entrada realizada com sucesso!');
-    // }
-
-    //TESTE 25/11/2024
 
     public function checkInRequest(Request $request)
     {
@@ -298,7 +284,7 @@ class UserController extends Controller
 
         return redirect()->route('home.page')->with('message', 'Olá! Entrada realizada com sucesso!');
     }
-    // FIM TESTE 25/11/2024
+
 
     public function checkOutRequest()
     {

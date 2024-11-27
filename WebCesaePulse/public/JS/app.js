@@ -1,5 +1,3 @@
-// import $ from 'jquery';
-// import 'bootstrap-datepicker';
 console.log("DEU!")
 
 
@@ -72,10 +70,10 @@ function setCurrentDate() {
     dateElement.textContent = `${day}/${month}/${year}`;
 }
 
-// Chamando a função ao carregar a página
+
 document.addEventListener('DOMContentLoaded', setCurrentDate);
 
-//ADICIONADO
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const alert = document.getElementById('success-alert');
@@ -103,16 +101,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
     bodypd = document.getElementById(bodyId),
     headerpd = document.getElementById(headerId)
 
-    // Validate that all variables exist
+
     if(toggle && nav && bodypd && headerpd){
     toggle.addEventListener('click', ()=>{
-    // show navbar
+
     nav.classList.toggle('show')
-    // change icon
+
     toggle.classList.toggle('bx-x')
-    // add padding to body
+
     bodypd.classList.toggle('body-pd')
-    // add padding to header
+
     headerpd.classList.toggle('body-pd')
     })
     }
@@ -120,7 +118,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     showNavbar('header-toggle','nav-bar','body-pd','header')
 
-    /*===== LINK ACTIVE =====*/
     const linkColor = document.querySelectorAll('.nav_link')
 
     function colorLink(){
@@ -131,21 +128,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
     linkColor.forEach(l=> l.addEventListener('click', colorLink))
 
-     // Your code to run since DOM is loaded and ready
+
     });
-    // Função para mostrar/ocultar o segundo calendário
+
     function toggleSegundoCalendario() {
         var checkBox = document.getElementById("inlineCheckbox1");
         var segundoCalendarioContainer = document.getElementById("segundoCalendarioContainer");
 
         if (checkBox.checked) {
-            segundoCalendarioContainer.style.display = "block"; // Mostra o segundo calendário
+            segundoCalendarioContainer.style.display = "block";
         } else {
-            segundoCalendarioContainer.style.display = "none";  // Esconde o segundo calendário
+            segundoCalendarioContainer.style.display = "none";
         }
     }
 
-    // Garante que o segundo calendário inicie com o estado correto ao carregar a página
+
     document.addEventListener("DOMContentLoaded", function() {
         toggleSegundoCalendario();
     });

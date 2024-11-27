@@ -243,12 +243,12 @@ class StatisticController extends Controller
 
     public function getSector()
     {
-        // Recupera o número de usuários por setor
+       
         $sectors = DB::table('users')
-                    ->select('setor', DB::raw('count(*) as total_users')) // Seleciona o setor e conta os usuários
-                    ->groupBy('setor') // Agrupa os resultados por setor
-                    ->get(); // Obtém os resultados
+                    ->select('setor', DB::raw('count(*) as total_users'))
+                    ->groupBy('setor')
+                    ->get();
 
-        return $sectors; // Retorna os dados para a view
+        return $sectors;
     }
 }

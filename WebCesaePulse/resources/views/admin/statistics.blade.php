@@ -6,7 +6,6 @@
 
     <div class="container">
         <div class="row">
-            <!-- Bar Charts -->
             @foreach ($userData as $userId => $user)
                 <div class="col-md-6 mb-3">
                     <div class="card">
@@ -23,7 +22,6 @@
     <div class="container mt-5">
         <h2 class="text-center">Pie Charts</h2>
         <div class="row">
-            <!-- Pie Charts -->
             @foreach ($userData as $userId => $user)
                 <div class="col-md-6 mb-3">
                     <div class="card">
@@ -42,12 +40,10 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             @foreach ($userData as $userId => $user)
-                // Prepare data for the bar chart
                 const labels{{ $userId }} = {!! json_encode($user['attendance']->pluck('month')) !!};
                 const data{{ $userId }} = {!! json_encode($user['attendance']->pluck('total_hours')) !!};
                 const daysData{{ $userId }} = {!! json_encode($user['attendance']->pluck('attendance_days')) !!};
 
-                // Create the bar chart
                 const ctx{{ $userId }} = document.getElementById('attendanceChart-{{ $userId }}')
                     .getContext('2d');
                 new Chart(ctx{{ $userId }}, {
@@ -80,13 +76,11 @@
                     }
                 });
 
-                // pie chart
                 const pieData{{ $userId }} = [
                     {!! json_encode($user['attendance']->sum('attendance_days')) !!},
                     {!! json_encode((30 * $user['attendance']->count()) - $user['attendance']->sum('attendance_days')) !!}
                 ];
 
-                // Create pie chart
                 const pieCtx{{ $userId }} = document.getElementById('attendancePieChart-{{ $userId }}')
                     .getContext('2d');
                 new Chart(pieCtx{{ $userId }}, {
