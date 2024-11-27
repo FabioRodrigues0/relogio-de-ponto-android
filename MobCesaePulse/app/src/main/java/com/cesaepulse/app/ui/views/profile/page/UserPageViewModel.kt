@@ -1,4 +1,4 @@
-package com.cesaepulse.app.ui.views.user.page
+package com.cesaepulse.app.ui.views.profile.page
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -47,7 +47,7 @@ class UsersPageViewModel @Inject constructor(
         }
     }
 
-    fun calculateHoursDay(): String {
+    private fun calculateHoursDay(): String {
         if (profile.value != null && profile.value?.presences != emptyList<PresenceRecord>()) {
             var difference: Long = 0;
             val filterPresences = profile.value?.presences?.filter{ presences ->
@@ -71,7 +71,7 @@ class UsersPageViewModel @Inject constructor(
         }
         return "0"
     }
-    fun calculateHoursWeek(): String {
+    private fun calculateHoursWeek(): String {
         if (profile.value != null && profile.value?.presences != emptyList<PresenceRecord>()) {
             val formatWeek: SimpleDateFormat = SimpleDateFormat("WW");
             var difference: Long = 0;
@@ -95,7 +95,7 @@ class UsersPageViewModel @Inject constructor(
         }
         return "0"
     }
-    fun calculateHoursMonth(): String {
+    private fun calculateHoursMonth(): String {
         if (profile.value != null && profile.value?.presences != emptyList<PresenceRecord>()) {
             val formatMonth: SimpleDateFormat = SimpleDateFormat("MM");
             var difference: Long = 0;
@@ -120,7 +120,7 @@ class UsersPageViewModel @Inject constructor(
         return "0"
     }
 
-    fun calculateLastPresence(): String {
+    private fun calculateLastPresence(): String {
         if (profile.value != null && profile.value?.presences != emptyList<PresenceRecord>()) {
             val sortedPresences = profile.value?.presences?.sortedByDescending { it.date }
             return sortedPresences?.first()?.date.toString()

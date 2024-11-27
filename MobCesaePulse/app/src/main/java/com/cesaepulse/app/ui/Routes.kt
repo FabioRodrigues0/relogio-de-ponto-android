@@ -15,10 +15,16 @@ data class UserRoute(val id: Int)
 //data object UserHoursRoute
 
 @Serializable
-data object HomeRoute
+data class HomeRoute(val isLogged: Boolean, val id: Int)
 
 @Serializable
 data object CalendarRoute
+
+@Serializable
+data object DetailsHoursRoute
+
+@Serializable
+data object ProfileActivityRoute
 
 //@Serializable
 //data object CalendarWeekRoute

@@ -9,5 +9,4 @@ interface IUserRepository {
 	suspend fun postCheckIn(id: Int, type: Int): Boolean
 
 	suspend fun postCheckOut(id: Int): Boolean
-
 }

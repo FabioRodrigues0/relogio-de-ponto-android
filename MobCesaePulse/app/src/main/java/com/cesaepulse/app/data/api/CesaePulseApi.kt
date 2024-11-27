@@ -30,7 +30,7 @@ interface CesaePulseApi {
 	 *
 	 *  @param id: Int
 	 */
-	@GET("check-in/{id}/{type}")
+	@GET("check-in/{id}/{type}/")
 	suspend fun postCheckIn(@Path("id") id: Int, @Path("type") type: Int): ApiResponse<Void>
 
 
@@ -51,7 +51,7 @@ interface CesaePulseApi {
 	 *  @param month: Int
 	 *
 	 */
-	@GET("schedules/{id}/{month}")
+	@GET("schedule/{id}/{month}")
 	suspend fun getSchedulesByUserId(@Path("id") id: Int, @Path("month") month: Int): ApiResponse<ListScheduleResponse>
 
 

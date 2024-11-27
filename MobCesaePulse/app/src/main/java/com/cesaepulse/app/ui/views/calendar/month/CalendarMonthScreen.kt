@@ -36,8 +36,8 @@ import java.time.YearMonth
 fun CalendarMonthScreen(
 	viewModel: CalendarViewModel = hiltViewModel(),
 ) {
-	var selectedText = viewModel.monthSelect.collectAsStateWithLifecycle()
-	var monthSelectIndex = viewModel.monthSelectIndex.collectAsStateWithLifecycle().value
+	val selectedText by viewModel.monthSelect.collectAsStateWithLifecycle()
+	val monthSelectIndex by viewModel.monthSelectIndex.collectAsStateWithLifecycle()
 	val schedulers by viewModel.schedules.collectAsStateWithLifecycle()
 	val currentYear = viewModel.currentYear
 	val format: SimpleDateFormat = SimpleDateFormat("dd");
@@ -49,7 +49,7 @@ fun CalendarMonthScreen(
 
 	fun checkWorkDays(day: Int): Schedule? {
 		val date = format.parse("${currentYear}-${monthSelectIndex}-${day}")
-		val scheduleDay = schedulers.filter { it ->  it?.created_at?.split(" ")[0] == date?.toString() }
+		val scheduleDay = schedulers.filter { it ->  it?.created_at?.split(" ")?.get(0) == date?.toString() }
 		if (scheduleDay.isNotEmpty()) {
 			return scheduleDay[0]
 		}
@@ -114,7 +114,7 @@ fun CalendarMonthScreen(
 							Column {
 								Text(text = (day + 1).toString())
 								val schedule = checkWorkDays(day + 1)
-								if (schedule != null) {
+								if (schedulers.isNotEmpty() && schedule != null) {
 									HorizontalDivider(
 										thickness = 4.dp,
 										color = if(schedule.attendance_mode_id == 1) colorOnline else colorOffline,

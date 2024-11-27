@@ -30,4 +30,5 @@ class ProfileRepository @Inject constructor(
 
 		return profile
 	}
+
 }

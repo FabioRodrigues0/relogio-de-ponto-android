@@ -27,6 +27,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.cesaepulse.app.data.api.CesaePulseApi
 import com.cesaepulse.app.ui.CalendarRoute
+import com.cesaepulse.app.ui.ProfileActivityRoute
 import com.cesaepulse.app.ui.components.InfoHours.InfoHour
 import com.cesaepulse.app.ui.components.NavigationButton.NavigationButton
 import com.cesaepulse.app.ui.theme.Shapes

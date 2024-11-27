@@ -25,14 +25,32 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun HomePage(
 	viewModel: HomePageViewModel = hiltViewModel(),
+	isLogged: Boolean,
+	id: Int
 ){
-
 	LaunchedEffect(key1 = true) {
-
+		viewModel.fetchUser(id)
 	}
 
-	val user by viewModel.user.collectAsStateWithLifecycle()
+	val list = listOf(
+		Item(
+			title = "Entrada Online",
+			color = MaterialTheme.colorScheme.primary,
+			onCheckIn = { viewModel.onCheckIn(id = id, 1) },
+			onCheckOut =  { viewModel.onCheckOut(id = id) } ),
+		Item(
+			title = "Entrada Presencial",
+			color = MaterialTheme.colorScheme.secondary,
+			onCheckIn = { viewModel.onCheckIn(id = id, 2) },
+			onCheckOut =  { viewModel.onCheckOut(id = id) }),
+		Item(
+			title = "Entrada Externa",
+			color = MaterialTheme.colorScheme.tertiary,
+			onCheckIn = { viewModel.onCheckIn(id = id, 3) },
+			onCheckOut =  { viewModel.onCheckOut(id = id) }),
+	)
 
+	val profile by viewModel.profile.collectAsStateWithLifecycle()
 
 	Card(
 		modifier = Modifier
@@ -46,7 +64,7 @@ fun HomePage(
 			Text(text = "Olá,",
 				fontWeight = FontWeight.Bold,
 				fontSize = MaterialTheme.typography.displaySmall.fontSize)
-			Text(text = "User 1",
+			Text(text = profile?.name ?: "User",
 				fontWeight = FontWeight.Bold,
 				fontSize = MaterialTheme.typography.displaySmall.fontSize)
 
@@ -57,14 +75,14 @@ fun HomePage(
 				modifier = Modifier
 					.padding(top = 16.dp)
 			) {
-				items(4) {
+				items(list.size) {
 					Box(
 						contentAlignment = Alignment.Center,
 						modifier = Modifier
-							.background(MaterialTheme.colorScheme.errorContainer, shape = MaterialTheme.shapes.medium)
-							.size(width = 100.dp, height = 285.dp)
+							.background(list[it].color, shape = MaterialTheme.shapes.medium)
+							.size(width = 100.dp, height = 275.dp)
 					){
-						Text(text = "teste")
+						Text(text = list[it].title)
 					}
 				}
 			}
