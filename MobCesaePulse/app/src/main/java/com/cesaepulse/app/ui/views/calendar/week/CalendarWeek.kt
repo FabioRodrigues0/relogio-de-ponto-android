@@ -34,7 +34,6 @@ import androidx.navigation.NavController
 import com.cesaepulse.app.ui.views.Calendar.dialog.CalendarDayDetails
 import com.cesaepulse.app.ui.views.calendar.CalendarViewModel
 import com.cesaepulse.app.ui.views.calendar.models.WorkType
-import java.text.SimpleDateFormat
 
 @Composable
 fun CalendarWeek(
@@ -59,7 +58,7 @@ fun CalendarWeek(
 			.padding(16.dp), // Padding geral ao redor dos cartões
 		verticalArrangement = Arrangement.spacedBy(6.dp) // Espaçamento entre os cartões
 	) {
-		items(cardTexts.size) { i ->
+		items(cardTexts.value.size) { i ->
 			Card(
 				modifier = Modifier
 					.fillMaxWidth()
@@ -102,7 +101,6 @@ fun CalendarWeek(
 						Column(modifier = Modifier.size(50.dp)) {
 							Text(
 								text = "Manha",
-								color = if(cardTexts[i]?.attendance_mode_id == 1) Color.Green else Color.Blue,
 								modifier = Modifier
 									.background(if (cardTexts[i]?.attendance_mode_id == 1) Color.Green else Color.Blue)
 									.weight(1f) // Faz o texto ocupar o espaço restante
@@ -110,7 +108,6 @@ fun CalendarWeek(
 							if(cardTexts[i]?.afternoon_exit_time != "17:00:00"){
 								Text(
 									text = "Tarde",
-									color = if(cardTexts[i]?.attendance_mode_id == 1) Color.Green else Color.Blue,
 									modifier = Modifier
 										.background(if (cardTexts[i]?.attendance_mode_id == 1) Color.Green else Color.Blue)
 										.weight(1f) // Faz o texto ocupar o espaço restante
