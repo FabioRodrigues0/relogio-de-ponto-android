@@ -51,7 +51,7 @@ class UsersPageViewModel @Inject constructor(
         if (profile.value != null && profile.value?.presences != emptyList<PresenceRecord>()) {
             var difference: Long = 0;
             val filterPresences = profile.value?.presences?.filter{ presences ->
-                presences.date == now().toString().split('T')[0]
+	            presences.date == now().toString().split('T')[0]
             }
 
             filterPresences?.map { presence ->

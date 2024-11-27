@@ -1,6 +1,9 @@
 package com.cesaepulse.app.ui.theme
 import androidx.compose.ui.graphics.Color
 
+val colorOnline = Color(0xFF4CAF50)
+val colorOffline = Color(0xFF2C7CC1)
+
 val primaryLight = Color(0xFF230F46)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFEBDDFF)

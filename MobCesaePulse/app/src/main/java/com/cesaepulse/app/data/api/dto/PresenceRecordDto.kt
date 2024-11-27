@@ -12,9 +12,9 @@ import java.sql.Time
  *  @param attenance_mode: AttendanceModeDto
  */
 data class PresenceRecordDto(
-	val date: Time,
-	val entry_time: Time,
-	val exit_time: Time?,
+	val date: String,
+	val entry_time: String,
+	val exit_time: String?,
 	val attendance_mode: AttendanceModeDto,
 ) {
 	/**

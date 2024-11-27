@@ -19,7 +19,7 @@ class ScheduleRepository @Inject constructor(
 		api.getSchedulesByUserId(id, month)
 			.onSuccess {
 				Log.d("getSchedulesById", "success")
-				schedules = data.toModel()
+				schedules = data.data
 			}
 			.onError {
 				Log.e(TAG, "Fail ou getting all schedules from user")

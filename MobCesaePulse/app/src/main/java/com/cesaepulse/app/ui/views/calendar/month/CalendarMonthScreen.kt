@@ -12,40 +12,57 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.cesaepulse.app.domain.model.Schedule
+import com.cesaepulse.app.ui.theme.colorOffline
+import com.cesaepulse.app.ui.theme.colorOnline
 import com.cesaepulse.app.ui.views.calendar.CalendarViewModel
 import com.cesaepulse.app.ui.views.calendar.dropdown.CalendarSelect
+import java.text.SimpleDateFormat
 import java.time.YearMonth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalendarMonthScreen(
-	 viewModel: CalendarViewModel = hiltViewModel(),
+	viewModel: CalendarViewModel = hiltViewModel(),
 ) {
 	var selectedText = viewModel.monthSelect.collectAsStateWithLifecycle()
 	var monthSelectIndex = viewModel.monthSelectIndex.collectAsStateWithLifecycle().value
+	val schedulers by viewModel.schedules.collectAsStateWithLifecycle()
 	val currentYear = viewModel.currentYear
+	val format: SimpleDateFormat = SimpleDateFormat("dd");
 
 	val currentMonth = YearMonth.of(currentYear, monthSelectIndex)
 	val daysInMonth = currentMonth.lengthOfMonth()
 	val firstDayOfMonth = currentMonth.atDay(1)
 	val dayOfWeek = firstDayOfMonth.dayOfWeek.value % 7
 
+	fun checkWorkDays(day: Int): Schedule? {
+		val date = format.parse("${currentYear}-${monthSelectIndex}-${day}")
+		val scheduleDay = schedulers.filter { it ->  it?.created_at?.split(" ")[0] == date?.toString() }
+		if (scheduleDay.isNotEmpty()) {
+			return scheduleDay[0]
+		}
+		return null
+	}
+
 	Column(
-		modifier = Modifier.fillMaxSize().padding(top = 120.dp),
+		modifier = Modifier
+			.fillMaxSize()
+			.padding(top = 120.dp),
 		verticalArrangement = Arrangement.Top
 	) {
-
 		//calendario mensal
-
 		Column(
 			modifier = Modifier
 				.fillMaxSize()
@@ -94,7 +111,16 @@ fun CalendarMonthScreen(
 								.padding(4.dp), // Espaçamento entre as células
 							contentAlignment = Alignment.Center
 						) {
-							Text(text = (day + 1).toString())
+							Column {
+								Text(text = (day + 1).toString())
+								val schedule = checkWorkDays(day + 1)
+								if (schedule != null) {
+									HorizontalDivider(
+										thickness = 4.dp,
+										color = if(schedule.attendance_mode_id == 1) colorOnline else colorOffline,
+									)
+								}
+							}
 						}
 					}
 				}

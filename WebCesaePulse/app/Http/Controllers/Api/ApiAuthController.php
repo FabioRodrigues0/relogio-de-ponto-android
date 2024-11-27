@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 // Importando o modelo Session
 
@@ -17,27 +19,23 @@ class ApiAuthController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         // Validação dos dados de login
-        $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
         // Tentando autenticar o usuário
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt($credentials)) {
             // Usuário autenticado com sucesso
-            $user = Auth::user();
+            $request->session()->regenerate();
 
-            // Criar uma nova sessão na tabela 'sessions' sem os campos de timestamp
-            $session = Session::create([
-                'user_id' => $user->id,
-                'ip_address' => $request->ip(),
-                'user_agent' => $request->header('User-Agent'),
-                'payload' => json_encode(['role' => $user->users_type_id]),
-                'last_activity' => now()->timestamp,
-            ]);
+            $user =Auth::id();
+            $session = DB::table('sessions')->where('user_id', Auth::id())
+                ->orderBy('last_activity', 'desc')
+                ->first();
 
             // Retornar a resposta com o usuário e dados da sessão
             return response()->json([

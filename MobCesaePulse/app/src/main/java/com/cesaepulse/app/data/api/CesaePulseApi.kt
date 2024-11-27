@@ -25,6 +25,23 @@ interface CesaePulseApi {
 	@GET("profile/{id}/")
 	suspend fun getProfileById(@Path("id") id: Int): ApiResponse<ProfileResponse>
 
+	/**
+	 *  Call Api to check-in Entrance
+	 *
+	 *  @param id: Int
+	 */
+	@GET("check-in/{id}/{type}")
+	suspend fun postCheckIn(@Path("id") id: Int, @Path("type") type: Int): ApiResponse<Void>
+
+
+	/**
+	 *  Call Api to check-out Entrance
+	 *
+	 *  @param id: Int
+	 */
+	@GET("check-out/{id}")
+	suspend fun postCheckOut(@Path("id") id: Int): ApiResponse<Void>
+
 	// ------------------ SCHEDULE -----------------------
 
 	/**

@@ -13,11 +13,11 @@ class ScheduleSeeder extends Seeder
     {
         $users = User::all();
 
-        $startYear =Carbon::now()->startOfYear();
+
         $endYear = Carbon::now()->endOfYear();
 
         foreach ($users as $user) {
-            $date = $startYear;
+            $date =Carbon::now()->startOfYear();
             for ($j = 1; $j <= 365; $j++) {
                 $date = $date->addDays(1);
                 if($date->isWeekday()){
@@ -28,7 +28,7 @@ class ScheduleSeeder extends Seeder
                             'afternoon_entry_time' => '14:00:00',
                             'afternoon_exit_time' => '18:00:00',
                             'user_id' => $user->id,
-                            'attendance_mode_id' => 1,
+                            'attendance_mode_id' => rand(1, 2),
                             'created_at' => $date,
                             'updated_at' => $date
                         ],
