@@ -16,7 +16,7 @@ import com.cesaepulse.app.ui.UserRoute
 import com.cesaepulse.app.ui.views.calendar.Calendar
 import com.cesaepulse.app.ui.views.home.HomePage
 import com.cesaepulse.app.ui.views.login.LoginPage
-import com.cesaepulse.app.ui.views.user.list.UsersList
+import com.cesaepulse.app.ui.views.admin.list.UsersList
 import com.cesaepulse.app.ui.views.user.page.UsersPage
 
 @Composable

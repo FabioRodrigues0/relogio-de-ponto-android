@@ -1,4 +1,4 @@
-package com.cesaepulse.app.ui.views.user.list.composable
+package com.cesaepulse.app.ui.views.admin.list.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

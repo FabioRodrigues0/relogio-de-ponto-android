@@ -1,4 +1,4 @@
-package com.cesaepulse.app.ui.views.user.list
+package com.cesaepulse.app.ui.views.admin.list
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.cesaepulse.app.ui.views.user.list.composable.UserCard
+import com.cesaepulse.app.ui.views.admin.list.composable.UserCard
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable

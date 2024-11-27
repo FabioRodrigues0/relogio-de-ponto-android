@@ -1,4 +1,4 @@
-package com.cesaepulse.app.ui.views.user.list
+package com.cesaepulse.app.ui.views.admin.list
 
 import androidx.compose.runtime.Composable
 
