@@ -101,6 +101,7 @@ fun CalendarWeek(
 						Column(modifier = Modifier.size(50.dp)) {
 							Text(
 								text = "Manha",
+								color = if(cardTexts.value[i].workType == WorkType.ONLINE) Color.Green else Color.Blue,
 								modifier = Modifier
 									.background(if (cardTexts[i]?.attendance_mode_id == 1) Color.Green else Color.Blue)
 									.weight(1f) // Faz o texto ocupar o espaço restante
@@ -108,6 +109,7 @@ fun CalendarWeek(
 							if(cardTexts[i]?.afternoon_exit_time != "17:00:00"){
 								Text(
 									text = "Tarde",
+									color = if(cardTexts.value[i].workType == WorkType.ONLINE) Color.Green else Color.Blue,
 									modifier = Modifier
 										.background(if (cardTexts[i]?.attendance_mode_id == 1) Color.Green else Color.Blue)
 										.weight(1f) // Faz o texto ocupar o espaço restante
