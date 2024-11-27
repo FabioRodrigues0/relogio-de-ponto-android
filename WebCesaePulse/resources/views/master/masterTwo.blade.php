@@ -24,8 +24,6 @@
     <script src="{{ asset('JS/app.js') }}" defer></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
-
 </head>
 
 
@@ -33,11 +31,8 @@
 
 <body id="body-pd">
     <header class="header" id="header">
-
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-
     </header>
-
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div> <a href="#" class="nav_logo"> <i class="fa-solid fa-user-clock nav_logo-icon"></i> <span
@@ -59,8 +54,6 @@
                         class="nav_link {{ request()->routeIs('register.get') ? 'active' : '' }}"> <i
                             class='bx bx-message-square-detail nav_icon'></i>
                         <span class="nav_name">Registar Utilizador</span> </a>
-
-
                 </div>
             </div>
 
@@ -69,11 +62,8 @@
                 <li> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'
                             onclick="document.getElementById('logout-form').submit()"></i> <span class="nav_name"
                             onclick="document.getElementById('logout-form').submit()">Logout</span> </a>
-
             </form>
-
         </nav>
-
     </div>
 
     <!--Container Main start-->

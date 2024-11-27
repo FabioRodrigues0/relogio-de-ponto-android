@@ -30,7 +30,7 @@
 
                             <div class="mb-3">
 
-                      
+                                <i class="fas fa-envelope"></i>
                                 <label class="mb-2 text-muted ms-1" for="email">Email</label>
                                 <input id="email" type="email" class="form-control" name="email" value=""
                                     autofocus="" fdprocessedid="8f7bri" required>
@@ -69,7 +69,13 @@
                                     name ="users_type_id">
                                     <option selected>-</option>
                                     @foreach ($sendUserType as $userType)
-                                        <option value="{{ $userType->id }}">{{ $userType->type }}</option>
+                                        <option value="{{ $userType->id }}">
+                                            @if($userType->type == "Admin")
+                                            Administrador
+                                            @else
+                                            Funcionário
+                                            @endif
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>

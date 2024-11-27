@@ -107,6 +107,6 @@
             @endforeach
         });
 
-        
+
     </script>
 @endsection

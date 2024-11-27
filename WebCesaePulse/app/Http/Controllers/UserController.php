@@ -27,8 +27,9 @@ class UserController extends Controller
 
             $countUsersNumber = $this->countUsers();
             $countPasswordsNumber = $this->countPasswords();
+            $lastUserUpdate = $this->lastUpdate();
 
-            return view('pages.users', compact('showUsers', 'countUsersNumber', 'countPasswordsNumber'));
+            return view('pages.users', compact('showUsers', 'countUsersNumber', 'countPasswordsNumber', 'lastUserUpdate'));
         } else {
             return redirect()->route('login');
         }
@@ -43,13 +44,13 @@ class UserController extends Controller
         $userAlerts = $this->getUserAlerts();
         $loggedToday = $this->checkIfLoggedToday();
         $loggedOutToday = $this->checkIfLoggedOutToday();
+        $lastPwRequest = $this->lastPasswordRequest();
 
         if (Auth::user()->users_type_id == 1) {
-            return view('pages.adminHome', compact('userTime', 'allUserData', 'performance', 'userAlerts', 'loggedToday', 'loggedOutToday'));
+            return view('pages.adminHome', compact('userTime', 'allUserData', 'performance', 'userAlerts', 'loggedToday', 'loggedOutToday', 'lastPwRequest'));
+        } else {
+            return view('pages.home', compact('userTime', 'allUserData', 'performance', 'userAlerts', 'loggedToday', 'loggedOutToday', 'lastPwRequest'));
         }
-        else{
-        return view('pages.home', compact('userTime', 'allUserData', 'performance', 'userAlerts', 'loggedToday', 'loggedOutToday'));
-    }
     }
 
     public function viewContact($id)
@@ -82,8 +83,9 @@ class UserController extends Controller
     public function deleteUser($id)
     {
         DB::table('presence_record')->where('user_id', $id)->delete();
+        DB::table('password_request')->where('users_id', $id)->delete();
         User::where('id', $id)->delete();
-        return back();
+        return redirect()->route('users.home')->with('eliminated', 'Contacto eliminado com sucesso.');
     }
 
     public function showUserProfile($id)
@@ -211,10 +213,6 @@ class UserController extends Controller
         return ($checkAllFields);
     }
 
-
-
-
-
     public function userPerformance()
     {
         $monthStart = Carbon::now()->startOfMonth();
@@ -269,19 +267,38 @@ class UserController extends Controller
         return redirect()->back()->with('message', 'Solicitação de alteração de palavra-passe enviada com sucesso!');
     }
 
-    public function checkInRequest()
+    // public function checkInRequest()
+    // {
+    //     DB::table('presence_record')->insert([
+    //         'date' => now()->format('Y-m-d'),
+    //         'entry_time' => now()->format('H:i:s'),
+    //         'attendance_mode_id' => 1,
+    //         'user_id' => auth::user()->id,
+    //         'created_at' => now(),
+    //     ]);
+
+    //     return redirect()->route('home.page')->with('message', 'Olá! Entrada realizada com sucesso!');
+    // }
+
+    //TESTE 25/11/2024
+
+    public function checkInRequest(Request $request)
     {
+        $validation = $request->validate([
+            'users_type_id' => 'required|integer'
+        ]);
+
         DB::table('presence_record')->insert([
             'date' => now()->format('Y-m-d'),
             'entry_time' => now()->format('H:i:s'),
-            'attendance_mode_id' => 1,
+            'attendance_mode_id' => $request->users_type_id,
             'user_id' => auth::user()->id,
             'created_at' => now(),
         ]);
 
         return redirect()->route('home.page')->with('message', 'Olá! Entrada realizada com sucesso!');
     }
-
+    // FIM TESTE 25/11/2024
 
     public function checkOutRequest()
     {
@@ -323,5 +340,29 @@ class UserController extends Controller
             ->exists();
 
         return $loggedOutToday;
+    }
+
+    public function lastUpdate()
+    {
+        $lastUserUpdate = DB::table('users')
+            ->select('updated_at')
+            ->orderBy('updated_at', 'desc')
+            ->first();
+
+        return $lastUserUpdate;
+    }
+
+    public function lastPasswordRequest()
+    {
+        $id = Auth::user()->id;
+
+        $lastRequest = DB::Table('password_request')
+            ->select('status', 'created_at', 'updated_at')
+            ->where('users_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+
+        return $lastRequest;
     }
 }

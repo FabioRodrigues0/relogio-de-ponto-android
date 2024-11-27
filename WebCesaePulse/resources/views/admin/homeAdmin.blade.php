@@ -184,7 +184,11 @@
                             <div class="card text-center shadow">
                                 <div class="card-body">
                                     <h5 class="card-title">Total de Horas</h5>
+                                    @if($totalHours > 0)
+                                    <p class="card-text fs-4" style="color: #1E0C3C)">{{ $totalHours }}h</p>
+                                    @else
                                     <p class="card-text fs-4">{{ $totalHours }}h</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -192,7 +196,11 @@
                             <div class="card text-center shadow">
                                 <div class="card-body">
                                     <h5 class="card-title">Utilizadores Ativos</h5>
+                                    @if($cont > 0)
+                                    <p class="card-text fs-4" style="color: rgb(0, 223, 0)">{{ $cont }}</p>
+                                    @else
                                     <p class="card-text fs-4">{{ $cont }}</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -319,8 +327,13 @@
                         <div class="d-flex justify-content-center">
                             {{ $alerts->links('') }}
                         </div>
+
                     </div>
                 </div>
+
+
+
+
                 {{-- <div class="row justify-content-center">
             <div class="col-sm-3">
                 <div class="card shadow" style="border-color: #5b1bd2;">

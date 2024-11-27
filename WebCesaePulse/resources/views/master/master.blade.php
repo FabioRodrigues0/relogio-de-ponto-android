@@ -64,7 +64,7 @@
                 src="{{ Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('images/defaultUser.png') }}" alt="" style="border-radius: 50%"></td>
               </a>
               <ul class="dropdown-menu text-small" style="">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
+                {{-- <li><a class="dropdown-item" href="#">New project...</a></li> --}}
                 <li><a class="dropdown-item" href="{{ route('user.profile', Auth::user()->id) }}">Perfil</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <form method="POST" action="{{ route('logout') }}" id="logout-form">

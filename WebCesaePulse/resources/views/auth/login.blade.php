@@ -37,9 +37,7 @@
                             <div class="mb-3">
                                 <div class="mb-2 w-100">
                                     <label class="text-muted" for="password">Password</label>
-                                    <a href="forgot.html" class="float-end">
-                                        Esqueceste-te da password?
-                                    </a>
+                                
                                 </div>
                                 <input id="password" type="password"
                                     class="form-control" name="password"

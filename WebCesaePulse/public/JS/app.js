@@ -86,6 +86,15 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const alert = document.getElementById('danger-alert');
+    if (alert) {
+        setTimeout(function() {
+            alert.style.display = 'none';
+        }, 5000);
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function(event) {
 
     const showNavbar = (toggleId, navId, bodyId, headerId) =>{

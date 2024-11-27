@@ -93,13 +93,13 @@ class StatisticController extends Controller
         $getTotalUsersData = $this->getTotalHours();
         $currentMonth = $this->getCurrentMonth();
         $usersAbsence = $this->usersAbsence();
-
+        $sectors = $this->getSector();
 
         $totalHours = $getTotalUsersData['totalHours'];
         $totalPresences = $getTotalUsersData['presences'];
 
 
-        return view('admin.allStatistics', compact('userData', 'chartLabels', 'chartValues', 'getTotalUsers', 'totalHours', 'totalPresences', 'currentMonth', 'usersAbsence'));
+        return view('admin.allStatistics', compact('userData', 'chartLabels', 'chartValues', 'getTotalUsers', 'totalHours', 'totalPresences', 'currentMonth', 'usersAbsence', 'sectors'));
         }
         else{
             return redirect()->route('login');
@@ -239,5 +239,16 @@ class StatisticController extends Controller
         }
 
         return $totalUserAbsence;
+    }
+
+    public function getSector()
+    {
+        // Recupera o número de usuários por setor
+        $sectors = DB::table('users')
+                    ->select('setor', DB::raw('count(*) as total_users')) // Seleciona o setor e conta os usuários
+                    ->groupBy('setor') // Agrupa os resultados por setor
+                    ->get(); // Obtém os resultados
+
+        return $sectors; // Retorna os dados para a view
     }
 }

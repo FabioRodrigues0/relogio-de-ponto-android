@@ -49,7 +49,21 @@
                                 @csrf
                                 <div class="card shadow card-alert " style="width: 16rem;">
                                     <div class="card-body text-center">
+
+                                    {{-- ADICIONADO TESTE 25/11/2024 --}}
+                                    <select class="form-select form-select-sm mb-2" aria-label="Small select example" required
+                                    name ="users_type_id">
+                                    <option disabled selected value="">-</option>
+
+                                        <option value="1">Presencial</option>
+                                        <option value="2">Remoto</option>
+                                        <option value="3">Serviço Externo</option>
+
+                                   </select>
+                                  {{-- ADICIONADO TESTE FIM  25/11/2024 --}}
+
                                 <div class="d-flex justify-content-center">
+
                                     <button class="btn btn-success "
                                         style="height: 90px; width: 90px; border-radius: 50%;">Dar Entrada</button>
                                 </div>
@@ -60,6 +74,7 @@
                             <form action="{{ route('user.checkOut') }}" method="POST">
                                 @csrf
                                 <div class="card shadow card-alert " style="width: 16rem;">
+
                                     <div class="card-body text-center">
                                 <div class="d-flex justify-content-center">
                                     <button class="btn btn-danger "
@@ -173,10 +188,15 @@
                     </div>
                     <div class="col-lg-6 mb-4 d-flex justify-content-center">
                         <div class="card w-100 shadow">
-                            <div class="card-header bg-purple text-white text-center">Avisos do Cesae</div>
+                            <div class="card-header bg-purple text-white text-center">Última solicitação password</div>
                             <div class="card-body">
-                                <p>Reunião geral na sexta-feira, dia 10/11, às 15:00.</p>
-                                <p>Próxima revisão de ponto: dia 15/11.</p>
+                                @if (is_null($lastPwRequest))
+                                <p class="text-center">Ainda não efetuaste pedidos de password.</p>
+                                @elseif (is_null($lastPwRequest->updated_at))
+                                <p class="text-center">Ainda não há registos de alteração password.</p>
+                               @else
+                               <p class="text-center">A última atualização de alteração de password foi efetuada no dia {{ \Carbon\Carbon::parse($lastPwRequest->created_at)->format('d/m/Y') }}.</p>
+                                @endif
                             </div>
                         </div>
                     </div>
