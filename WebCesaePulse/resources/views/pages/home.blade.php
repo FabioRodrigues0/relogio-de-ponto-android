@@ -54,9 +54,8 @@
                                     <select class="form-select form-select-sm mb-2" aria-label="Small select example" required
                                     name ="users_type_id">
                                     <option disabled selected value="">-</option>
-
-                                        <option value="1">Presencial</option>
-                                        <option value="2">Remoto</option>
+                                        <option value="1">Remoto</option>
+                                        <option value="2">Presencial</option>
                                         <option value="3">Serviço Externo</option>
 
                                    </select>

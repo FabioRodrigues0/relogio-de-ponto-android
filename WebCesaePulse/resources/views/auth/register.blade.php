@@ -97,7 +97,7 @@
 
                             <div class="d-flex align-items-center">
                                 <button type="submit" class="btn btn-primary ms-auto btnRegister" fdprocessedid="i5syyn">
-                                    Register
+                                    Registar
                                 </button>
                             </div>
                         </form>
