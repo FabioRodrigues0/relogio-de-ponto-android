@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cesaepulse.app.domain.model.PresenceRecord
-import com.cesaepulse.app.ui.views.profile.detailsHours.TimeEntry
 import com.cesaepulse.app.ui.views.profile.page.UsersPageViewModel
 import java.text.SimpleDateFormat
 

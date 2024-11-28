@@ -1,4 +1,4 @@
-package com.cesaepulse.app.ui.views.profile.detailsHours
+package com.cesaepulse.app.ui.views.totalHours
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,30 +11,37 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.cesaepulse.app.domain.model.AttendanceMode
-import com.cesaepulse.app.domain.model.PresenceRecord
-import com.cesaepulse.app.ui.views.profile.page.UsersPageViewModel
-import java.text.SimpleDateFormat
-import java.util.Date
 
 @Composable
 fun DetailsHours(
-    viewModel: UsersPageViewModel = hiltViewModel(),
-) {
-    val profile by viewModel.profile.collectAsStateWithLifecycle()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 120.dp)
+) {
+    val timeEntries = listOf(
+    TimeEntry("2024-11-25", 9.53),
+    TimeEntry("2024-11-24", 6.03),
+    TimeEntry("2024-11-23", 5.8),
+    TimeEntry("2024-11-22", 9.53),
+    TimeEntry("2024-11-21", 6.03),
+    TimeEntry("2024-11-20", 5.8),
+    TimeEntry("2024-11-19", 9.53),
+    TimeEntry("2024-11-18", 6.03),
+    TimeEntry("2024-11-17", 5.8),
+    TimeEntry("2024-11-16", 6.50),
+    TimeEntry("2024-11-15", 5.8),
+    TimeEntry("2024-11-14", 9.53),
+    TimeEntry("2024-11-13", 6.03),
+    TimeEntry("2024-11-12", 8.0),
+    TimeEntry("2024-11-11", 8.50),
+    TimeEntry("2024-11-10", 6.20),
+    TimeEntry("2024-11-09", 7.0))
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(top = 120.dp)
     ) {
         // Cabeçalho da Tabela
         Row(
@@ -45,25 +52,19 @@ fun DetailsHours(
         ) {
             Text(
                 text = "Data",
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(8.dp),
+                modifier = Modifier.weight(1f).padding(8.dp),
                 textAlign = TextAlign.Center,
                 color = Color.White // Cor do texto para o cabeçalho
             )
             Text(
                 text = "Horas",
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(8.dp),
+                modifier = Modifier.weight(1f).padding(8.dp),
                 textAlign = TextAlign.Center,
                 color = Color.White // Cor do texto para o cabeçalho
             )
             Text(
                 text = "Resultado",
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(8.dp),
+                modifier = Modifier.weight(1f).padding(8.dp),
                 textAlign = TextAlign.Center,
                 color = Color.White // Cor do texto para o cabeçalho
             )
@@ -75,53 +76,36 @@ fun DetailsHours(
         // LazyColumn para tornar a tabela rolável
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             // Iterando sobre a lista de entradas
-            if (profile != null && profile!!.presences != emptyList<PresenceRecord>()) {
-                items(profile!!.presences.size) { index ->
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        Text(
-                            text = profile!!.presences[index].date,
-                            modifier = Modifier.weight(1f),
-                            textAlign = TextAlign.Center
-                        )
-                        Text(
-                            text = profile!!.presences[index].entry_time.toString(),
-                            modifier = Modifier.weight(1f),
-                            textAlign = TextAlign.Center
-                        )
-                        Text(
-                            text = checkTime(profile!!.presences[index]),
-                            modifier = Modifier.weight(1f),
-                            textAlign = TextAlign.Center
-                        )
-                    }
-
-                    // Linha de separação entre cada linha de dados
-                    Divider(modifier = Modifier.padding(vertical = 4.dp))
+            items(timeEntries.size) { index ->
+                val entry = timeEntries[index]
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    Text(text = entry.date, modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
+                    Text(text = entry.hours.toString(), modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
+                    Text(
+                        text = checkTime(entry.hours),
+                        modifier = Modifier.weight(1f),
+                        textAlign = TextAlign.Center
+                    )
                 }
+
+                // Linha de separação entre cada linha de dados
+                Divider(modifier = Modifier.padding(vertical = 4.dp))
             }
         }
     }
 }
 
 // Função para verificar se o tempo ultrapassou o limite
-fun checkTime(presence: PresenceRecord): String {
-    var difference: Long = 0;
-    val format: SimpleDateFormat = SimpleDateFormat("HH:mm:ss");
-    val entry_time: Date = format.parse(presence.entry_time);
-    if (presence.exit_time != null) {
-        val exit_time: Date = format.parse(presence.exit_time);
-        difference = exit_time.getTime() - entry_time.getTime();
-    }
+fun checkTime(hours: Double): String {
     return when {
-        difference >= 7 -> "Ultrapassou" // Se as horas são acima de 7, é mais de 95%
-        difference.toDouble() in 5.25..6.65 -> "75% a 95%" // Se as horas estão entre 75% (5.25h) e 95% (6.65h) de 7 horas
-        difference > 6 -> "Acima 50%" // Se as horas são maiores que 6, mas menores que 7
+        hours >= 7 -> "Ultrapassou" // Se as horas são acima de 7, é mais de 95%
+        hours in 5.25..6.65 -> "75% a 95%" // Se as horas estão entre 75% (5.25h) e 95% (6.65h) de 7 horas
+        hours > 6 -> "Acima 50%" // Se as horas são maiores que 6, mas menores que 7
         else -> "No limite" // Se as horas são menores que 6
     }
 }

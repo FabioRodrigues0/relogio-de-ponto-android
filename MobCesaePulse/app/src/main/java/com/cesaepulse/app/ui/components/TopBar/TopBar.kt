@@ -61,7 +61,7 @@ fun TopBar(
 			}
 		},
 		title = {
-			Text("Top app bar")
+			Text("Cesae Pulse")
 		}
 	)
 }

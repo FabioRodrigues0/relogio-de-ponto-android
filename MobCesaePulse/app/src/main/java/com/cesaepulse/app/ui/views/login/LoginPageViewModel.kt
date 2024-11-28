@@ -2,6 +2,7 @@ package com.cesaepulse.app.ui.views.login
 
 import android.util.Log
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.ui.text.capitalize
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cesaepulse.app.domain.model.User
@@ -41,8 +42,8 @@ class LoginPageViewModel @Inject constructor(
 
     // Mock credentials
     private val mockCredentials = mapOf(
-        "joana@cesae.pt" to "123456",
-        "admin@cesae.pt" to "admin",
+        "joana@cesae.pt" to "123fab",
+        "fabio@cesae.pt" to "123fab",
         "test@cesae.pt" to "test"
     )
 
@@ -76,7 +77,7 @@ class LoginPageViewModel @Inject constructor(
                     _isLogged.value = true
                     _user.value = User(
                         id = 16,
-                        name = "Joana",
+                        name = "${email.split("@")[0].capitalize()}",
                         email = email,
                         foto = "uploadedImages/rxbAqvWZQqWvFcOxXgJYPgDw1IhebfcSlzaL79GP.png",
                         users_type_id = 1,

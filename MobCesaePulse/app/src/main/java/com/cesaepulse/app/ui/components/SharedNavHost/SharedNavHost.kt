@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.input.key.Key.Companion.D
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,8 +27,9 @@ import com.cesaepulse.app.ui.views.calendar.Calendar
 import com.cesaepulse.app.ui.views.home.HomePage
 import com.cesaepulse.app.ui.views.login.LoginPage
 import com.cesaepulse.app.ui.views.profile.activity.ProfileActivity
-import com.cesaepulse.app.ui.views.profile.detailsHours.DetailsHours
 import com.cesaepulse.app.ui.views.profile.page.UsersPage
+import com.cesaepulse.app.ui.views.totalHours.DetailsHours
+import com.cesaepulse.app.ui.views.totalHours.TimeEntry
 
 @Composable
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -80,7 +82,9 @@ fun SharedNavHost(navController: NavHostController, innerPadding: PaddingValues)
                 Calendar(navController)
             }
             composable<DetailsHoursRoute> {
-                DetailsHours()
+
+                DetailsHours(  )
+                
             }
             composable<ProfileActivityRoute> {
                 ProfileActivity()
