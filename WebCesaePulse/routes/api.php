@@ -16,8 +16,8 @@ Route::post('/check-out/{id}', [UserApiController::class, 'checkOutRequest']);
 Route::get('/schedule/{id}/{month}', [ScheduleApiController::class, 'show']);
 
 // Rotas para o SessionController
-Route::get('session/{id}', [SessionController::class, 'show']);
+Route::get('/sessions/{id}', [SessionController::class, 'show']);
 
 // Rotas para o AuthController
-Route::post('login', [ApiAuthController::class, 'login']);
-Route::post('logout', [ApiAuthController::class, 'logout']);
+Route::post('/login', [ApiAuthController::class, 'login']);
+Route::post('/logout', [ApiAuthController::class, 'logout']);

@@ -2,9 +2,14 @@ package com.cesaepulse.app.data.api
 
 import com.cesaepulse.app.data.api.dto.ListScheduleResponse
 import com.cesaepulse.app.data.api.dto.ListUserResponse
+import com.cesaepulse.app.data.api.dto.LoginResponse
+import com.cesaepulse.app.data.api.dto.LogoutResponse
 import com.cesaepulse.app.data.api.dto.ProfileResponse
 import com.skydoves.sandwich.ApiResponse
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface CesaePulseApi {
@@ -22,7 +27,7 @@ interface CesaePulseApi {
 	 *
 	 *  @param id: Int
 	 */
-	@GET("profile/{id}/")
+	@GET("profile/{id}")
 	suspend fun getProfileById(@Path("id") id: Int): ApiResponse<ProfileResponse>
 
 	/**
@@ -30,7 +35,7 @@ interface CesaePulseApi {
 	 *
 	 *  @param id: Int
 	 */
-	@GET("check-in/{id}/{type}/")
+	@GET("checkin/{id}/{type}")
 	suspend fun postCheckIn(@Path("id") id: Int, @Path("type") type: Int): ApiResponse<Void>
 
 
@@ -39,8 +44,23 @@ interface CesaePulseApi {
 	 *
 	 *  @param id: Int
 	 */
-	@GET("check-out/{id}")
+	@GET("checkout/{id}")
 	suspend fun postCheckOut(@Path("id") id: Int): ApiResponse<Void>
+
+	/**
+	 *  Call Api to login
+	 *
+	 */
+	@FormUrlEncoded
+	@POST("login")
+	suspend fun login(@Field("email") email: String, @Field("password") password: String): ApiResponse<LoginResponse>
+
+	/**
+	 *  Call Api to logout
+	 *
+	 */
+	@POST("logout/{id}")
+	suspend fun logout(@Path("id") id: Int): ApiResponse<LogoutResponse>
 
 	// ------------------ SCHEDULE -----------------------
 

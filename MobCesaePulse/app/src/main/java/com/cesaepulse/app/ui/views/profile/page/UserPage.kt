@@ -26,8 +26,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.cesaepulse.app.data.api.CesaePulseApi
+import com.cesaepulse.app.ui.AdminPanelRoute
 import com.cesaepulse.app.ui.CalendarRoute
-import com.cesaepulse.app.ui.DetailsHoursRoute
 import com.cesaepulse.app.ui.ProfileActivityRoute
 import com.cesaepulse.app.ui.components.InfoHours.InfoHour
 import com.cesaepulse.app.ui.components.NavigationButton.NavigationButton
@@ -35,92 +35,97 @@ import com.cesaepulse.app.ui.theme.Shapes
 
 @Composable
 fun UsersPage(
-    navController: NavHostController,
-    viewModel: UsersPageViewModel = hiltViewModel(),
-    id: Int
+	navController: NavHostController,
+	viewModel: UsersPageViewModel = hiltViewModel(),
+	id: Int
 ) {
-    LaunchedEffect(key1 = true) {
-        viewModel.fetchUser(id)
-    }
+	LaunchedEffect(key1 = true) {
+		viewModel.fetchUser(id)
+	}
 
-    val profile by viewModel.profile.collectAsStateWithLifecycle()
-    val hoursDay by viewModel.hoursDay.collectAsStateWithLifecycle()
-    val hoursWeek by viewModel.hoursWeek.collectAsStateWithLifecycle()
-    val hoursMonth by viewModel.hoursMonth.collectAsStateWithLifecycle()
-    val lastPresence by viewModel.lastPresence.collectAsStateWithLifecycle()
+	val profile by viewModel.profile.collectAsStateWithLifecycle()
+	val hoursDay by viewModel.hoursDay.collectAsStateWithLifecycle()
+	val hoursWeek by viewModel.hoursWeek.collectAsStateWithLifecycle()
+	val hoursMonth by viewModel.hoursMonth.collectAsStateWithLifecycle()
+	val lastPresence by viewModel.lastPresence.collectAsStateWithLifecycle()
 
-    Card(
-        modifier = Modifier
+	Card(
+		modifier = Modifier
             .fillMaxSize()
             .padding(top = 105.dp, start = 10.dp, end = 10.dp, bottom = 10.dp)
-    ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
+	) {
+		Column(
+			verticalArrangement = Arrangement.spacedBy(8.dp),
+			modifier = Modifier
                 .fillMaxSize()
                 .padding(15.dp)
-        ) {
-            Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                AsyncImage(
-                    model = profile?.foto ?: (CesaePulseApi.urlImage + "defaultUserBack.png"),
-                    contentDescription = profile?.name,
-                    modifier = Modifier
+		) {
+			Row(
+				horizontalArrangement = Arrangement.SpaceEvenly,
+				verticalAlignment = Alignment.CenterVertically
+			) {
+				AsyncImage(
+					model = profile?.foto ?: (CesaePulseApi.urlImage + "defaultUserBack.png"),
+					contentDescription = profile?.name,
+					modifier = Modifier
                         .padding(vertical = 20.dp)
                         .size(136.dp)
                         .clip(Shapes.small),
-                    contentScale = ContentScale.Crop,
-                )
-                Column(
-                    modifier = Modifier.padding(start = 20.dp)
-                ) {
-                    Text(
-                        text = profile?.name ?: "Nome",
-                        fontSize = TextUnit(30f, TextUnitType.Sp),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(text = "Ultima Entrada: $lastPresence")
-                }
+					contentScale = ContentScale.Crop,
+				)
+				Column(
+					modifier = Modifier.padding(start = 20.dp)
+				) {
+					Text(
+						text = profile?.name ?: "Nome",
+						fontSize = TextUnit(30f, TextUnitType.Sp),
+						fontWeight = FontWeight.Bold
+					)
+					Text(text = "Ultima Entrada: $lastPresence")
+				}
+			}
+			Text(
+				text = "Horas",
+				fontSize = TextUnit(25f, TextUnitType.Sp),
+				fontWeight = FontWeight.Bold
+			)
+			HorizontalDivider(thickness = 2.dp)
+			Row(
+				horizontalArrangement = Arrangement.spacedBy(20.dp),
+				modifier = Modifier.padding(vertical = 10.dp)
+			) {
+				InfoHour(
+					header = "Diárias",
+					hour = "${hoursDay}h",
+					color = MaterialTheme.colorScheme.primary,
+					colorText = MaterialTheme.colorScheme.onPrimary
+				)
+				InfoHour(
+					header = "Semanais",
+					hour = "${hoursWeek}h",
+					color = MaterialTheme.colorScheme.secondary,
+					colorText = MaterialTheme.colorScheme.onSecondary
+				)
+				InfoHour(
+					header = "Mensais",
+					hour = "${hoursMonth}h",
+					color = MaterialTheme.colorScheme.tertiary,
+					colorText = MaterialTheme.colorScheme.onTertiary
+				)
+			}
+            if (profile?.user_type == "Admin") {
+                NavigationButton(
+                    text = "Admin Panel",
+                    onClick = { navController.navigate(AdminPanelRoute) })
             }
-            Text(
-                text = "Horas",
-                fontSize = TextUnit(25f, TextUnitType.Sp),
-                fontWeight = FontWeight.Bold
-            )
-            HorizontalDivider(thickness = 2.dp)
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(20.dp),
-                modifier = Modifier.padding(vertical = 10.dp)
-            ) {
-                InfoHour(
-                    header = "Diárias",
-                    hour = "${hoursDay}h",
-                    color = MaterialTheme.colorScheme.primary,
-                    colorText = MaterialTheme.colorScheme.onPrimary
-                )
-                InfoHour(
-                    header = "Semanais",
-                    hour = "${hoursWeek}h",
-                    color = MaterialTheme.colorScheme.secondary,
-                    colorText = MaterialTheme.colorScheme.onSecondary
-                )
-                InfoHour(
-                    header = "Mensais",
-                    hour = "${hoursMonth}h",
-                    color = MaterialTheme.colorScheme.tertiary,
-                    colorText = MaterialTheme.colorScheme.onTertiary
-                )
-            }
-            NavigationButton(
-                text = "Calendario",
-                onClick = { navController.navigate(CalendarRoute) })
-            NavigationButton(text = "Detalhes de Horas", onClick = {
-                navController.navigate(
-                    ProfileActivityRoute
-                )
-            })
-        }
-    }
+			NavigationButton(
+				text = "Calendario",
+				onClick = { navController.navigate(CalendarRoute) })
+			NavigationButton(text = "Detalhes de Horas", onClick = {
+				navController.navigate(
+					ProfileActivityRoute
+				)
+			})
+		}
+	}
 }

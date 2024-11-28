@@ -1,4 +1,4 @@
-package com.cesaepulse.app.ui.views.Calendar.dialog
+package com.cesaepulse.app.ui.views.calendar.dialog
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text

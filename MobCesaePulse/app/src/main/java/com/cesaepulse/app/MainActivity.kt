@@ -8,9 +8,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.cesaepulse.app.ui.components.BottomNavBar.BottomNavBar
 import com.cesaepulse.app.ui.components.SharedNavHost.SharedNavHost
@@ -26,6 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CesaepulseTheme {
                 val navController = rememberNavController()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
 
                 enableEdgeToEdge(
                     statusBarStyle = SystemBarStyle.dark(
@@ -34,12 +36,13 @@ class MainActivity : ComponentActivity() {
                 )
                 Scaffold(
                     topBar = { TopBar() },
-                    bottomBar = { BottomNavBar(navController) },
+                    bottomBar = {
+                        BottomNavBar(navController)
+                    },
                 ) { innerPadding ->
                     SharedNavHost(navController, innerPadding)
                 }
             }
-
         }
     }
 }
@@ -59,4 +62,3 @@ fun GreetingPreview() {
         Greeting("LUIS")
     }
 }
-

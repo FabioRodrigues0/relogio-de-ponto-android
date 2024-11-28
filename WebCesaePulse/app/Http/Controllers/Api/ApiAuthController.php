@@ -19,23 +19,28 @@ class ApiAuthController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function login(LoginRequest $request)
+    public function login(Request $request)
     {
         // Validação dos dados de login
-        $credentials = $request->validate([
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        // Tentando autenticar o usuário
-        if (Auth::attempt($credentials)) {
-            // Usuário autenticado com sucesso
-            $request->session()->regenerate();
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
 
-            $user =Auth::id();
-            $session = DB::table('sessions')->where('user_id', Auth::id())
-                ->orderBy('last_activity', 'desc')
-                ->first();
+            $user = Auth::user();
+            // Criar uma nova sessão na tabela 'sessions'
+            $session = Session::create([
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->header('User-Agent'),
+                'payload' => json_encode([
+                    'role' => $user->users_type_id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                ]),
+                'last_activity' => now()->timestamp,
+            ]);
 
             // Retornar a resposta com o usuário e dados da sessão
             return response()->json([
@@ -44,7 +49,6 @@ class ApiAuthController extends Controller
                 'session' => $session
             ], 200);
         }
-
         // Se a autenticação falhar
         return response()->json(['message' => 'Credenciais inválidas'], 401);
     }
@@ -56,15 +60,16 @@ class ApiAuthController extends Controller
      */
     public function logout(Request $request)
     {
-        // Remover a sessão do usuário
+        // Procurar pela sessão do usuário e deletá-la
         $session = Session::where('user_id', Auth::id())->first();
+
         if ($session) {
-            $session->delete();
+            $session->delete();  // Deletar a sessão associada
         }
 
         // Fazer logout do usuário
         Auth::logout();
 
-        return response()->json(['message' => 'Logout realizado com sucesso']);
+        return response()->json(['message' => 'Logout realizado com sucesso'], 200);
     }
 }

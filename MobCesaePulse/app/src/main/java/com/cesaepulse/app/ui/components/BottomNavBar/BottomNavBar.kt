@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -20,9 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.cesaepulse.app.ui.HomeRoute
-import com.cesaepulse.app.ui.UserListRoute
 import com.cesaepulse.app.ui.UserRoute
-import com.cesaepulse.app.ui.theme.primaryLight
 
 @Composable
 fun BottomNavBar(
@@ -52,15 +49,6 @@ fun BottomNavBar(
         ) {
             Icon(Icons.Filled.Person,
                 contentDescription = "User",
-                tint = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier.padding(horizontal = 10.dp))
-        }
-        IconButton(
-            modifier = Modifier.padding(horizontal = 10.dp),
-            onClick = {navController.navigate(UserListRoute)}
-        ) {
-            Icon(Icons.Filled.VerifiedUser,
-                contentDescription = "Administrator",
                 tint = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.padding(horizontal = 10.dp))
         }

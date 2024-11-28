@@ -25,7 +25,7 @@ class CalendarViewModel @Inject constructor(
 		"", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
 		"Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 	)
-	val titles = listOf("Mensal", "Semanal")
+	val titles = listOf("Mensal", "Detalhes")
 
 	private val _state = MutableStateFlow<Int>(0)
 	var state = _state.asStateFlow()

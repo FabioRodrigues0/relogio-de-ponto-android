@@ -1,7 +1,6 @@
 package com.cesaepulse.app.data.api.dto
 
 import com.cesaepulse.app.domain.model.PresenceRecord
-import java.sql.Time
 
 /**
  *  Data Class of PresenceRecord

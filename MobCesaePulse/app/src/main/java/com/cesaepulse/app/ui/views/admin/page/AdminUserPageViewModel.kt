@@ -2,6 +2,7 @@ package com.cesaepulse.app.ui.views.admin.page
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cesaepulse.app.domain.model.AttendanceMode
 import com.cesaepulse.app.domain.model.PresenceRecord
 import com.cesaepulse.app.domain.model.Profile
 import com.cesaepulse.app.domain.repository.IProfileRepository
@@ -36,6 +37,20 @@ class UsersPageViewModel @Inject constructor(
 
     private var _lastPresence = MutableStateFlow<String>("0000-00-00")
     val lastPresence = _lastPresence.asStateFlow()
+
+    private var _faults = MutableStateFlow<List<PresenceRecord?>>(emptyList())
+    val faults = _faults.asStateFlow()
+
+    fun giveFaults() {
+        _faults.update {
+            it + listOf(
+                PresenceRecord(date="2024-01-05", entry_time="12:00:00", exit_time="15:00:00", attendance_mode = AttendanceMode(1, "Online")),
+                PresenceRecord(date="2024-03-10", entry_time="10:30:00", exit_time="17:30:00", attendance_mode = AttendanceMode(1, "Online")),
+                PresenceRecord(date="2024-04-15", entry_time="12:30:00", exit_time="14:30:00", attendance_mode = AttendanceMode(2, "Presencial")),
+                PresenceRecord(date="2024-08-20", entry_time="11:00:00", exit_time="13:00:00", attendance_mode = AttendanceMode(1, "Online")),
+            )
+        }
+    }
 
     fun fetchUser(id: Int) {
         viewModelScope.launch {

@@ -6,13 +6,19 @@ import kotlinx.serialization.Serializable
 data object LoginRoute
 
 @Serializable
-data object UserListRoute
+data object AdminPanelRoute
 
 @Serializable
-data class UserRoute(val id: Int)
+data class AdminUserRoute(val id: Int)
+
+@Serializable
+data object AdminUserListRoute
 
 //@Serializable
 //data object UserHoursRoute
+
+@Serializable
+data class UserRoute(val id: Int)
 
 @Serializable
 data class HomeRoute(val isLogged: Boolean, val id: Int)

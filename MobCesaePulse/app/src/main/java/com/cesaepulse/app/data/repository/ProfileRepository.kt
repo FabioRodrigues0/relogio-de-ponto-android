@@ -8,6 +8,7 @@ import com.cesaepulse.app.domain.repository.IProfileRepository
 import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.onSuccess
+import com.skydoves.sandwich.retrofit.statusCode
 import javax.inject.Inject
 
 class ProfileRepository @Inject constructor(
@@ -16,18 +17,24 @@ class ProfileRepository @Inject constructor(
 
 	override suspend fun getProfileById(id: Int): Profile? {
 		var profile: Profile? = null
-		api.getProfileById(id)
-			.onSuccess {
-				Log.d("getProfileById", "success")
-				profile = data.toModel()
-			}
-			.onError {
-				Log.e(TAG, "Fail ou getting user {$id}")
-			}
-			.onException {
-				Log.d("getUserById", "exception - ${this.message}")
-			}
-
+		try {
+			api.getProfileById(id)
+				.onSuccess {
+					Log.d("getProfileById", "success")
+					profile = data.toModel()
+				}
+				.onError {
+					Log.e(TAG, "Failed getting user $id: ${statusCode.code}")
+					throw Exception("Failed to get profile: ${statusCode.code}")
+				}
+				.onException {
+					Log.e(TAG, "Exception getting user $id: ${message}")
+					throw Exception("Failed to get profile: $message")
+				}
+		} catch (e: Exception) {
+			Log.e(TAG, "Error getting profile: ${e.message}")
+			throw e
+		}
 		return profile
 	}
 
